@@ -1,0 +1,24 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+.input {
+    -fx-prompt-text-fill: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 50px;
+    -fx-background-color: transparent;
+    -fx-pref-height: 35px;
+}
+
+.btnLogin{
+    -fx-border-color: black;
+    -fx-prompt-text-fill: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 50px;
+    -fx-background-color: transparent;
+    -fx-pref-height: 35px;
+}

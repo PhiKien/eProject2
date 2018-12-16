@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="QuanLyBanThuoc.jnlp">
+  <information>
+    <title>QuanLyBanThuoc</title>
+    <vendor>drago</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="QuanLyBanThuoc.jar" size="1532524" download="eager" />
+    <jar href="lib\eclipselink.jar" size="8478776" download="eager" />
+    <jar href="lib\javax.persistence_2.1.0.201304241213.jar" size="164637" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
+    <jar href="lib\org.eclipse.persistence.jpa.jpql_2.5.2.20140319-9ad6abd.jar" size="1366247" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="View.FXMainHome"  name="QuanLyBanThuoc" />
+  <update check="always"/>
+</jnlp>
