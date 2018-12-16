@@ -43,18 +43,10 @@ public class FXMLMainHomeController implements Initializable {
     private TextField txtTenDangNhap;
     @FXML
     private TextField txtMatKhau;
-    
-    private void handleButtonAction(ActionEvent event){
-        if(event.getSource() == btnDangNhap){
-            paneDangNhap.toFront();
-        }
-        else{
-            if(event.getSource() == btnDangKy){
-                paneDangNhap.visibleProperty().setValue(Boolean.TRUE);
-                paneDangKy.visibleProperty().setValue(Boolean.FALSE);
-            }
-        }
-    }
+    @FXML
+    private Pane paneNhaPhatTrien;
+    @FXML
+    private Pane paneHuongDanSuDung;
     
     /**
      * Initializes the controller class.
@@ -68,18 +60,22 @@ public class FXMLMainHomeController implements Initializable {
 
     @FXML
     private void btnDangNhapShowForm_Click(ActionEvent event) {
+        paneDangNhap.toFront();
     }
 
     @FXML
     private void btnDangKyShowForm_Click(ActionEvent event) {
+        paneDangKy.toFront();
     }
 
     @FXML
     private void btnHuongDanSuDungShowForm_Click(ActionEvent event) {
+        paneHuongDanSuDung.toFront();
     }
 
     @FXML
     private void btnNhaPhatTrienShowForm_Click(ActionEvent event) {
+        paneNhaPhatTrien.toFront();
     }
 
     @FXML
@@ -94,6 +90,7 @@ public class FXMLMainHomeController implements Initializable {
 
     @FXML
     private void btnDangKy_Click(ActionEvent event) {
+        paneDangKy.toFront();
     }
     
 }
