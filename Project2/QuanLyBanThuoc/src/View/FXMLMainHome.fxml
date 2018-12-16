@@ -16,34 +16,34 @@
         <URL value="@CSS/fxmlmainhome.css" />
     </stylesheets>
     <children>
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="425.0" prefWidth="216.0" style="-fx-background-color: linear-gradient(to bottom, #833ab4, #fd1d1d, #fcb045);">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="425.0" prefWidth="216.0" style="-fx-background-color: linear-gradient(to top, #ff512f, #dd2476);">
          <children>
             <ImageView fitHeight="69.0" fitWidth="81.0" layoutX="66.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/45496785_1770514296407904_9101675942408880128_n.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnDangNhap" alignment="TOP_LEFT" layoutY="149.0" mnemonicParsing="false" onAction="#btnDangNhapShowForm_Click" prefHeight="31.0" prefWidth="216.0" style="-fx-background-color: Transparent;" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Đăng nhập" textFill="WHITE" AnchorPane.bottomAnchor="241.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="149.0">
+            <Button fx:id="btnDangNhap" alignment="TOP_LEFT" layoutY="149.0" mnemonicParsing="false" onAction="#btnDangNhapShowForm_Click" prefHeight="31.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Đăng nhập" textFill="WHITE" AnchorPane.bottomAnchor="241.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="149.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnDangKy" alignment="TOP_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#btnDangKyShowForm_Click" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: Transparent;" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Đăng ký" textFill="WHITE">
+            <Button fx:id="btnDangKy" alignment="TOP_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#btnDangKyShowForm_Click" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Đăng ký" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnHuongDanSuDung" alignment="TOP_LEFT" layoutY="242.0" mnemonicParsing="false" onAction="#btnHuongDanSuDungShowForm_Click" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: Transparent;" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Hướng dẫn sử dụng" textFill="WHITE">
+            <Button fx:id="btnHuongDanSuDung" alignment="TOP_LEFT" layoutY="242.0" mnemonicParsing="false" onAction="#btnHuongDanSuDungShowForm_Click" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Hướng dẫn sử dụng" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnNhaPhatTrien" alignment="TOP_LEFT" layoutY="287.0" mnemonicParsing="false" onAction="#btnNhaPhatTrienShowForm_Click" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: Transparent;" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Nhà phát triển" textFill="WHITE">
+            <Button fx:id="btnNhaPhatTrien" alignment="TOP_LEFT" layoutY="287.0" mnemonicParsing="false" onAction="#btnNhaPhatTrienShowForm_Click" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Nhà phát triển" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnThoat" alignment="TOP_LEFT" layoutY="333.0" mnemonicParsing="false" onAction="#btnThoat_Click" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: Transparent;" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Thoát" textFill="WHITE">
+            <Button fx:id="btnThoat" alignment="TOP_LEFT" layoutY="333.0" mnemonicParsing="false" onAction="#btnThoat_Click" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Thoát" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -189,6 +189,11 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
+                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="182.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/male-user.png" />
+                     </image>
+                  </ImageView>
                   <TextField fx:id="txtMatKhau_DangNhap" layoutX="176.0" layoutY="109.0" prefHeight="30.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: White; -fx-border-radius: 50; -fx-pref-height: 35; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
@@ -197,11 +202,6 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
-                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="182.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Image/male-user.png" />
-                     </image>
-                  </ImageView>
                   <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="182.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/icons8-secure-filled-50.png" />

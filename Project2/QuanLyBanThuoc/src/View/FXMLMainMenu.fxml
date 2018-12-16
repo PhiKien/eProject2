@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -7,8 +9,96 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLMainMenuController">
+<AnchorPane id="AnchorPane" prefHeight="536.0" prefWidth="784.0" style="-fx-background-color: linear-gradient(to top, #3a7bd5, #3a6073);" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLMainMenuController">
     <stylesheets>
-        <URL value="@/View/CSS/fxmlmainmenu.css"/>
+        <URL value="@/View/CSS/fxmlmainmenu.css" />
     </stylesheets>
+   <children>
+      <Text fill="WHITE" layoutX="262.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MỤC LỤC CHÍNH" textAlignment="CENTER" wrappingWidth="260.13671875">
+         <font>
+            <Font name="Times New Roman Bold" size="30.0" />
+         </font>
+      </Text>
+      <Pane fx:id="paneNhanVien" layoutX="41.0" layoutY="257.0" onMouseClicked="#paneNhanVien_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
+         <children>
+            <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/icons8-employee-96.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="33.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nhân viên">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quản lý nhân viên, phê duyệt tài khoản" textAlignment="CENTER" wrappingWidth="127.6708984375">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="paneKhachHang" layoutX="222.0" layoutY="257.0" onMouseClicked="#paneKhachHang_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
+         <children>
+            <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/icons8-customer-100.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="25.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Khách hàng">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="6.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nhập thông tin, khám bệnh, bán thuốc cho khách hàng" textAlignment="CENTER" wrappingWidth="148.6708984375">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="paneKhoThuoc" layoutX="404.0" layoutY="257.0" onMouseClicked="#paneKhoThuoc_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
+         <children>
+            <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/icons8-pill-filled-100.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="33.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kho thuốc">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="7.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quản lý kho thuốc, thông tin các loại thuốc" textAlignment="CENTER" wrappingWidth="148.6708984375">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="paneHoaDon" layoutX="586.0" layoutY="257.0" onMouseClicked="#paneHoaDon_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
+         <children>
+            <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/icons8-purchase-order-100.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="40.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hóa đơn">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="9.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quản lý hóa đơn bán hàng, kiểm soát doanh thu hàng tháng" textAlignment="CENTER" wrappingWidth="142.6708984375">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Text fill="WHITE" layoutX="208.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chọn chức năng để cập nhật thông tin" textAlignment="CENTER" wrappingWidth="367.6708984375">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+   </children>
 </AnchorPane>
