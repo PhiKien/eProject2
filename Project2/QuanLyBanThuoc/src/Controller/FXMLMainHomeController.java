@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -34,19 +35,27 @@ public class FXMLMainHomeController implements Initializable {
     @FXML
     private Button btnThoat;
     @FXML
-    private TextField inputText1;
-    @FXML
-    private TextField inputText11;
-    @FXML
-    private TextField inputText111;
-    @FXML
-    private TextField txtTenDangNhap;
-    @FXML
-    private TextField txtMatKhau;
-    @FXML
     private Pane paneNhaPhatTrien;
     @FXML
     private Pane paneHuongDanSuDung;
+    @FXML
+    private Button btnLamMoi;
+    @FXML
+    private Button btnXacNhanDangKy;
+    @FXML
+    private TextField txtHoVaTen;
+    @FXML
+    private TextField txtNhapLaiMatKhau;
+    @FXML
+    private TextField txtNgaySinh;
+    @FXML
+    private TextField txtTenDangNhap_DangKy;
+    @FXML
+    private TextField txtMatKhau_DangKy;
+    @FXML
+    private TextField txtTenDangNhap_DangNhap;
+    @FXML
+    private TextField txtMatKhau_DangNhap;
     
     /**
      * Initializes the controller class.
@@ -91,6 +100,19 @@ public class FXMLMainHomeController implements Initializable {
     @FXML
     private void btnDangKy_Click(ActionEvent event) {
         paneDangKy.toFront();
+    }
+
+    @FXML
+    private void btnXacNhanDangKy_Click(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnLamMoi_Click(MouseEvent event) {
+         txtTenDangNhap_DangKy.clear();
+         txtMatKhau_DangKy.clear();
+         txtNhapLaiMatKhau.clear();
+         txtNgaySinh.clear();
+         txtHoVaTen.clear();
     }
     
 }
