@@ -9,3 +9,7 @@
 .paneMenu{
     -fx-background-color: rgba(42, 80, 110, 0.7);
 }
+
+.paneMenu:hover{
+    -fx-background-color: rgba(7, 2, 2, 0.6);
+}

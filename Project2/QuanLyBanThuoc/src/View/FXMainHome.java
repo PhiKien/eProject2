@@ -27,6 +27,7 @@ public class FXMainHome extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("FXMLMainHome.fxml"));
             primaryStage.setTitle("Đăng nhập");
             primaryStage.setScene(new Scene(root));
+            primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(FXMainHome.class.getName()).log(Level.SEVERE, null, ex);

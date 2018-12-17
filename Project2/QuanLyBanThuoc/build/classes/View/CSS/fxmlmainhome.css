@@ -24,10 +24,11 @@
 }
 
 .btnMenu {
-    -fx-background-color: transparent;
+    -fx-background-color: rgba(255,255,255,0);
+    
 }
 
-.btnMenu:hover{
-    -fx-text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
-    -fx-transition: all 0.4s ease 0s;
+.btnMenu:hover {
+    -fx-background-color: rgba(0,0,0,0.3);
 }
+
