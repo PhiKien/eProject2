@@ -20,7 +20,7 @@
             <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Text>
-      <Pane fx:id="paneNhanVien" layoutX="41.0" layoutY="257.0" onMouseClicked="#paneNhanVien_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
+      <Pane fx:id="paneNhanVien" layoutX="41.0" layoutY="257.0" onDragDetected="#paneNhanVien_Click" onMouseClicked="#paneNhanVien_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
          <children>
             <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,7 +39,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="paneKhachHang" layoutX="222.0" layoutY="257.0" onMouseClicked="#paneKhachHang_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
+      <Pane fx:id="paneKhachHang" layoutX="222.0" layoutY="257.0" onDragDetected="#paneKhachHang_Click" onMouseClicked="#paneKhachHang_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
          <children>
             <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -58,7 +58,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="paneKhoThuoc" layoutX="404.0" layoutY="257.0" onMouseClicked="#paneKhoThuoc_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
+      <Pane fx:id="paneKhoThuoc" layoutX="404.0" layoutY="257.0" onDragDetected="#paneKhoThuoc_Click" onMouseClicked="#paneKhoThuoc_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
          <children>
             <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -77,7 +77,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="paneHoaDon" layoutX="586.0" layoutY="257.0" onMouseClicked="#paneHoaDon_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
+      <Pane fx:id="paneHoaDon" layoutX="586.0" layoutY="257.0" onDragDetected="#paneHoaDon_Click" onMouseClicked="#paneHoaDon_Click" prefHeight="203.0" prefWidth="161.0" styleClass="paneMenu" stylesheets="@CSS/fxmlmainmenu.css">
          <children>
             <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>

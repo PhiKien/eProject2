@@ -24,7 +24,7 @@ public class FXMainHome extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("FXMLMainHome.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("FXMLMainMenu.fxml"));
             primaryStage.setTitle("Đăng nhập");
             primaryStage.setScene(new Scene(root));
             primaryStage.initStyle(StageStyle.UNDECORATED);
