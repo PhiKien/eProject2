@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
  *
  * @author drago
  */
-public class FXMLNhanVienController implements Initializable {
+public class FXMLKhachHangController implements Initializable {
 
     @FXML
     private MenuItem mnItemThem;
@@ -54,16 +54,6 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private MenuItem mnItemBaoCao;
     @FXML
-    private TextField txtHoTen;
-    @FXML
-    private TextField txtSDT;
-    @FXML
-    private TextField txtDiaChi;
-    @FXML
-    private RadioButton rbNam;
-    @FXML
-    private RadioButton rbNu;
-    @FXML
     private Button btnThem;
     @FXML
     private Button btnSua;
@@ -73,6 +63,18 @@ public class FXMLNhanVienController implements Initializable {
     private Button btnLamMoi;
     @FXML
     private Button btnTimKiem;
+    @FXML
+    private TextField txtTimKiem;
+    @FXML
+    private TextField txtHoTen;
+    @FXML
+    private TextField txtSDT;
+    @FXML
+    private TextField txtDiaChi;
+    @FXML
+    private RadioButton rbNam;
+    @FXML
+    private RadioButton rbNu;
     @FXML
     private TableView<?> tabDsDuyet;
     @FXML
@@ -84,19 +86,15 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private TableColumn<?, ?> tcGioiTinh;
     @FXML
-    private TextField txtTimKiem;
+    private DatePicker dpNgaySinh;
     @FXML
-    private TextField txtPass;
+    private TextField txtTrieuChung;
     @FXML
-    private TextField txtUser;
+    private TextField txttxtChuanDoan;
     @FXML
-    private TableColumn<?, ?> tcUser;
+    private TableColumn<?, ?> tcTrieuChung;
     @FXML
-    private TableColumn<?, ?> tcPass;
-    @FXML
-    private Button btnXacNhan;
-    @FXML
-    private Button btnTuChoi;
+    private TableColumn<?, ?> tcChuanDoan;
 
     /**
      * Initializes the controller class.
@@ -180,14 +178,6 @@ public class FXMLNhanVienController implements Initializable {
 
     @FXML
     private void btnTimKiem_Click(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnXacNhan_Click(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnTuChoi_Click(ActionEvent event) {
     }
 
     

@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
  *
  * @author drago
  */
-public class FXMLNhanVienController implements Initializable {
+public class FXMLHoaDonController implements Initializable {
 
     @FXML
     private MenuItem mnItemThem;
@@ -54,16 +54,6 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private MenuItem mnItemBaoCao;
     @FXML
-    private TextField txtHoTen;
-    @FXML
-    private TextField txtSDT;
-    @FXML
-    private TextField txtDiaChi;
-    @FXML
-    private RadioButton rbNam;
-    @FXML
-    private RadioButton rbNu;
-    @FXML
     private Button btnThem;
     @FXML
     private Button btnSua;
@@ -74,29 +64,29 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private Button btnTimKiem;
     @FXML
+    private TextField txtTimKiem;
+    @FXML
     private TableView<?> tabDsDuyet;
     @FXML
     private TableColumn<?, ?> tcHoTen;
     @FXML
-    private TableColumn<?, ?> tcSDT;
-    @FXML
     private TableColumn<?, ?> tcDiaChi;
     @FXML
-    private TableColumn<?, ?> tcGioiTinh;
+    private TableColumn<?, ?> tcTrieuChung;
     @FXML
-    private TextField txtTimKiem;
+    private TableColumn<?, ?> tcChuanDoan;
     @FXML
-    private TextField txtPass;
+    private TextField txtMaHoaDon;
     @FXML
-    private TextField txtUser;
+    private TextField txtMaThuoc;
     @FXML
-    private TableColumn<?, ?> tcUser;
+    private TextField txtMaKH;
     @FXML
-    private TableColumn<?, ?> tcPass;
+    private DatePicker dpNgayBan;
     @FXML
-    private Button btnXacNhan;
+    private Button btnCTHoaDon;
     @FXML
-    private Button btnTuChoi;
+    private Button btnInHoaDon;
 
     /**
      * Initializes the controller class.
@@ -183,12 +173,11 @@ public class FXMLNhanVienController implements Initializable {
     }
 
     @FXML
-    private void btnXacNhan_Click(ActionEvent event) {
+    private void btnCTHoaDon_Click(ActionEvent event) {
     }
 
     @FXML
-    private void btnTuChoi_Click(ActionEvent event) {
+    private void btnInHoaDon_Click(ActionEvent event) {
     }
-
     
 }

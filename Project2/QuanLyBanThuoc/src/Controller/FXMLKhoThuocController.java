@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -23,7 +22,7 @@ import javafx.scene.control.TextField;
  *
  * @author drago
  */
-public class FXMLNhanVienController implements Initializable {
+public class FXMLKhoThuocController implements Initializable {
 
     @FXML
     private MenuItem mnItemThem;
@@ -54,16 +53,6 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private MenuItem mnItemBaoCao;
     @FXML
-    private TextField txtHoTen;
-    @FXML
-    private TextField txtSDT;
-    @FXML
-    private TextField txtDiaChi;
-    @FXML
-    private RadioButton rbNam;
-    @FXML
-    private RadioButton rbNu;
-    @FXML
     private Button btnThem;
     @FXML
     private Button btnSua;
@@ -74,29 +63,31 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private Button btnTimKiem;
     @FXML
-    private TableView<?> tabDsDuyet;
-    @FXML
-    private TableColumn<?, ?> tcHoTen;
-    @FXML
-    private TableColumn<?, ?> tcSDT;
-    @FXML
-    private TableColumn<?, ?> tcDiaChi;
-    @FXML
-    private TableColumn<?, ?> tcGioiTinh;
-    @FXML
     private TextField txtTimKiem;
     @FXML
-    private TextField txtPass;
+    private TextField txtMaThuoc;
     @FXML
-    private TextField txtUser;
+    private TextField txtTenThuoc;
     @FXML
-    private TableColumn<?, ?> tcUser;
+    private TextField txtDonVi;
     @FXML
-    private TableColumn<?, ?> tcPass;
+    private DatePicker dpNSX;
     @FXML
-    private Button btnXacNhan;
+    private DatePicker dpHSD;
     @FXML
-    private Button btnTuChoi;
+    private TextField txtGia;
+    @FXML
+    private TableView<?> tabDsThuoc;
+    @FXML
+    private TableColumn<?, ?> tcTenThuoc;
+    @FXML
+    private TableColumn<?, ?> tcDonVi;
+    @FXML
+    private TableColumn<?, ?> tcNSX;
+    @FXML
+    private TableColumn<?, ?> tcHSD;
+    @FXML
+    private TableColumn<?, ?> tcDonGia;
 
     /**
      * Initializes the controller class.
@@ -181,14 +172,5 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private void btnTimKiem_Click(ActionEvent event) {
     }
-
-    @FXML
-    private void btnXacNhan_Click(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnTuChoi_Click(ActionEvent event) {
-    }
-
     
 }
