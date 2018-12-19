@@ -49,27 +49,27 @@
       </MenuBar>
       <Pane layoutX="13.0" layoutY="41.0" prefHeight="46.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
          <children>
-            <Button fx:id="btnThem" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="button_c" text="Thêm">
+            <Button fx:id="btnThem" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="btn" text="Thêm">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnSua" layoutX="90.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnSua_Click" prefHeight="30.0" prefWidth="55.0" styleClass="button_c" text="Sửa ">
+            <Button fx:id="btnSua" layoutX="90.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnSua_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" text="Sửa ">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnXoa" layoutX="156.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnXoa_Click" prefHeight="30.0" prefWidth="55.0" styleClass="button_c" text="Xóa">
+            <Button fx:id="btnXoa" layoutX="156.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnXoa_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" text="Xóa">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnLamMoi" layoutX="222.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnLamMoi_Click" styleClass="button_c" text="Làm mới">
+            <Button fx:id="btnLamMoi" layoutX="222.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnLamMoi_Click" styleClass="btn" text="Làm mới">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnTimKiem" layoutX="447.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="button_c" text="Tìm kiếm">
+            <Button fx:id="btnTimKiem" layoutX="447.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="btn" text="Tìm kiếm">
                <font>
                   <Font size="14.0" />
                </font>

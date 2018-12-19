@@ -5,3 +5,34 @@
 .mainFxmlClass {
 
 }
+
+.btn {
+    -fx-font-veight: bold;
+    -fx-background-color: linear-gradient(to top, #3a7bd5, #3a6073);
+    -fx-background-radius: 22;
+    -fx-text-fill: white;
+}
+
+.btn:hover {
+    -fx-scale-y: 1.1;
+    -fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 22;
+    -fx-text-fill: linear-gradient(to top, #3a7bd5, #3a6073);
+    -fx-border-color: linear-gradient(to top, #3a7bd5, #3a6073);
+    -fx-border-radius: 20;
+    -fx-border-vidth: 3;
+}
+
+.btn:pressed:hover {
+    -fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 22;
+    -fx-text-fill: linear-gradient(to top, #3a7bd5, #3a6073);
+    -fx-border-color: linear-gradient(to top, #3a7bd5, #3a6073);
+    -fx-border-radius: 20;
+    -fx-border-vidth: 3;
+    -fx-rotate: 10;
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}

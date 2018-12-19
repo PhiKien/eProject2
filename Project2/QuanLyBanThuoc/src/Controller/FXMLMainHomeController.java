@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -117,6 +118,51 @@ public class FXMLMainHomeController implements Initializable {
          txtNhapLaiMatKhau.clear();
          txtNgaySinh.clear();
          txtHoVaTen.clear();
+    }
+
+    @FXML
+    private void btnChung_Entered(MouseEvent event) {
+//        DropShadow shadow = new DropShadow();
+//        
+//        btnDangNhap.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
+//            btnDangNhap.setEffect(shadow);
+//        });
+//
+//        btnDangKy.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
+//            btnDangKy.setEffect(shadow);
+//        });
+//
+//        btnHuongDanSuDung.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
+//            btnHuongDanSuDung.setEffect(shadow);
+//        });
+//
+//        btnNhaPhatTrien.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
+//            btnNhaPhatTrien.setEffect(shadow);
+//        });
+//
+//        btnThoat.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
+//            btnThoat.setEffect(shadow);
+//        });
+//        
+//        btnDangNhap.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent event1) -> {
+//            btnDangNhap.setEffect(null);
+//        });
+//
+//        btnDangKy.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent event1) -> {
+//            btnDangKy.setEffect(null);
+//        });
+//
+//        btnHuongDanSuDung.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent event1) -> {
+//            btnHuongDanSuDung.setEffect(null);
+//        });
+//
+//        btnNhaPhatTrien.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent event1) -> {
+//            btnNhaPhatTrien.setEffect(null);
+//        });
+//
+//        btnThoat.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent event1) -> {
+//            btnThoat.setEffect(null);
+//        });
     }
     
 }

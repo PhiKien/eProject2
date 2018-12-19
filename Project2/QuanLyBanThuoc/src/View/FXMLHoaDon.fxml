@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="765.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.FXMLHoaDonController">
+<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="765.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLHoaDonController">
     <stylesheets>
         <URL value="@/View/CSS/fxmlhoadon.css" />
     </stylesheets>
@@ -49,23 +49,23 @@
       </MenuBar>
       <Pane layoutX="13.0" layoutY="41.0" prefHeight="46.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
          <children>
-            <Button fx:id="btnThem" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="button_c" text="Thêm">
+            <Button fx:id="btnThem" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="btn" text="Thêm">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button fx:id="btnSua" layoutX="90.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnSua_Click" prefHeight="30.0" prefWidth="55.0" styleClass="button_c" text="Sửa ">
+            <Button fx:id="btnSua" layoutX="90.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnSua_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" text="Sửa ">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button fx:id="btnXoa" layoutX="156.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnXoa_Click" prefHeight="30.0" prefWidth="55.0" styleClass="button_c" text="Xóa">
+            <Button fx:id="btnXoa" layoutX="156.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnXoa_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" text="Xóa">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button fx:id="btnLamMoi" layoutX="222.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnLamMoi_Click" styleClass="button_c" text="Làm mới">
+            <Button fx:id="btnLamMoi" layoutX="222.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnLamMoi_Click" styleClass="btn" text="Làm mới">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button fx:id="btnTimKiem" layoutX="447.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="button_c" text="Tìm kiếm">
+            <Button fx:id="btnTimKiem" layoutX="447.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="btn" text="Tìm kiếm">
                <font>
                   <Font size="14.0" />
                </font></Button>
@@ -86,12 +86,12 @@
             <Label layoutX="393.0" layoutY="40.0" text="Ngày bán:" />
             <Label layoutX="364.0" layoutY="79.0" text="Mã khách hàng:" />
             <DatePicker fx:id="dpNgayBan" layoutX="458.0" layoutY="38.0" />
-            <Button fx:id="btnCTHoaDon" layoutX="126.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnCTHoaDon_Click" text="Chi tiết hóa đơn">
+            <Button fx:id="btnCTHoaDon" layoutX="126.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnCTHoaDon_Click" styleClass="btn" text="Chi tiết hóa đơn">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnInHoaDon" layoutX="458.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnInHoaDon_Click" text="In hóa đơn">
+            <Button fx:id="btnInHoaDon" layoutX="458.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnInHoaDon_Click" styleClass="btn" text="In hóa đơn">
                <font>
                   <Font size="14.0" />
                </font>

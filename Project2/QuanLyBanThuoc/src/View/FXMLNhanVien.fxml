@@ -8,111 +8,119 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="536.0" prefWidth="784.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.FXMLNhanVienController">
+<AnchorPane id="AnchorPane" prefHeight="536.0" prefWidth="784.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLNhanVienController">
     <stylesheets>
-        <URL value="@View/CSS/fxmlnhanvien.css" />
+        <URL value="@CSS/fxmlnhanvien.css" />
     </stylesheets>
-     <children>
-      <MenuBar prefHeight="30.0" prefWidth="790.0" style="-fx-background-color: linear-gradient(to top, #3a7bd5, #3a6073);">
-        <menus>
-          <Menu mnemonicParsing="false" styleClass="menuB" text="Chức năng">
-            <items>
-              <MenuItem fx:id="mnItemThem" mnemonicParsing="false" onAction="#mnItemThem_Click" styleClass="menuItem" text="Thêm " />
-                  <MenuItem fx:id="mnItemSua" mnemonicParsing="false" onAction="#mnItemSua_Click" styleClass="menuItem" text="Sửa" />
-                  <MenuItem fx:id="mnItemXoa" mnemonicParsing="false" onAction="#mnItemXoa_Click" styleClass="menuItem" text="Xóa" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="mnItemTKNC" mnemonicParsing="false" onAction="#mnItemTKNC_Click" styleClass="menuItem" text="Tìm kiếm nâng cao" />
-                  <MenuItem fx:id="mnItemXuatExcel" mnemonicParsing="false" onAction="#mnItemXuatExcel_Click" styleClass="menuItem" text="Xuất ra Excel" />
-                  <MenuItem fx:id="mnItemNhapExcel" mnemonicParsing="false" onAction="#mnItemNhapExcel_Click" styleClass="menuItem" text="Nhập từ Excel" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" styleClass="menuB" text="Hệ thống">
-            <items>
-              <MenuItem fx:id="mnItemNhanVien" mnemonicParsing="false" onAction="#mnItemNhanVien_Click" styleClass="menuItem" text="Nhân viên" />
-                  <MenuItem fx:id="mnItemKhachHang" mnemonicParsing="false" onAction="#mnItemKhachHang_Click" styleClass="menuItem" text="Khách hàng" />
-                  <MenuItem fx:id="mnItemKhoThuoc" mnemonicParsing="false" onAction="#mnItemKhoThuoc_Click" styleClass="menuItem" text="Kho thuốc " />
-                  <MenuItem fx:id="mnItemHoaDon" mnemonicParsing="false" onAction="#mnItemHoaDon_Click" styleClass="menuItem" text="Hóa đơn" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="mnItemThoat" mnemonicParsing="false" onAction="#mnItemThoat_Click" styleClass="menuItem" text="Thoát" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" styleClass="menuB" text="Trợ giúp">
-            <items>
-              <MenuItem fx:id="mnItemTroGiup" mnemonicParsing="false" onAction="#mnItemTroGiup_Click" styleClass="menuItem" text="Xem trợ giúp" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="mnItemDanhGia" mnemonicParsing="false" onAction="#mnItemDanhGia_Click" styleClass="menuItem" text="Đánh giá phần mềm" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="mnItemBaoCao" mnemonicParsing="false" onAction="#mnItemBaoCao_Click" styleClass="menuItem" text="Báo cáo lỗi " />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Pane layoutX="13.0" layoutY="41.0" prefHeight="46.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
-         <children>
-            <Button fx:id="btnThem" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="button_c" text="Thêm">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-            <Button fx:id="btnSua" layoutX="90.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnSua_Click" prefHeight="30.0" prefWidth="55.0" styleClass="button_c" text="Sửa ">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-            <Button fx:id="btnXoa" layoutX="156.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnXoa_Click" prefHeight="30.0" prefWidth="55.0" styleClass="button_c" text="Xóa">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-            <Button fx:id="btnLamMoi" layoutX="222.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnLamMoi_Click" styleClass="button_c" text="Làm mới">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-            <Button fx:id="btnTimKiem" layoutX="447.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="button_c" text="Tìm kiếm">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-            <TextField fx:id="txtTimKiem" layoutX="532.0" layoutY="8.0" prefHeight="25.0" prefWidth="190.0" promptText="Nhập tên nhân viên....">
-               <font>
-                  <Font size="14.0" />
-               </font></TextField>
-         </children>
-      </Pane>
-      <Pane layoutX="14.0" layoutY="102.0" prefHeight="193.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC; -fx-border-style: double;">
-         <children>
-            <TextField editable="false" layoutX="27.0" layoutY="-12.0" prefHeight="25.0" prefWidth="128.0" text="Thông tin nhân viên" />
-            <TextField fx:id="txtHoTen" layoutX="126.0" layoutY="41.0" />
-            <TextField fx:id="txtSDT" layoutX="126.0" layoutY="86.0" />
-            <TextField fx:id="txtDiaChi" layoutX="126.0" layoutY="134.0" prefHeight="46.0" prefWidth="239.0" />
-            <TextField fx:id="txtPass" layoutX="499.0" layoutY="86.0" />
-            <TextField fx:id="txtUser" layoutX="499.0" layoutY="41.0" />
-            <RadioButton fx:id="rbNam" layoutX="501.0" layoutY="138.0" mnemonicParsing="false" text="Nam" />
-            <RadioButton fx:id="rbNu" layoutX="573.0" layoutY="138.0" mnemonicParsing="false" text="Nữ" />
-            <Label layoutX="77.0" layoutY="45.0" text="Họ tên:" />
-            <Label layoutX="92.0" layoutY="90.0" text="SĐT:" />
-            <Label layoutX="77.0" layoutY="138.0" text="Địa chỉ:" />
-            <Label layoutX="433.0" layoutY="45.0" text="Username:" />
-            <Label layoutX="435.0" layoutY="90.0" text="Password:" />
-            <Label layoutX="442.0" layoutY="138.0" text="Giới tính:" />
-         </children>
-      </Pane>
-      <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" prefHeight="177.0" prefWidth="765.0">
-        <columns>
-          <TableColumn fx:id="tcHoTen" prefWidth="150.0" text="Họ tên" />
-          <TableColumn fx:id="tcSDT" minWidth="0.0" prefWidth="132.0" text="SĐT" />
-            <TableColumn fx:id="tcDiaChi" minWidth="0.0" prefWidth="133.0" text="Địa chỉ" />
-            <TableColumn fx:id="tcGioiTinh" minWidth="0.0" prefWidth="108.0" text="Giới tính" />
-            <TableColumn fx:id="tcUser" minWidth="0.0" prefWidth="123.0" text="Username" />
-            <TableColumn fx:id="tcPass" minWidth="0.0" prefWidth="118.0" text="Password" />
-        </columns>
-      </TableView>
-      <Button fx:id="btnXacNhan" layoutX="589.0" layoutY="501.0" mnemonicParsing="false" onAction="#btnXacNhan_Click" text="Xác nhận">
-         <font>
-            <Font size="13.0" />
-         </font></Button>
-      <Button fx:id="btnTuChoi" layoutX="688.0" layoutY="501.0" mnemonicParsing="false" onAction="#btnTuChoi_Click" text="Từ chối">
-         <font>
-            <Font size="13.0" />
-         </font></Button>
-      <Label layoutX="328.0" layoutY="297.0" text="Danh sách chờ phê duyệt">
+    <children>
+        <MenuBar prefHeight="30.0" prefWidth="790.0" style="-fx-background-color: linear-gradient(to top, #3a7bd5, #3a6073);">
+            <menus>
+                <Menu mnemonicParsing="false" styleClass="menuB" text="Chức năng">
+                    <items>
+                        <MenuItem fx:id="mnItemThem" mnemonicParsing="false" onAction="#mnItemThem_Click" styleClass="menuItem" text="Thêm " />
+                        <MenuItem fx:id="mnItemSua" mnemonicParsing="false" onAction="#mnItemSua_Click" styleClass="menuItem" text="Sửa" />
+                        <MenuItem fx:id="mnItemXoa" mnemonicParsing="false" onAction="#mnItemXoa_Click" styleClass="menuItem" text="Xóa" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="mnItemTKNC" mnemonicParsing="false" onAction="#mnItemTKNC_Click" styleClass="menuItem" text="Tìm kiếm nâng cao" />
+                        <MenuItem fx:id="mnItemXuatExcel" mnemonicParsing="false" onAction="#mnItemXuatExcel_Click" styleClass="menuItem" text="Xuất ra Excel" />
+                        <MenuItem fx:id="mnItemNhapExcel" mnemonicParsing="false" onAction="#mnItemNhapExcel_Click" styleClass="menuItem" text="Nhập từ Excel" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" styleClass="menuB" text="Hệ thống">
+                    <items>
+                        <MenuItem fx:id="mnItemNhanVien" mnemonicParsing="false" onAction="#mnItemNhanVien_Click" styleClass="menuItem" text="Nhân viên" />
+                        <MenuItem fx:id="mnItemKhachHang" mnemonicParsing="false" onAction="#mnItemKhachHang_Click" styleClass="menuItem" text="Khách hàng" />
+                        <MenuItem fx:id="mnItemKhoThuoc" mnemonicParsing="false" onAction="#mnItemKhoThuoc_Click" styleClass="menuItem" text="Kho thuốc " />
+                        <MenuItem fx:id="mnItemHoaDon" mnemonicParsing="false" onAction="#mnItemHoaDon_Click" styleClass="menuItem" text="Hóa đơn" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="mnItemThoat" mnemonicParsing="false" onAction="#mnItemThoat_Click" styleClass="menuItem" text="Thoát" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" styleClass="menuB" text="Trợ giúp">
+                    <items>
+                        <MenuItem fx:id="mnItemTroGiup" mnemonicParsing="false" onAction="#mnItemTroGiup_Click" styleClass="menuItem" text="Xem trợ giúp" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="mnItemDanhGia" mnemonicParsing="false" onAction="#mnItemDanhGia_Click" styleClass="menuItem" text="Đánh giá phần mềm" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="mnItemBaoCao" mnemonicParsing="false" onAction="#mnItemBaoCao_Click" styleClass="menuItem" text="Báo cáo lỗi " />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Pane layoutX="13.0" layoutY="41.0" prefHeight="46.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
+            <children>
+                <Button fx:id="btnThem" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="btn" text="Thêm">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnSua" layoutX="90.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnSua_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" text="Sửa ">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnXoa" layoutX="156.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnXoa_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" text="Xóa">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnLamMoi" layoutX="222.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnLamMoi_Click" styleClass="btn" text="Làm mới">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnTimKiem" layoutX="447.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="btn" text="Tìm kiếm">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="txtTimKiem" layoutX="532.0" layoutY="8.0" prefHeight="25.0" prefWidth="190.0" promptText="Nhập tên nhân viên....">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+            </children>
+        </Pane>
+        <Pane layoutX="14.0" layoutY="102.0" prefHeight="193.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC; -fx-border-style: double;">
+            <children>
+                <TextField editable="false" layoutX="27.0" layoutY="-12.0" prefHeight="25.0" prefWidth="128.0" text="Thông tin nhân viên" />
+                <TextField fx:id="txtHoTen" layoutX="126.0" layoutY="41.0" />
+                <TextField fx:id="txtSDT" layoutX="126.0" layoutY="86.0" />
+                <TextField fx:id="txtDiaChi" layoutX="126.0" layoutY="134.0" prefHeight="46.0" prefWidth="239.0" />
+                <TextField fx:id="txtPass" layoutX="499.0" layoutY="86.0" />
+                <TextField fx:id="txtUser" layoutX="499.0" layoutY="41.0" />
+                <RadioButton fx:id="rbNam" layoutX="501.0" layoutY="138.0" mnemonicParsing="false" text="Nam" />
+                <RadioButton fx:id="rbNu" layoutX="573.0" layoutY="138.0" mnemonicParsing="false" text="Nữ" />
+                <Label layoutX="77.0" layoutY="45.0" text="Họ tên:" />
+                <Label layoutX="92.0" layoutY="90.0" text="SĐT:" />
+                <Label layoutX="77.0" layoutY="138.0" text="Địa chỉ:" />
+                <Label layoutX="433.0" layoutY="45.0" text="Username:" />
+                <Label layoutX="435.0" layoutY="90.0" text="Password:" />
+                <Label layoutX="442.0" layoutY="138.0" text="Giới tính:" />
+            </children>
+        </Pane>
+        <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" prefHeight="177.0" prefWidth="765.0">
+            <columns>
+                <TableColumn fx:id="tcHoTen" prefWidth="150.0" text="Họ tên" />
+                <TableColumn fx:id="tcSDT" minWidth="0.0" prefWidth="132.0" text="SĐT" />
+                <TableColumn fx:id="tcDiaChi" minWidth="0.0" prefWidth="133.0" text="Địa chỉ" />
+                <TableColumn fx:id="tcGioiTinh" minWidth="0.0" prefWidth="108.0" text="Giới tính" />
+                <TableColumn fx:id="tcUser" minWidth="0.0" prefWidth="123.0" text="Username" />
+                <TableColumn fx:id="tcPass" minWidth="0.0" prefWidth="118.0" text="Password" />
+            </columns>
+        </TableView>
+        <Button fx:id="btnXacNhan" layoutX="589.0" layoutY="501.0" mnemonicParsing="false" onAction="#btnXacNhan_Click" styleClass="btn" text="Xác nhận">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnTuChoi" layoutX="688.0" layoutY="501.0" mnemonicParsing="false" onAction="#btnTuChoi_Click" styleClass="btn" text="Từ chối">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+        <Label layoutX="328.0" layoutY="297.0" text="Danh sách chờ phê duyệt">
          
-      </Label>
-   </children>
+        </Label>
+    </children>
 </AnchorPane>

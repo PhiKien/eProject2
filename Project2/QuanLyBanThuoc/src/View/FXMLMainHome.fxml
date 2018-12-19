@@ -23,27 +23,27 @@
                   <Image url="@../Image/45496785_1770514296407904_9101675942408880128_n.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnDangNhap" alignment="TOP_LEFT" layoutY="149.0" mnemonicParsing="false" onAction="#btnDangNhapShowForm_Click" prefHeight="31.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Đăng nhập" textFill="WHITE" AnchorPane.bottomAnchor="241.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="149.0">
+            <Button fx:id="btnDangNhap" alignment="TOP_LEFT" layoutY="149.0" mnemonicParsing="false" onAction="#btnDangNhapShowForm_Click" onMouseEntered="#btnChung_Entered" prefHeight="31.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Đăng nhập" textFill="WHITE" AnchorPane.bottomAnchor="241.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="149.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnDangKy" alignment="TOP_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#btnDangKyShowForm_Click" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Đăng ký" textFill="WHITE">
+            <Button fx:id="btnDangKy" alignment="TOP_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#btnDangKyShowForm_Click" onMouseEntered="#btnChung_Entered" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Đăng ký" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnHuongDanSuDung" alignment="TOP_LEFT" layoutY="242.0" mnemonicParsing="false" onAction="#btnHuongDanSuDungShowForm_Click" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Hướng dẫn sử dụng" textFill="WHITE">
+            <Button fx:id="btnHuongDanSuDung" alignment="TOP_LEFT" layoutY="242.0" mnemonicParsing="false" onAction="#btnHuongDanSuDungShowForm_Click" onMouseEntered="#btnChung_Entered" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Hướng dẫn sử dụng" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnNhaPhatTrien" alignment="TOP_LEFT" layoutY="287.0" mnemonicParsing="false" onAction="#btnNhaPhatTrienShowForm_Click" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Nhà phát triển" textFill="WHITE">
+            <Button fx:id="btnNhaPhatTrien" alignment="TOP_LEFT" layoutY="287.0" mnemonicParsing="false" onAction="#btnNhaPhatTrienShowForm_Click" onMouseEntered="#btnChung_Entered" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Nhà phát triển" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnThoat" alignment="TOP_LEFT" layoutY="333.0" mnemonicParsing="false" onAction="#btnThoat_Click" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Thoát" textFill="WHITE">
+            <Button fx:id="btnThoat" alignment="TOP_LEFT" layoutY="333.0" mnemonicParsing="false" onAction="#btnThoat_Click" onMouseEntered="#btnChung_Entered" prefHeight="30.0" prefWidth="216.0" styleClass="btnMenu" stylesheets="@CSS/fxmlmainhome.css" text="        Thoát" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
