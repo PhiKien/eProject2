@@ -5,17 +5,21 @@
  */
 package Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -111,6 +115,18 @@ public class FXMLKhoThuocController implements Initializable {
 
     @FXML
     private void mnItemTKNC_Click(ActionEvent event) {
+        try {
+            //((Node) event.getSource()).getScene().getWindow().hide();    an di from home
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/View/FXMLTKNCKhoThuoc.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage window = new Stage();
+            window.setTitle("Nhân viên");
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -139,6 +155,7 @@ public class FXMLKhoThuocController implements Initializable {
 
     @FXML
     private void mnItemThoat_Click(ActionEvent event) {
+        System.exit(0);
     }
 
     @FXML

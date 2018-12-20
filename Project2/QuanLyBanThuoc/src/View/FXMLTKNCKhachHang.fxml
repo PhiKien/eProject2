@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="243.0" prefWidth="315.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.FXMLTKNCKhachHangController">
+    <stylesheets>
+        <URL value="@/View/CSS/fxmltknckhachhang.css" />
+    </stylesheets>
+    <children>
+      <Button fx:id="btnTimKiem" layoutX="89.0" layoutY="26.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="btn" text="Tìm kiếm">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Button fx:id="btnLamMoi" layoutX="178.0" layoutY="26.0" mnemonicParsing="false" onAction="#btnLamMoi_Click" styleClass="btn" text="Làm mới">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <TextField fx:id="txtMaBenhNhan" layoutX="115.0" layoutY="75.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField fx:id="txtHoTen" layoutX="115.0" layoutY="114.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField fx:id="txtDiaChi" layoutX="115.0" layoutY="151.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField fx:id="txtSDT" layoutX="115.0" layoutY="188.0" prefHeight="25.0" prefWidth="170.0" />
+      <Label layoutX="21.0" layoutY="79.0" text="Mã bệnh nhân:" />
+      <Label layoutX="62.0" layoutY="155.0" text="Địa chỉ:" />
+      <Label layoutX="77.0" layoutY="192.0" text="SĐT:" />
+      <Label layoutX="62.0" layoutY="118.0" text="Họ tên:" />
+   </children>
+</AnchorPane>
