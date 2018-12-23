@@ -82,20 +82,22 @@
             <TextField fx:id="txtMaThuoc" layoutX="126.0" layoutY="77.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="txtMaKH" layoutX="459.0" layoutY="77.0" />
             <Label layoutX="49.0" layoutY="42.0" text="Mã hóa đơn:" />
-            <Label layoutX="63.0" layoutY="80.0" text="Mã thuốc:" />
+            <Label layoutX="39.0" layoutY="81.0" text="Tên nhân viên:" />
             <Label layoutX="393.0" layoutY="40.0" text="Ngày bán:" />
-            <Label layoutX="364.0" layoutY="79.0" text="Mã khách hàng:" />
+            <Label layoutX="362.0" layoutY="80.0" text="Tên khách hàng:" />
             <DatePicker fx:id="dpNgayBan" layoutX="458.0" layoutY="38.0" />
-            <Button fx:id="btnCTHoaDon" layoutX="126.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnCTHoaDon_Click" styleClass="btn" text="Chi tiết hóa đơn">
+            <Button fx:id="btnCTHoaDon" layoutX="459.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnCTHoaDon_Click" styleClass="btn" text="Chi tiết hóa đơn">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnInHoaDon" layoutX="458.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnInHoaDon_Click" styleClass="btn" text="In hóa đơn">
+            <Button fx:id="btnInHoaDon" layoutX="641.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnInHoaDon_Click" styleClass="btn" text="In hóa đơn">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
+            <Label layoutX="59.0" layoutY="119.0" text="Tổng tiền: " />
+            <TextField layoutX="126.0" layoutY="115.0" />
          </children>
       </Pane>
       <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" prefHeight="212.0" prefWidth="765.0">

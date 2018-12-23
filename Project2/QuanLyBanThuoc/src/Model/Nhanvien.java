@@ -6,7 +6,10 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,25 +17,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author drago
  */
 @Entity
-@Table(name = "nhanvien", catalog = "quanlybanthuocdb", schema = "")
+@Table(name = "nhanvien")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Nhanvien.findAll", query = "SELECT n FROM Nhanvien n"),
     @NamedQuery(name = "Nhanvien.findByMaNV", query = "SELECT n FROM Nhanvien n WHERE n.maNV = :maNV"),
-    @NamedQuery(name = "Nhanvien.findByMaHD", query = "SELECT n FROM Nhanvien n WHERE n.maHD = :maHD"),
-    @NamedQuery(name = "Nhanvien.findByHoTen", query = "SELECT n FROM Nhanvien n WHERE n.hoTen = :hoTen"),
+    @NamedQuery(name = "Nhanvien.findByHoTenNV", query = "SELECT n FROM Nhanvien n WHERE n.hoTenNV = :hoTenNV"),
+    @NamedQuery(name = "Nhanvien.findByNgaySinh", query = "SELECT n FROM Nhanvien n WHERE n.ngaySinh = :ngaySinh"),
     @NamedQuery(name = "Nhanvien.findByGioiTinh", query = "SELECT n FROM Nhanvien n WHERE n.gioiTinh = :gioiTinh"),
     @NamedQuery(name = "Nhanvien.findByDiaChi", query = "SELECT n FROM Nhanvien n WHERE n.diaChi = :diaChi"),
-    @NamedQuery(name = "Nhanvien.findBySoDienThoai", query = "SELECT n FROM Nhanvien n WHERE n.soDienThoai = :soDienThoai"),
-    @NamedQuery(name = "Nhanvien.findByUsername", query = "SELECT n FROM Nhanvien n WHERE n.username = :username"),
+    @NamedQuery(name = "Nhanvien.findByUsernane", query = "SELECT n FROM Nhanvien n WHERE n.usernane = :usernane"),
     @NamedQuery(name = "Nhanvien.findByPassword", query = "SELECT n FROM Nhanvien n WHERE n.password = :password"),
     @NamedQuery(name = "Nhanvien.findByTrangThai", query = "SELECT n FROM Nhanvien n WHERE n.trangThai = :trangThai")})
 public class Nhanvien implements Serializable {
@@ -43,28 +49,47 @@ public class Nhanvien implements Serializable {
     @Basic(optional = false)
     @Column(name = "MaNV")
     private Integer maNV;
-    @Column(name = "MaHD")
-    private Integer maHD;
-    @Column(name = "HoTen")
-    private String hoTen;
+    @Basic(optional = false)
+    @Column(name = "HoTenNV")
+    private String hoTenNV;
+    @Basic(optional = false)
+    @Column(name = "NgaySinh")
+    @Temporal(TemporalType.DATE)
+    private Date ngaySinh;
+    @Basic(optional = false)
     @Column(name = "GioiTinh")
-    private Boolean gioiTinh;
+    private boolean gioiTinh;
+    @Basic(optional = false)
     @Column(name = "DiaChi")
     private String diaChi;
-    @Column(name = "SoDienThoai")
-    private String soDienThoai;
-    @Column(name = "Username")
-    private String username;
+    @Basic(optional = false)
+    @Column(name = "Usernane")
+    private String usernane;
+    @Basic(optional = false)
     @Column(name = "Password")
     private String password;
+    @Basic(optional = false)
     @Column(name = "TrangThai")
-    private Short trangThai;
+    private short trangThai;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "maNV")
+    private Collection<Hoadon> hoadonCollection;
 
     public Nhanvien() {
     }
 
     public Nhanvien(Integer maNV) {
         this.maNV = maNV;
+    }
+
+    public Nhanvien(Integer maNV, String hoTenNV, Date ngaySinh, boolean gioiTinh, String diaChi, String usernane, String password, short trangThai) {
+        this.maNV = maNV;
+        this.hoTenNV = hoTenNV;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.diaChi = diaChi;
+        this.usernane = usernane;
+        this.password = password;
+        this.trangThai = trangThai;
     }
 
     public Integer getMaNV() {
@@ -75,27 +100,27 @@ public class Nhanvien implements Serializable {
         this.maNV = maNV;
     }
 
-    public Integer getMaHD() {
-        return maHD;
+    public String getHoTenNV() {
+        return hoTenNV;
     }
 
-    public void setMaHD(Integer maHD) {
-        this.maHD = maHD;
+    public void setHoTenNV(String hoTenNV) {
+        this.hoTenNV = hoTenNV;
     }
 
-    public String getHoTen() {
-        return hoTen;
+    public Date getNgaySinh() {
+        return ngaySinh;
     }
 
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
     }
 
-    public Boolean getGioiTinh() {
+    public boolean getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(Boolean gioiTinh) {
+    public void setGioiTinh(boolean gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
@@ -107,20 +132,12 @@ public class Nhanvien implements Serializable {
         this.diaChi = diaChi;
     }
 
-    public String getSoDienThoai() {
-        return soDienThoai;
+    public String getUsernane() {
+        return usernane;
     }
 
-    public void setSoDienThoai(String soDienThoai) {
-        this.soDienThoai = soDienThoai;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsernane(String usernane) {
+        this.usernane = usernane;
     }
 
     public String getPassword() {
@@ -131,12 +148,21 @@ public class Nhanvien implements Serializable {
         this.password = password;
     }
 
-    public Short getTrangThai() {
+    public short getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(Short trangThai) {
+    public void setTrangThai(short trangThai) {
         this.trangThai = trangThai;
+    }
+
+    @XmlTransient
+    public Collection<Hoadon> getHoadonCollection() {
+        return hoadonCollection;
+    }
+
+    public void setHoadonCollection(Collection<Hoadon> hoadonCollection) {
+        this.hoadonCollection = hoadonCollection;
     }
 
     @Override

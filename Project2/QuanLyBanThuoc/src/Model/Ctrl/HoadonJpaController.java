@@ -5,16 +5,22 @@
  */
 package Model.Ctrl;
 
-import Model.Ctrl.exceptions.NonexistentEntityException;
-import Model.Hoadon;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import Model.Khachhang;
+import Model.Nhanvien;
+import Model.Chitiethoadon;
+import Model.Ctrl.exceptions.IllegalOrphanException;
+import Model.Ctrl.exceptions.NonexistentEntityException;
+import Model.Hoadon;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -32,11 +38,47 @@ public class HoadonJpaController implements Serializable {
     }
 
     public void create(Hoadon hoadon) {
+        if (hoadon.getChitiethoadonCollection() == null) {
+            hoadon.setChitiethoadonCollection(new ArrayList<Chitiethoadon>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Khachhang maKH = hoadon.getMaKH();
+            if (maKH != null) {
+                maKH = em.getReference(maKH.getClass(), maKH.getMaKH());
+                hoadon.setMaKH(maKH);
+            }
+            Nhanvien maNV = hoadon.getMaNV();
+            if (maNV != null) {
+                maNV = em.getReference(maNV.getClass(), maNV.getMaNV());
+                hoadon.setMaNV(maNV);
+            }
+            Collection<Chitiethoadon> attachedChitiethoadonCollection = new ArrayList<Chitiethoadon>();
+            for (Chitiethoadon chitiethoadonCollectionChitiethoadonToAttach : hoadon.getChitiethoadonCollection()) {
+                chitiethoadonCollectionChitiethoadonToAttach = em.getReference(chitiethoadonCollectionChitiethoadonToAttach.getClass(), chitiethoadonCollectionChitiethoadonToAttach.getChitiethoadonPK());
+                attachedChitiethoadonCollection.add(chitiethoadonCollectionChitiethoadonToAttach);
+            }
+            hoadon.setChitiethoadonCollection(attachedChitiethoadonCollection);
             em.persist(hoadon);
+            if (maKH != null) {
+                maKH.getHoadonCollection().add(hoadon);
+                maKH = em.merge(maKH);
+            }
+            if (maNV != null) {
+                maNV.getHoadonCollection().add(hoadon);
+                maNV = em.merge(maNV);
+            }
+            for (Chitiethoadon chitiethoadonCollectionChitiethoadon : hoadon.getChitiethoadonCollection()) {
+                Hoadon oldHoadonOfChitiethoadonCollectionChitiethoadon = chitiethoadonCollectionChitiethoadon.getHoadon();
+                chitiethoadonCollectionChitiethoadon.setHoadon(hoadon);
+                chitiethoadonCollectionChitiethoadon = em.merge(chitiethoadonCollectionChitiethoadon);
+                if (oldHoadonOfChitiethoadonCollectionChitiethoadon != null) {
+                    oldHoadonOfChitiethoadonCollectionChitiethoadon.getChitiethoadonCollection().remove(chitiethoadonCollectionChitiethoadon);
+                    oldHoadonOfChitiethoadonCollectionChitiethoadon = em.merge(oldHoadonOfChitiethoadonCollectionChitiethoadon);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,12 +87,73 @@ public class HoadonJpaController implements Serializable {
         }
     }
 
-    public void edit(Hoadon hoadon) throws NonexistentEntityException, Exception {
+    public void edit(Hoadon hoadon) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Hoadon persistentHoadon = em.find(Hoadon.class, hoadon.getMaHD());
+            Khachhang maKHOld = persistentHoadon.getMaKH();
+            Khachhang maKHNew = hoadon.getMaKH();
+            Nhanvien maNVOld = persistentHoadon.getMaNV();
+            Nhanvien maNVNew = hoadon.getMaNV();
+            Collection<Chitiethoadon> chitiethoadonCollectionOld = persistentHoadon.getChitiethoadonCollection();
+            Collection<Chitiethoadon> chitiethoadonCollectionNew = hoadon.getChitiethoadonCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Chitiethoadon chitiethoadonCollectionOldChitiethoadon : chitiethoadonCollectionOld) {
+                if (!chitiethoadonCollectionNew.contains(chitiethoadonCollectionOldChitiethoadon)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Chitiethoadon " + chitiethoadonCollectionOldChitiethoadon + " since its hoadon field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            if (maKHNew != null) {
+                maKHNew = em.getReference(maKHNew.getClass(), maKHNew.getMaKH());
+                hoadon.setMaKH(maKHNew);
+            }
+            if (maNVNew != null) {
+                maNVNew = em.getReference(maNVNew.getClass(), maNVNew.getMaNV());
+                hoadon.setMaNV(maNVNew);
+            }
+            Collection<Chitiethoadon> attachedChitiethoadonCollectionNew = new ArrayList<Chitiethoadon>();
+            for (Chitiethoadon chitiethoadonCollectionNewChitiethoadonToAttach : chitiethoadonCollectionNew) {
+                chitiethoadonCollectionNewChitiethoadonToAttach = em.getReference(chitiethoadonCollectionNewChitiethoadonToAttach.getClass(), chitiethoadonCollectionNewChitiethoadonToAttach.getChitiethoadonPK());
+                attachedChitiethoadonCollectionNew.add(chitiethoadonCollectionNewChitiethoadonToAttach);
+            }
+            chitiethoadonCollectionNew = attachedChitiethoadonCollectionNew;
+            hoadon.setChitiethoadonCollection(chitiethoadonCollectionNew);
             hoadon = em.merge(hoadon);
+            if (maKHOld != null && !maKHOld.equals(maKHNew)) {
+                maKHOld.getHoadonCollection().remove(hoadon);
+                maKHOld = em.merge(maKHOld);
+            }
+            if (maKHNew != null && !maKHNew.equals(maKHOld)) {
+                maKHNew.getHoadonCollection().add(hoadon);
+                maKHNew = em.merge(maKHNew);
+            }
+            if (maNVOld != null && !maNVOld.equals(maNVNew)) {
+                maNVOld.getHoadonCollection().remove(hoadon);
+                maNVOld = em.merge(maNVOld);
+            }
+            if (maNVNew != null && !maNVNew.equals(maNVOld)) {
+                maNVNew.getHoadonCollection().add(hoadon);
+                maNVNew = em.merge(maNVNew);
+            }
+            for (Chitiethoadon chitiethoadonCollectionNewChitiethoadon : chitiethoadonCollectionNew) {
+                if (!chitiethoadonCollectionOld.contains(chitiethoadonCollectionNewChitiethoadon)) {
+                    Hoadon oldHoadonOfChitiethoadonCollectionNewChitiethoadon = chitiethoadonCollectionNewChitiethoadon.getHoadon();
+                    chitiethoadonCollectionNewChitiethoadon.setHoadon(hoadon);
+                    chitiethoadonCollectionNewChitiethoadon = em.merge(chitiethoadonCollectionNewChitiethoadon);
+                    if (oldHoadonOfChitiethoadonCollectionNewChitiethoadon != null && !oldHoadonOfChitiethoadonCollectionNewChitiethoadon.equals(hoadon)) {
+                        oldHoadonOfChitiethoadonCollectionNewChitiethoadon.getChitiethoadonCollection().remove(chitiethoadonCollectionNewChitiethoadon);
+                        oldHoadonOfChitiethoadonCollectionNewChitiethoadon = em.merge(oldHoadonOfChitiethoadonCollectionNewChitiethoadon);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -68,7 +171,7 @@ public class HoadonJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -79,6 +182,27 @@ public class HoadonJpaController implements Serializable {
                 hoadon.getMaHD();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The hoadon with id " + id + " no longer exists.", enfe);
+            }
+            List<String> illegalOrphanMessages = null;
+            Collection<Chitiethoadon> chitiethoadonCollectionOrphanCheck = hoadon.getChitiethoadonCollection();
+            for (Chitiethoadon chitiethoadonCollectionOrphanCheckChitiethoadon : chitiethoadonCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Hoadon (" + hoadon + ") cannot be destroyed since the Chitiethoadon " + chitiethoadonCollectionOrphanCheckChitiethoadon + " in its chitiethoadonCollection field has a non-nullable hoadon field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            Khachhang maKH = hoadon.getMaKH();
+            if (maKH != null) {
+                maKH.getHoadonCollection().remove(hoadon);
+                maKH = em.merge(maKH);
+            }
+            Nhanvien maNV = hoadon.getMaNV();
+            if (maNV != null) {
+                maNV.getHoadonCollection().remove(hoadon);
+                maNV = em.merge(maNV);
             }
             em.remove(hoadon);
             em.getTransaction().commit();

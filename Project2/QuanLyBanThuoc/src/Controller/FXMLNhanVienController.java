@@ -108,7 +108,7 @@ public class FXMLNhanVienController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void mnItemThem_Click(ActionEvent event) {
@@ -148,18 +148,66 @@ public class FXMLNhanVienController implements Initializable {
 
     @FXML
     private void mnItemNhanVien_Click(ActionEvent event) {
+        try {
+            //((Node) event.getSource()).getScene().getWindow().hide();    
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/View/FXMLNhanVien.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage window = new Stage();
+            window.setTitle("Nhân viên");
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
     private void mnItemKhachHang_Click(ActionEvent event) {
+        try {
+            //((Node) event.getSource()).getScene().getWindow().hide();    
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/View/FXMLKhachHang.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage window = new Stage();
+            window.setTitle("Khách Hàng");
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
     private void mnItemKhoThuoc_Click(ActionEvent event) {
+        try {
+            //((Node) event.getSource()).getScene().getWindow().hide();    
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/View/FXMLKhoThuoc.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage window = new Stage();
+            window.setTitle("Kho Thuốc");
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
     private void mnItemHoaDon_Click(ActionEvent event) {
+        try {
+            //((Node) event.getSource()).getScene().getWindow().hide();    
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/View/FXMLHoaDon.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage window = new Stage();
+            window.setTitle("Hóa Đơn");
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -193,6 +241,12 @@ public class FXMLNhanVienController implements Initializable {
 
     @FXML
     private void btnLamMoi_Click(ActionEvent event) {
+        txtDiaChi.clear();
+        txtHoTen.clear();
+        txtPass.clear();
+        txtSDT.clear();
+        txtTimKiem.clear();
+        txtUser.clear();
     }
 
     @FXML
@@ -207,5 +261,4 @@ public class FXMLNhanVienController implements Initializable {
     private void btnTuChoi_Click(ActionEvent event) {
     }
 
-    
 }

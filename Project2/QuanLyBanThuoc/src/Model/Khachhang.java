@@ -6,8 +6,10 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,27 +17,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author drago
  */
 @Entity
-@Table(name = "khachhang", catalog = "quanlybanthuocdb", schema = "")
+@Table(name = "khachhang")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Khachhang.findAll", query = "SELECT k FROM Khachhang k"),
     @NamedQuery(name = "Khachhang.findByMaKH", query = "SELECT k FROM Khachhang k WHERE k.maKH = :maKH"),
-    @NamedQuery(name = "Khachhang.findByMaHD", query = "SELECT k FROM Khachhang k WHERE k.maHD = :maHD"),
-    @NamedQuery(name = "Khachhang.findByHoTen", query = "SELECT k FROM Khachhang k WHERE k.hoTen = :hoTen"),
+    @NamedQuery(name = "Khachhang.findByHoTenKH", query = "SELECT k FROM Khachhang k WHERE k.hoTenKH = :hoTenKH"),
     @NamedQuery(name = "Khachhang.findByNgaySinh", query = "SELECT k FROM Khachhang k WHERE k.ngaySinh = :ngaySinh"),
     @NamedQuery(name = "Khachhang.findByGioiTinh", query = "SELECT k FROM Khachhang k WHERE k.gioiTinh = :gioiTinh"),
     @NamedQuery(name = "Khachhang.findByDiaChi", query = "SELECT k FROM Khachhang k WHERE k.diaChi = :diaChi"),
-    @NamedQuery(name = "Khachhang.findBySoDienThoai", query = "SELECT k FROM Khachhang k WHERE k.soDienThoai = :soDienThoai"),
     @NamedQuery(name = "Khachhang.findByTrieuChung", query = "SELECT k FROM Khachhang k WHERE k.trieuChung = :trieuChung"),
     @NamedQuery(name = "Khachhang.findByChuanDoan", query = "SELECT k FROM Khachhang k WHERE k.chuanDoan = :chuanDoan"),
     @NamedQuery(name = "Khachhang.findByTrangThai", query = "SELECT k FROM Khachhang k WHERE k.trangThai = :trangThai")})
@@ -47,31 +49,43 @@ public class Khachhang implements Serializable {
     @Basic(optional = false)
     @Column(name = "MaKH")
     private Integer maKH;
-    @Column(name = "MaHD")
-    private Integer maHD;
-    @Column(name = "HoTen")
-    private String hoTen;
+    @Basic(optional = false)
+    @Column(name = "HoTenKH")
+    private String hoTenKH;
+    @Basic(optional = false)
     @Column(name = "NgaySinh")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date ngaySinh;
+    @Basic(optional = false)
     @Column(name = "GioiTinh")
-    private Boolean gioiTinh;
+    private boolean gioiTinh;
+    @Basic(optional = false)
     @Column(name = "DiaChi")
     private String diaChi;
-    @Column(name = "SoDienThoai")
-    private String soDienThoai;
     @Column(name = "TrieuChung")
     private String trieuChung;
     @Column(name = "ChuanDoan")
     private String chuanDoan;
+    @Basic(optional = false)
     @Column(name = "TrangThai")
-    private Short trangThai;
+    private short trangThai;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "maKH")
+    private Collection<Hoadon> hoadonCollection;
 
     public Khachhang() {
     }
 
     public Khachhang(Integer maKH) {
         this.maKH = maKH;
+    }
+
+    public Khachhang(Integer maKH, String hoTenKH, Date ngaySinh, boolean gioiTinh, String diaChi, short trangThai) {
+        this.maKH = maKH;
+        this.hoTenKH = hoTenKH;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.diaChi = diaChi;
+        this.trangThai = trangThai;
     }
 
     public Integer getMaKH() {
@@ -82,20 +96,12 @@ public class Khachhang implements Serializable {
         this.maKH = maKH;
     }
 
-    public Integer getMaHD() {
-        return maHD;
+    public String getHoTenKH() {
+        return hoTenKH;
     }
 
-    public void setMaHD(Integer maHD) {
-        this.maHD = maHD;
-    }
-
-    public String getHoTen() {
-        return hoTen;
-    }
-
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
+    public void setHoTenKH(String hoTenKH) {
+        this.hoTenKH = hoTenKH;
     }
 
     public Date getNgaySinh() {
@@ -106,11 +112,11 @@ public class Khachhang implements Serializable {
         this.ngaySinh = ngaySinh;
     }
 
-    public Boolean getGioiTinh() {
+    public boolean getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(Boolean gioiTinh) {
+    public void setGioiTinh(boolean gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
@@ -120,14 +126,6 @@ public class Khachhang implements Serializable {
 
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
-    }
-
-    public String getSoDienThoai() {
-        return soDienThoai;
-    }
-
-    public void setSoDienThoai(String soDienThoai) {
-        this.soDienThoai = soDienThoai;
     }
 
     public String getTrieuChung() {
@@ -146,12 +144,21 @@ public class Khachhang implements Serializable {
         this.chuanDoan = chuanDoan;
     }
 
-    public Short getTrangThai() {
+    public short getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(Short trangThai) {
+    public void setTrangThai(short trangThai) {
         this.trangThai = trangThai;
+    }
+
+    @XmlTransient
+    public Collection<Hoadon> getHoadonCollection() {
+        return hoadonCollection;
+    }
+
+    public void setHoadonCollection(Collection<Hoadon> hoadonCollection) {
+        this.hoadonCollection = hoadonCollection;
     }
 
     @Override

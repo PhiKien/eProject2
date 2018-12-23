@@ -6,33 +6,38 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author drago
  */
 @Entity
-@Table(name = "hoadon", catalog = "quanlybanthuocdb", schema = "")
+@Table(name = "hoadon")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Hoadon.findAll", query = "SELECT h FROM Hoadon h"),
     @NamedQuery(name = "Hoadon.findByMaHD", query = "SELECT h FROM Hoadon h WHERE h.maHD = :maHD"),
-    @NamedQuery(name = "Hoadon.findByMaThuoc", query = "SELECT h FROM Hoadon h WHERE h.maThuoc = :maThuoc"),
-    @NamedQuery(name = "Hoadon.findByMaKH", query = "SELECT h FROM Hoadon h WHERE h.maKH = :maKH"),
-    @NamedQuery(name = "Hoadon.findByNgayBan", query = "SELECT h FROM Hoadon h WHERE h.ngayBan = :ngayBan"),
+    @NamedQuery(name = "Hoadon.findByNgayLapHD", query = "SELECT h FROM Hoadon h WHERE h.ngayLapHD = :ngayLapHD"),
+    @NamedQuery(name = "Hoadon.findByTongTien", query = "SELECT h FROM Hoadon h WHERE h.tongTien = :tongTien"),
     @NamedQuery(name = "Hoadon.findByTrangThai", query = "SELECT h FROM Hoadon h WHERE h.trangThai = :trangThai")})
 public class Hoadon implements Serializable {
 
@@ -42,21 +47,37 @@ public class Hoadon implements Serializable {
     @Basic(optional = false)
     @Column(name = "MaHD")
     private Integer maHD;
-    @Column(name = "MaThuoc")
-    private Integer maThuoc;
-    @Column(name = "MaKH")
-    private Integer maKH;
-    @Column(name = "NgayBan")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date ngayBan;
+    @Basic(optional = false)
+    @Column(name = "NgayLapHD")
+    @Temporal(TemporalType.DATE)
+    private Date ngayLapHD;
+    @Basic(optional = false)
+    @Column(name = "TongTien")
+    private int tongTien;
+    @Basic(optional = false)
     @Column(name = "TrangThai")
-    private Short trangThai;
+    private short trangThai;
+    @JoinColumn(name = "MaKH", referencedColumnName = "MaKH")
+    @ManyToOne(optional = false)
+    private Khachhang maKH;
+    @JoinColumn(name = "MaNV", referencedColumnName = "MaNV")
+    @ManyToOne(optional = false)
+    private Nhanvien maNV;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoadon")
+    private Collection<Chitiethoadon> chitiethoadonCollection;
 
     public Hoadon() {
     }
 
     public Hoadon(Integer maHD) {
         this.maHD = maHD;
+    }
+
+    public Hoadon(Integer maHD, Date ngayLapHD, int tongTien, short trangThai) {
+        this.maHD = maHD;
+        this.ngayLapHD = ngayLapHD;
+        this.tongTien = tongTien;
+        this.trangThai = trangThai;
     }
 
     public Integer getMaHD() {
@@ -67,36 +88,53 @@ public class Hoadon implements Serializable {
         this.maHD = maHD;
     }
 
-    public Integer getMaThuoc() {
-        return maThuoc;
+    public Date getNgayLapHD() {
+        return ngayLapHD;
     }
 
-    public void setMaThuoc(Integer maThuoc) {
-        this.maThuoc = maThuoc;
+    public void setNgayLapHD(Date ngayLapHD) {
+        this.ngayLapHD = ngayLapHD;
     }
 
-    public Integer getMaKH() {
-        return maKH;
+    public int getTongTien() {
+        return tongTien;
     }
 
-    public void setMaKH(Integer maKH) {
-        this.maKH = maKH;
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
     }
 
-    public Date getNgayBan() {
-        return ngayBan;
-    }
-
-    public void setNgayBan(Date ngayBan) {
-        this.ngayBan = ngayBan;
-    }
-
-    public Short getTrangThai() {
+    public short getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(Short trangThai) {
+    public void setTrangThai(short trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public Khachhang getMaKH() {
+        return maKH;
+    }
+
+    public void setMaKH(Khachhang maKH) {
+        this.maKH = maKH;
+    }
+
+    public Nhanvien getMaNV() {
+        return maNV;
+    }
+
+    public void setMaNV(Nhanvien maNV) {
+        this.maNV = maNV;
+    }
+
+    @XmlTransient
+    public Collection<Chitiethoadon> getChitiethoadonCollection() {
+        return chitiethoadonCollection;
+    }
+
+    public void setChitiethoadonCollection(Collection<Chitiethoadon> chitiethoadonCollection) {
+        this.chitiethoadonCollection = chitiethoadonCollection;
     }
 
     @Override

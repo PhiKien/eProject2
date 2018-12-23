@@ -8,10 +8,10 @@ package Model;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -22,105 +22,93 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author drago
  */
 @Entity
-@Table(name = "chitiethoadon", catalog = "quanlybanthuocdb", schema = "")
+@Table(name = "chitiethoadon")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Chitiethoadon.findAll", query = "SELECT c FROM Chitiethoadon c"),
-    @NamedQuery(name = "Chitiethoadon.findByMaChiTietHD", query = "SELECT c FROM Chitiethoadon c WHERE c.maChiTietHD = :maChiTietHD"),
-    @NamedQuery(name = "Chitiethoadon.findByMaHD", query = "SELECT c FROM Chitiethoadon c WHERE c.maHD = :maHD"),
-    @NamedQuery(name = "Chitiethoadon.findByTenThuoc", query = "SELECT c FROM Chitiethoadon c WHERE c.tenThuoc = :tenThuoc"),
+    @NamedQuery(name = "Chitiethoadon.findByMaHD", query = "SELECT c FROM Chitiethoadon c WHERE c.chitiethoadonPK.maHD = :maHD"),
+    @NamedQuery(name = "Chitiethoadon.findByMaThuoc", query = "SELECT c FROM Chitiethoadon c WHERE c.chitiethoadonPK.maThuoc = :maThuoc"),
     @NamedQuery(name = "Chitiethoadon.findBySoLuong", query = "SELECT c FROM Chitiethoadon c WHERE c.soLuong = :soLuong"),
-    @NamedQuery(name = "Chitiethoadon.findByTrieuChung", query = "SELECT c FROM Chitiethoadon c WHERE c.trieuChung = :trieuChung"),
-    @NamedQuery(name = "Chitiethoadon.findByChuanDoan", query = "SELECT c FROM Chitiethoadon c WHERE c.chuanDoan = :chuanDoan"),
     @NamedQuery(name = "Chitiethoadon.findByTrangThai", query = "SELECT c FROM Chitiethoadon c WHERE c.trangThai = :trangThai")})
 public class Chitiethoadon implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EmbeddedId
+    protected ChitiethoadonPK chitiethoadonPK;
     @Basic(optional = false)
-    @Column(name = "MaChiTietHD")
-    private Integer maChiTietHD;
-    @Column(name = "MaHD")
-    private Integer maHD;
-    @Column(name = "TenThuoc")
-    private String tenThuoc;
     @Column(name = "SoLuong")
-    private Integer soLuong;
-    @Column(name = "TrieuChung")
-    private String trieuChung;
-    @Column(name = "ChuanDoan")
-    private String chuanDoan;
+    private short soLuong;
+    @Basic(optional = false)
     @Column(name = "TrangThai")
-    private Short trangThai;
+    private short trangThai;
+    @JoinColumn(name = "MaHD", referencedColumnName = "MaHD", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Hoadon hoadon;
+    @JoinColumn(name = "MaThuoc", referencedColumnName = "MaThuoc", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Khothuoc khothuoc;
 
     public Chitiethoadon() {
     }
 
-    public Chitiethoadon(Integer maChiTietHD) {
-        this.maChiTietHD = maChiTietHD;
+    public Chitiethoadon(ChitiethoadonPK chitiethoadonPK) {
+        this.chitiethoadonPK = chitiethoadonPK;
     }
 
-    public Integer getMaChiTietHD() {
-        return maChiTietHD;
+    public Chitiethoadon(ChitiethoadonPK chitiethoadonPK, short soLuong, short trangThai) {
+        this.chitiethoadonPK = chitiethoadonPK;
+        this.soLuong = soLuong;
+        this.trangThai = trangThai;
     }
 
-    public void setMaChiTietHD(Integer maChiTietHD) {
-        this.maChiTietHD = maChiTietHD;
+    public Chitiethoadon(int maHD, int maThuoc) {
+        this.chitiethoadonPK = new ChitiethoadonPK(maHD, maThuoc);
     }
 
-    public Integer getMaHD() {
-        return maHD;
+    public ChitiethoadonPK getChitiethoadonPK() {
+        return chitiethoadonPK;
     }
 
-    public void setMaHD(Integer maHD) {
-        this.maHD = maHD;
+    public void setChitiethoadonPK(ChitiethoadonPK chitiethoadonPK) {
+        this.chitiethoadonPK = chitiethoadonPK;
     }
 
-    public String getTenThuoc() {
-        return tenThuoc;
-    }
-
-    public void setTenThuoc(String tenThuoc) {
-        this.tenThuoc = tenThuoc;
-    }
-
-    public Integer getSoLuong() {
+    public short getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(Integer soLuong) {
+    public void setSoLuong(short soLuong) {
         this.soLuong = soLuong;
     }
 
-    public String getTrieuChung() {
-        return trieuChung;
-    }
-
-    public void setTrieuChung(String trieuChung) {
-        this.trieuChung = trieuChung;
-    }
-
-    public String getChuanDoan() {
-        return chuanDoan;
-    }
-
-    public void setChuanDoan(String chuanDoan) {
-        this.chuanDoan = chuanDoan;
-    }
-
-    public Short getTrangThai() {
+    public short getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(Short trangThai) {
+    public void setTrangThai(short trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public Hoadon getHoadon() {
+        return hoadon;
+    }
+
+    public void setHoadon(Hoadon hoadon) {
+        this.hoadon = hoadon;
+    }
+
+    public Khothuoc getKhothuoc() {
+        return khothuoc;
+    }
+
+    public void setKhothuoc(Khothuoc khothuoc) {
+        this.khothuoc = khothuoc;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maChiTietHD != null ? maChiTietHD.hashCode() : 0);
+        hash += (chitiethoadonPK != null ? chitiethoadonPK.hashCode() : 0);
         return hash;
     }
 
@@ -131,7 +119,7 @@ public class Chitiethoadon implements Serializable {
             return false;
         }
         Chitiethoadon other = (Chitiethoadon) object;
-        if ((this.maChiTietHD == null && other.maChiTietHD != null) || (this.maChiTietHD != null && !this.maChiTietHD.equals(other.maChiTietHD))) {
+        if ((this.chitiethoadonPK == null && other.chitiethoadonPK != null) || (this.chitiethoadonPK != null && !this.chitiethoadonPK.equals(other.chitiethoadonPK))) {
             return false;
         }
         return true;
@@ -139,7 +127,7 @@ public class Chitiethoadon implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Chitiethoadon[ maChiTietHD=" + maChiTietHD + " ]";
+        return "Model.Chitiethoadon[ chitiethoadonPK=" + chitiethoadonPK + " ]";
     }
     
 }
