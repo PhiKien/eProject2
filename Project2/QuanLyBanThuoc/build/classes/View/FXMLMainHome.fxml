@@ -132,7 +132,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnLamMoi" layoutX="285.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#btnLamMoi_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="LÀM MỚI">
+                  <Button fx:id="btnLamMoi" layoutX="285.0" layoutY="275.0" mnemonicParsing="false" onAction="#btnLamMoiDK_Click" onMouseClicked="#btnLamMoi_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="LÀM MỚI">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

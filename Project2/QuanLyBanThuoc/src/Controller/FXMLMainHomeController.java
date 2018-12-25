@@ -5,20 +5,27 @@
  */
 package Controller;
 
+import Model.Nhanvien;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  * FXML Controller class
@@ -28,8 +35,8 @@ import javafx.stage.Stage;
 public class FXMLMainHomeController implements Initializable {
 
     @FXML
-    private Pane paneDangNhap,paneDangKy;
-    
+    private Pane paneDangNhap, paneDangKy;
+
     @FXML
     private Button btnDangNhap, btnDangKy;
     @FXML
@@ -60,16 +67,17 @@ public class FXMLMainHomeController implements Initializable {
     private TextField txtTenDangNhap_DangNhap;
     @FXML
     private TextField txtMatKhau_DangNhap;
-    
+
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void btnDangNhapShowForm_Click(ActionEvent event) {
@@ -99,7 +107,49 @@ public class FXMLMainHomeController implements Initializable {
 
     @FXML
     private void btnDangNhap_Click(ActionEvent event) {
-        
+        Nhanvien nhanvien = new Nhanvien();
+        //tạo entity
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+        EntityManager em = emf.createEntityManager();
+        //bắt đầu tạo transaction
+        em.getTransaction().begin();
+        try {
+            //tạo list Usename ở nhân viên
+            TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
+            //lấy list username
+            List<Nhanvien> resultListNV = createNamedQuery.getResultList();
+            if (txtTenDangNhap_DangNhap.getText().length() > 4 && txtTenDangNhap_DangNhap.getText() != null) {
+                resultListNV.forEach((NV) -> {
+                    if (NV.getUsernane().equals(txtTenDangNhap_DangNhap.getText())) {
+                        if (NV.getPassword().equals(txtMatKhau_DangNhap.getText())) {
+                            try {
+                                ((Node) event.getSource()).getScene().getWindow().hide();    
+                                FXMLLoader fxmlLoader = new FXMLLoader();
+                                fxmlLoader.setLocation(getClass().getResource("/View/FXMLMainMenu.fxml"));
+                                Scene scene = new Scene(fxmlLoader.load());
+                                Stage window = new Stage();
+                                window.setTitle("Menu");
+                                window.setScene(scene);
+                                window.show();
+                            } catch (IOException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else {
+                            System.out.println("Sai Username hoặc Password!");
+                        }
+                    } else {
+                        System.out.println("Username chưa tồn tại!");
+                    }
+                });
+            } else {
+                System.out.println("Không được để trống Username và Password!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
     }
 
     @FXML
@@ -113,56 +163,34 @@ public class FXMLMainHomeController implements Initializable {
 
     @FXML
     private void btnLamMoi_Click(MouseEvent event) {
-         txtTenDangNhap_DangKy.clear();
-         txtMatKhau_DangKy.clear();
-         txtNhapLaiMatKhau.clear();
-         txtNgaySinh.clear();
-         txtHoVaTen.clear();
+        txtTenDangNhap_DangKy.clear();
+        txtMatKhau_DangKy.clear();
+        txtNhapLaiMatKhau.clear();
+        txtNgaySinh.clear();
+        txtHoVaTen.clear();
     }
 
     @FXML
     private void btnChung_Entered(MouseEvent event) {
-//        DropShadow shadow = new DropShadow();
-//        
-//        btnDangNhap.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
-//            btnDangNhap.setEffect(shadow);
-//        });
-//
-//        btnDangKy.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
-//            btnDangKy.setEffect(shadow);
-//        });
-//
-//        btnHuongDanSuDung.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
-//            btnHuongDanSuDung.setEffect(shadow);
-//        });
-//
-//        btnNhaPhatTrien.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
-//            btnNhaPhatTrien.setEffect(shadow);
-//        });
-//
-//        btnThoat.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent event1) -> {
-//            btnThoat.setEffect(shadow);
-//        });
-//        
-//        btnDangNhap.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent event1) -> {
-//            btnDangNhap.setEffect(null);
-//        });
-//
-//        btnDangKy.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent event1) -> {
-//            btnDangKy.setEffect(null);
-//        });
-//
-//        btnHuongDanSuDung.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent event1) -> {
-//            btnHuongDanSuDung.setEffect(null);
-//        });
-//
-//        btnNhaPhatTrien.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent event1) -> {
-//            btnNhaPhatTrien.setEffect(null);
-//        });
-//
-//        btnThoat.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent event1) -> {
-//            btnThoat.setEffect(null);
-//        });
     }
-    
+
+    public void persist(Object object) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try {
+            em.persist(object);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+    }
+
+    @FXML
+    private void btnLamMoiDK_Click(ActionEvent event) {
+    }
+
 }
