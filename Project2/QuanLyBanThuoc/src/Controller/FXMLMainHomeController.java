@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -67,6 +68,10 @@ public class FXMLMainHomeController implements Initializable {
     private TextField txtTenDangNhap_DangNhap;
     @FXML
     private TextField txtMatKhau_DangNhap;
+    @FXML
+    private Label lblStatus;
+    @FXML
+    private Label lblStatus1;
 
     /**
      * Initializes the controller class.
@@ -107,7 +112,6 @@ public class FXMLMainHomeController implements Initializable {
 
     @FXML
     private void btnDangNhap_Click(ActionEvent event) {
-        Nhanvien nhanvien = new Nhanvien();
         //tạo entity
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
         EntityManager em = emf.createEntityManager();
@@ -123,7 +127,7 @@ public class FXMLMainHomeController implements Initializable {
                     if (NV.getUsernane().equals(txtTenDangNhap_DangNhap.getText())) {
                         if (NV.getPassword().equals(txtMatKhau_DangNhap.getText())) {
                             try {
-                                ((Node) event.getSource()).getScene().getWindow().hide();    
+                                ((Node) event.getSource()).getScene().getWindow().hide();
                                 FXMLLoader fxmlLoader = new FXMLLoader();
                                 fxmlLoader.setLocation(getClass().getResource("/View/FXMLMainMenu.fxml"));
                                 Scene scene = new Scene(fxmlLoader.load());
@@ -136,13 +140,16 @@ public class FXMLMainHomeController implements Initializable {
                             }
                         } else {
                             System.out.println("Sai Username hoặc Password!");
+                            lblStatus.setText("Sai Username hoặc Password!");
                         }
                     } else {
                         System.out.println("Username chưa tồn tại!");
+                        lblStatus.setText("Username chưa tồn tại!");
                     }
                 });
             } else {
                 System.out.println("Không được để trống Username và Password!");
+                lblStatus.setText("Không được để trống Username và Password!");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -159,6 +166,43 @@ public class FXMLMainHomeController implements Initializable {
 
     @FXML
     private void btnXacNhanDangKy_Click(ActionEvent event) {
+        Nhanvien nhanvien = new Nhanvien();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+        EntityManager em = emf.createEntityManager();
+        //bắt đầu tạo transaction
+        em.getTransaction().begin();
+        try {
+            //tạo list Usename ở nhân viên
+            TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
+            //lấy list username
+            List<Nhanvien> resultListNV = createNamedQuery.getResultList();
+            if (txtTenDangNhap_DangNhap.getText().length() > 4 && txtTenDangNhap_DangNhap.getText() != null) {
+                resultListNV.forEach((NV) -> {
+                    if (!NV.getUsernane().equals(txtTenDangNhap_DangNhap.getText()) && NV.getUsernane().length() > 4) {
+                        if (txtMatKhau_DangKy.getText().length() > 6) {
+                            if(txtHoVaTen.getText().length() > 0 && txtNgaySinh.getText().length() > 0 ) {
+                            
+                            }
+                        } else {
+                            System.out.println("Sai Username hoặc Password!");
+                            lblStatus.setText("Sai Username hoặc Password!");
+                        }
+                    } else {
+                        System.out.println("Username chưa tồn tại!");
+                        lblStatus.setText("Username chưa tồn tại!");
+                    }
+                });
+            } else {
+                System.out.println("Không được để trống Username và Password!");
+                lblStatus.setText("Không được để trống Username và Password!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
     }
 
     @FXML

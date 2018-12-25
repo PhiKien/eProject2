@@ -103,22 +103,6 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
-                  <TextField fx:id="txtMatKhau_DangKy" layoutX="175.0" layoutY="152.0" prefHeight="30.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: White; -fx-border-radius: 50; -fx-pref-height: 35; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets left="35.0" />
-                     </padding>
-                  </TextField>
-                  <TextField fx:id="txtNhapLaiMatKhau" layoutX="177.0" layoutY="193.0" prefHeight="30.0" prefWidth="216.0" promptText="Nhập lại mật khẩu" style="-fx-border-color: White; -fx-border-radius: 50; -fx-pref-height: 35; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets left="35.0" />
-                     </padding>
-                  </TextField>
                   <TextField fx:id="txtNgaySinh" layoutX="175.0" layoutY="234.0" prefHeight="30.0" prefWidth="216.0" promptText="Ngày sinh (dd/MM/yyyy)" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
@@ -167,6 +151,22 @@
                         <Image url="@../Image/Gift_birthday-512.png" />
                      </image>
                   </ImageView>
+                  <PasswordField fx:id="txtMatKhau_DangKy" layoutX="177.0" layoutY="152.0" prefHeight="27.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </PasswordField>
+                  <PasswordField fx:id="txtNhapLaiMatKhau" layoutX="175.0" layoutY="193.0" prefHeight="27.0" prefWidth="216.0" promptText="Nhập lại mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </PasswordField>
                </children>
             </Pane>
             <Pane fx:id="paneDangNhap" prefHeight="425.0" prefWidth="567.0" style="-fx-background-color: transparent;">
@@ -194,14 +194,6 @@
                         <Image url="@../Image/male-user.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="txtMatKhau_DangNhap" layoutX="176.0" layoutY="109.0" prefHeight="30.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: White; -fx-border-radius: 50; -fx-pref-height: 35; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets left="35.0" />
-                     </padding>
-                  </TextField>
                   <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="182.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/icons8-secure-filled-50.png" />
@@ -217,6 +209,19 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
+                  <PasswordField fx:id="txtMatKhau_DangNhap" layoutX="175.0" layoutY="109.0" prefHeight="27.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </PasswordField>
+                  <Label fx:id="lblStatus" alignment="CENTER" layoutX="22.0" layoutY="198.0" prefHeight="35.0" prefWidth="525.0" textAlignment="CENTER" textFill="#da0909">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>
