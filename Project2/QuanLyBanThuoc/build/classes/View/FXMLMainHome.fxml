@@ -167,6 +167,11 @@
                         <Insets left="35.0" />
                      </padding>
                   </PasswordField>
+                  <Label fx:id="lblStatus1" alignment="CENTER" layoutX="23.0" layoutY="322.0" prefHeight="35.0" prefWidth="525.0" textAlignment="CENTER" textFill="#da0909">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Pane fx:id="paneDangNhap" prefHeight="425.0" prefWidth="567.0" style="-fx-background-color: transparent;">

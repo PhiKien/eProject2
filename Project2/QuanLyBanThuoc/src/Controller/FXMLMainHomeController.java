@@ -5,9 +5,12 @@
  */
 package Controller;
 
+import Model.Ctrl.NhanvienJpaController;
 import Model.Nhanvien;
+import Util.StringToDate;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -167,7 +170,12 @@ public class FXMLMainHomeController implements Initializable {
     @FXML
     private void btnXacNhanDangKy_Click(ActionEvent event) {
         Nhanvien nhanvien = new Nhanvien();
+        StringToDate stringToDate = new StringToDate();
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+
+        NhanvienJpaController jpaController = new NhanvienJpaController(emf);
+
         EntityManager em = emf.createEntityManager();
         //bắt đầu tạo transaction
         em.getTransaction().begin();
@@ -176,25 +184,60 @@ public class FXMLMainHomeController implements Initializable {
             TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
             //lấy list username
             List<Nhanvien> resultListNV = createNamedQuery.getResultList();
-            if (txtTenDangNhap_DangNhap.getText().length() > 4 && txtTenDangNhap_DangNhap.getText() != null) {
+            if (txtTenDangNhap_DangKy.getText().length() >= 4 && txtTenDangNhap_DangKy.getText() != null) {
                 resultListNV.forEach((NV) -> {
-                    if (!NV.getUsernane().equals(txtTenDangNhap_DangNhap.getText()) && NV.getUsernane().length() > 4) {
-                        if (txtMatKhau_DangKy.getText().length() > 6) {
-                            if(txtHoVaTen.getText().length() > 0 && txtNgaySinh.getText().length() > 0 ) {
-                            
+                    if (!NV.getUsernane().equals(txtTenDangNhap_DangKy.getText())) {
+                        if (txtMatKhau_DangKy.getText().length() >= 5 && txtMatKhau_DangKy.getText() != null) {
+                            if (txtHoVaTen.getText().length() > 0 && txtHoVaTen.getText() != null) {
+                                if (txtNgaySinh.getText().length() > 0 && txtNgaySinh.getText() != null) {
+                                    if (txtNhapLaiMatKhau.getText().equals(txtMatKhau_DangKy.getText())) {
+                                        String userName = txtTenDangNhap_DangKy.getText();
+                                        nhanvien.setUsernane(userName);
+                                        String pass = txtMatKhau_DangKy.getText();
+                                        nhanvien.setPassword(pass);
+                                        String hoTen = txtHoVaTen.getText();
+                                        nhanvien.setHoTenNV(hoTen);
+                                        String dob = txtNgaySinh.getText();
+                                        Date date = stringToDate.String2Date(dob);
+                                        nhanvien.setNgaySinh(date);
+                                        jpaController.create(nhanvien);
+                                        System.out.println("Đăng ký thành công!");
+                                        try {
+                                            ((Node) event.getSource()).getScene().getWindow().hide();
+                                            FXMLLoader fxmlLoader = new FXMLLoader();
+                                            fxmlLoader.setLocation(getClass().getResource("/View/FXMLMainMenu.fxml"));
+                                            Scene scene = new Scene(fxmlLoader.load());
+                                            Stage window = new Stage();
+                                            window.setTitle("Menu");
+                                            window.setScene(scene);
+                                            window.show();
+                                        } catch (IOException e) {
+                                            System.out.println(e.getMessage());
+                                        }
+                                    } else {
+                                        System.out.println("Mật khẩu và mật khẩu nhập lại không khớp!");
+                                        lblStatus1.setText("Mật khẩu và mật khẩu nhập lại không khớp!");
+                                    }
+                                } else {
+                                    System.out.println("Ngay sinh nhập sai mời nhập lại!");
+                                    lblStatus1.setText("Ngay sinh nhập sai mời nhập lại!");
+                                }
+                            } else {
+                                System.out.println("Họ và tên phải từ 4 kí tự trở nên!");
+                                lblStatus1.setText("Họ và tên phải từ 4 kí tự trở nên!");
                             }
                         } else {
-                            System.out.println("Sai Username hoặc Password!");
-                            lblStatus.setText("Sai Username hoặc Password!");
+                            System.out.println("Password phải từ 5 kí tự trở nên!");
+                            lblStatus1.setText("Password phải từ 5 kí tự trở nên!");
                         }
                     } else {
-                        System.out.println("Username chưa tồn tại!");
-                        lblStatus.setText("Username chưa tồn tại!");
+                        System.out.println("Username đã tồn tại!");
+                        lblStatus1.setText("Username đã tồn tại!");
                     }
                 });
             } else {
-                System.out.println("Không được để trống Username và Password!");
-                lblStatus.setText("Không được để trống Username và Password!");
+                System.out.println("Tên đăng nhập phải từ 4 kí tự trở nên!");
+                lblStatus1.setText("Tên đăng nhập phải từ 4 kí tự trở nên!");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -202,7 +245,6 @@ public class FXMLMainHomeController implements Initializable {
         } finally {
             em.close();
         }
-
     }
 
     @FXML

@@ -174,7 +174,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="paneDangNhap" prefHeight="425.0" prefWidth="567.0" style="-fx-background-color: transparent;" visible="false">
+            <Pane fx:id="paneDangNhap" prefHeight="425.0" prefWidth="567.0" style="-fx-background-color: transparent;">
                <children>
                   <ImageView fitHeight="425.0" fitWidth="569.0" pickOnBounds="true" preserveRatio="true">
                      <image>
