@@ -58,7 +58,7 @@ public class Nhanvien implements Serializable {
     private Date ngaySinh;
     @Basic(optional = false)
     @Column(name = "GioiTinh")
-    private boolean gioiTinh;
+    private String gioiTinh;
     @Basic(optional = false)
     @Column(name = "DiaChi")
     private String diaChi;
@@ -81,7 +81,7 @@ public class Nhanvien implements Serializable {
         this.maNV = maNV;
     }
 
-    public Nhanvien(Integer maNV, String hoTenNV, Date ngaySinh, boolean gioiTinh, String diaChi, String usernane, String password, short trangThai) {
+    public Nhanvien(Integer maNV, String hoTenNV, Date ngaySinh, String gioiTinh, String diaChi, String usernane, String password, short trangThai) {
         this.maNV = maNV;
         this.hoTenNV = hoTenNV;
         this.ngaySinh = ngaySinh;
@@ -116,11 +116,11 @@ public class Nhanvien implements Serializable {
         this.ngaySinh = ngaySinh;
     }
 
-    public boolean getGioiTinh() {
+    public String getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(boolean gioiTinh) {
+    public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 

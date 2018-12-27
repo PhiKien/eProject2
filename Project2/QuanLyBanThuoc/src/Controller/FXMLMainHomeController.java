@@ -166,7 +166,9 @@ public class FXMLMainHomeController implements Initializable {
     private void btnDangKy_Click(ActionEvent event) {
         paneDangKy.toFront();
     }
-
+    
+    List<Nhanvien> resultListNV;
+    
     @FXML
     private void btnXacNhanDangKy_Click(ActionEvent event) {
         Nhanvien nhanvien = new Nhanvien();
@@ -183,10 +185,11 @@ public class FXMLMainHomeController implements Initializable {
             //tạo list Usename ở nhân viên
             TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
             //lấy list username
-            List<Nhanvien> resultListNV = createNamedQuery.getResultList();
+            resultListNV = createNamedQuery.getResultList();
+            
             if (txtTenDangNhap_DangKy.getText().length() >= 4 && txtTenDangNhap_DangKy.getText() != null) {
                 resultListNV.forEach((NV) -> {
-                    if (NV.getUsernane().toString() != txtTenDangNhap_DangKy.getText().toString()) {
+                    if (kiemTra(txtTenDangNhap_DangKy.getText())) {
                         if (txtMatKhau_DangKy.getText().length() >= 5 && txtMatKhau_DangKy.getText() != null) {
                             if (txtHoVaTen.getText().length() > 0 && txtHoVaTen.getText() != null) {
                                 if (txtNgaySinh.getText().length() > 0 && txtNgaySinh.getText() != null) {
@@ -201,19 +204,21 @@ public class FXMLMainHomeController implements Initializable {
                                         Date date = stringToDate.String2Date(dob);
                                         nhanvien.setNgaySinh(date);
                                         jpaController.create(nhanvien);
+                                        lblStatus.setText("Đăng ký thành công!");
+                                        paneDangNhap.toFront();
                                         System.out.println("Đăng ký thành công!");
-                                        try {
-                                            ((Node) event.getSource()).getScene().getWindow().hide();
-                                            FXMLLoader fxmlLoader = new FXMLLoader();
-                                            fxmlLoader.setLocation(getClass().getResource("/View/FXMLMainMenu.fxml"));
-                                            Scene scene = new Scene(fxmlLoader.load());
-                                            Stage window = new Stage();
-                                            window.setTitle("Menu");
-                                            window.setScene(scene);
-                                            window.show();
-                                        } catch (IOException e) {
-                                            System.out.println(e.getMessage());
-                                        }
+//                                        try {
+//                                            ((Node) event.getSource()).getScene().getWindow().hide();
+//                                            FXMLLoader fxmlLoader = new FXMLLoader();
+//                                            fxmlLoader.setLocation(getClass().getResource("/View/FXMLMainMenu.fxml"));
+//                                            Scene scene = new Scene(fxmlLoader.load());
+//                                            Stage window = new Stage();
+//                                            window.setTitle("Menu");
+//                                            window.setScene(scene);
+//                                            window.show();
+//                                        } catch (IOException e) {
+//                                            System.out.println(e.getMessage());
+//                                        }
                                     } else {
                                         System.out.println("Mật khẩu và mật khẩu nhập lại không khớp!");
                                         lblStatus1.setText("Mật khẩu và mật khẩu nhập lại không khớp!");
@@ -247,6 +252,13 @@ public class FXMLMainHomeController implements Initializable {
         }
     }
 
+    private boolean kiemTra(String text) {
+        for (Nhanvien nhanvien : resultListNV) {
+            if (nhanvien.getUsernane().equals(text)) return false;
+        }
+        return true;
+    }
+    
     @FXML
     private void btnLamMoi_Click(MouseEvent event) {
         txtTenDangNhap_DangKy.clear();
