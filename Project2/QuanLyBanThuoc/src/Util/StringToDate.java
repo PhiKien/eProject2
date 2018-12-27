@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  * @author drago
  */
 public class StringToDate {
+
     public Date String2Date(String dob) {
         Date date = new Date();
         try {

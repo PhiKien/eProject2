@@ -85,15 +85,13 @@
             <children>
                 <TextField editable="false" layoutX="27.0" layoutY="-12.0" prefHeight="25.0" prefWidth="128.0" text="Thông tin nhân viên" />
                 <TextField fx:id="txtHoTen" layoutX="126.0" layoutY="41.0" />
-                <TextField fx:id="txtSDT" layoutX="126.0" layoutY="86.0" />
-                <TextField fx:id="txtDiaChi" layoutX="126.0" layoutY="134.0" prefHeight="46.0" prefWidth="239.0" />
+                <TextField fx:id="txtDiaChi" layoutX="126.0" layoutY="88.0" prefHeight="46.0" prefWidth="239.0" />
                 <TextField fx:id="txtPass" layoutX="499.0" layoutY="86.0" />
                 <TextField fx:id="txtUser" layoutX="499.0" layoutY="41.0" />
                 <RadioButton fx:id="rbNam" layoutX="501.0" layoutY="138.0" mnemonicParsing="false" text="Nam" />
                 <RadioButton fx:id="rbNu" layoutX="573.0" layoutY="138.0" mnemonicParsing="false" text="Nữ" />
                 <Label layoutX="77.0" layoutY="45.0" text="Họ tên:" />
-                <Label layoutX="92.0" layoutY="90.0" text="SĐT:" />
-                <Label layoutX="77.0" layoutY="138.0" text="Địa chỉ:" />
+                <Label layoutX="77.0" layoutY="103.0" text="Địa chỉ:" />
                 <Label layoutX="433.0" layoutY="45.0" text="Username:" />
                 <Label layoutX="435.0" layoutY="90.0" text="Password:" />
                 <Label layoutX="442.0" layoutY="138.0" text="Giới tính:" />
@@ -101,12 +99,11 @@
         </Pane>
         <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" prefHeight="177.0" prefWidth="765.0">
             <columns>
-                <TableColumn fx:id="tcHoTen" prefWidth="150.0" text="Họ tên" />
-                <TableColumn fx:id="tcSDT" minWidth="0.0" prefWidth="132.0" text="SĐT" />
-                <TableColumn fx:id="tcDiaChi" minWidth="0.0" prefWidth="133.0" text="Địa chỉ" />
-                <TableColumn fx:id="tcGioiTinh" minWidth="0.0" prefWidth="108.0" text="Giới tính" />
-                <TableColumn fx:id="tcUser" minWidth="0.0" prefWidth="123.0" text="Username" />
-                <TableColumn fx:id="tcPass" minWidth="0.0" prefWidth="118.0" text="Password" />
+                <TableColumn fx:id="tcHoTen" prefWidth="165.0" text="Họ tên" />
+                <TableColumn fx:id="tcDiaChi" minWidth="0.0" prefWidth="219.0" text="Địa chỉ" />
+                <TableColumn fx:id="tcGioiTinh" minWidth="0.0" prefWidth="117.0" text="Giới tính" />
+                <TableColumn fx:id="tcUser" minWidth="0.0" prefWidth="127.0" text="Username" />
+                <TableColumn fx:id="tcPass" minWidth="0.0" prefWidth="136.0" text="Password" />
             </columns>
         </TableView>
         <Button fx:id="btnXacNhan" layoutX="589.0" layoutY="501.0" mnemonicParsing="false" onAction="#btnXacNhan_Click" styleClass="btn" text="Xác nhận">

@@ -5,22 +5,30 @@
  */
 package Controller;
 
+import Model.Nhanvien;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  * FXML Controller class
@@ -60,8 +68,6 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private TextField txtHoTen;
     @FXML
-    private TextField txtSDT;
-    @FXML
     private TextField txtDiaChi;
     @FXML
     private RadioButton rbNam;
@@ -78,15 +84,13 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private Button btnTimKiem;
     @FXML
-    private TableView<?> tabDsDuyet;
+    private TableView<Nhanvien> tabDsDuyet;
     @FXML
-    private TableColumn<?, ?> tcHoTen;
+    private TableColumn<Nhanvien, String> tcHoTen;
     @FXML
-    private TableColumn<?, ?> tcSDT;
+    private TableColumn<Nhanvien, String> tcDiaChi;
     @FXML
-    private TableColumn<?, ?> tcDiaChi;
-    @FXML
-    private TableColumn<?, ?> tcGioiTinh;
+    private TableColumn<Nhanvien, String> tcGioiTinh;
     @FXML
     private TextField txtTimKiem;
     @FXML
@@ -94,9 +98,9 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private TextField txtUser;
     @FXML
-    private TableColumn<?, ?> tcUser;
+    private TableColumn<Nhanvien, String> tcUser;
     @FXML
-    private TableColumn<?, ?> tcPass;
+    private TableColumn<Nhanvien, String> tcPass;
     @FXML
     private Button btnXacNhan;
     @FXML
@@ -104,10 +108,37 @@ public class FXMLNhanVienController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+    EntityManager em = emf.createEntityManager();
+    TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
+    List<Nhanvien> resultListNV = createNamedQuery.getResultList();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        initColumns();
+        tabDsDuyet.setItems(getStudentData());
+    }
+
+    public void initColumns() {
+        tcHoTen.setCellValueFactory(new PropertyValueFactory<>("HoTenNV"));
+        tcDiaChi.setCellValueFactory(new PropertyValueFactory<>("DiaChi"));
+        tcGioiTinh.setCellValueFactory(new PropertyValueFactory<>("GioiTinh"));
+        tcUser.setCellValueFactory(new PropertyValueFactory<>("Usernane"));
+        tcPass.setCellValueFactory(new PropertyValueFactory<>("Password"));
+    }
+
+    private ObservableList<Nhanvien> data;
+
+    public ObservableList<Nhanvien> getStudentData() {
+        data = FXCollections.observableArrayList(resultListNV);
+        if (data == null) {
+            return FXCollections.observableArrayList();
+        }
+        return data;
     }
 
     @FXML
@@ -244,7 +275,6 @@ public class FXMLNhanVienController implements Initializable {
         txtDiaChi.clear();
         txtHoTen.clear();
         txtPass.clear();
-        txtSDT.clear();
         txtTimKiem.clear();
         txtUser.clear();
     }

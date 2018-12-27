@@ -186,7 +186,7 @@ public class FXMLMainHomeController implements Initializable {
             List<Nhanvien> resultListNV = createNamedQuery.getResultList();
             if (txtTenDangNhap_DangKy.getText().length() >= 4 && txtTenDangNhap_DangKy.getText() != null) {
                 resultListNV.forEach((NV) -> {
-                    if (!NV.getUsernane().equals(txtTenDangNhap_DangKy.getText())) {
+                    if (NV.getUsernane().toString() != txtTenDangNhap_DangKy.getText().toString()) {
                         if (txtMatKhau_DangKy.getText().length() >= 5 && txtMatKhau_DangKy.getText() != null) {
                             if (txtHoVaTen.getText().length() > 0 && txtHoVaTen.getText() != null) {
                                 if (txtNgaySinh.getText().length() > 0 && txtNgaySinh.getText() != null) {
