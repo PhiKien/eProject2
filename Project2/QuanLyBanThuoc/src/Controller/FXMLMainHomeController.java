@@ -125,7 +125,7 @@ public class FXMLMainHomeController implements Initializable {
             //lấy list username
             resultListNV = createNamedQuery.getResultList();
             if (txtTenDangNhap_DangNhap.getText().length() > 4 && txtTenDangNhap_DangNhap.getText() != null) {
-                        if (kiemTraDangNhanp(txtTenDangNhap_DangNhap.getText(), txtTenDangNhap_DangNhap.getText())) {
+                        if (kiemTraDangNhanp(txtTenDangNhap_DangNhap.getText(), txtMatKhau_DangNhap.getText())) {
                             try {
                                 ((Node) event.getSource()).getScene().getWindow().hide();
                                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -158,10 +158,8 @@ public class FXMLMainHomeController implements Initializable {
     
     private boolean kiemTraDangNhanp(String user, String pass) {        
         for (int i = 0; i < resultListNV.size(); i++) {
-            if (resultListNV.get(i).getUsernane().equals(user)) {
-                if (resultListNV.get(i).getPassword().equals(pass)) {
-                    return true;
-                }
+            if (resultListNV.get(i).getUsernane().equals(user) && resultListNV.get(i).getPassword().equals(pass)) {              
+                    return true;                
             }
         }
         return false;
