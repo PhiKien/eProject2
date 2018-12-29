@@ -21,7 +21,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -124,11 +123,9 @@ public class FXMLMainHomeController implements Initializable {
             //tạo list Usename ở nhân viên
             TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
             //lấy list username
-            List<Nhanvien> resultListNV = createNamedQuery.getResultList();
+            resultListNV = createNamedQuery.getResultList();
             if (txtTenDangNhap_DangNhap.getText().length() > 4 && txtTenDangNhap_DangNhap.getText() != null) {
-                resultListNV.forEach((NV) -> {
-                    if (NV.getUsernane().equals(txtTenDangNhap_DangNhap.getText())) {
-                        if (NV.getPassword().equals(txtMatKhau_DangNhap.getText())) {
+                        if (kiemTraDangNhanp(txtTenDangNhap_DangNhap.getText(), txtTenDangNhap_DangNhap.getText())) {
                             try {
                                 ((Node) event.getSource()).getScene().getWindow().hide();
                                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -144,12 +141,7 @@ public class FXMLMainHomeController implements Initializable {
                         } else {
                             System.out.println("Sai Username hoặc Password!");
                             lblStatus.setText("Sai Username hoặc Password!");
-                        }
-                    } else {
-                        System.out.println("Username chưa tồn tại!");
-                        lblStatus.setText("Username chưa tồn tại!");
-                    }
-                });
+                        }                         
             } else {
                 System.out.println("Không được để trống Username và Password!");
                 lblStatus.setText("Không được để trống Username và Password!");
@@ -161,14 +153,27 @@ public class FXMLMainHomeController implements Initializable {
             em.close();
         }
     }
-
+   
+    List<Nhanvien> resultListNV;
+    
+    private boolean kiemTraDangNhanp(String user, String pass) {        
+        for (int i = 0; i < resultListNV.size(); i++) {
+            if (resultListNV.get(i).getUsernane().equals(user)) {
+                if (resultListNV.get(i).getPassword().equals(pass)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     @FXML
     private void btnDangKy_Click(ActionEvent event) {
         paneDangKy.toFront();
     }
-    
-    List<Nhanvien> resultListNV;
-    
+
+   
+
     @FXML
     private void btnXacNhanDangKy_Click(ActionEvent event) {
         Nhanvien nhanvien = new Nhanvien();
@@ -186,60 +191,46 @@ public class FXMLMainHomeController implements Initializable {
             TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
             //lấy list username
             resultListNV = createNamedQuery.getResultList();
-            
+
             if (txtTenDangNhap_DangKy.getText().length() >= 4 && txtTenDangNhap_DangKy.getText() != null) {
-                resultListNV.forEach((NV) -> {
-                    if (kiemTra(txtTenDangNhap_DangKy.getText())) {
-                        if (txtMatKhau_DangKy.getText().length() >= 5 && txtMatKhau_DangKy.getText() != null) {
-                            if (txtHoVaTen.getText().length() > 0 && txtHoVaTen.getText() != null) {
-                                if (txtNgaySinh.getText().length() > 0 && txtNgaySinh.getText() != null) {
-                                    if (txtNhapLaiMatKhau.getText().equals(txtMatKhau_DangKy.getText())) {
-                                        String userName = txtTenDangNhap_DangKy.getText();
-                                        nhanvien.setUsernane(userName);
-                                        String pass = txtMatKhau_DangKy.getText();
-                                        nhanvien.setPassword(pass);
-                                        String hoTen = txtHoVaTen.getText();
-                                        nhanvien.setHoTenNV(hoTen);
-                                        String dob = txtNgaySinh.getText();
-                                        Date date = stringToDate.String2Date(dob);
-                                        nhanvien.setNgaySinh(date);
-                                        jpaController.create(nhanvien);
-                                        lblStatus.setText("Đăng ký thành công!");
-                                        paneDangNhap.toFront();
-                                        System.out.println("Đăng ký thành công!");
-//                                        try {
-//                                            ((Node) event.getSource()).getScene().getWindow().hide();
-//                                            FXMLLoader fxmlLoader = new FXMLLoader();
-//                                            fxmlLoader.setLocation(getClass().getResource("/View/FXMLMainMenu.fxml"));
-//                                            Scene scene = new Scene(fxmlLoader.load());
-//                                            Stage window = new Stage();
-//                                            window.setTitle("Menu");
-//                                            window.setScene(scene);
-//                                            window.show();
-//                                        } catch (IOException e) {
-//                                            System.out.println(e.getMessage());
-//                                        }
-                                    } else {
-                                        System.out.println("Mật khẩu và mật khẩu nhập lại không khớp!");
-                                        lblStatus1.setText("Mật khẩu và mật khẩu nhập lại không khớp!");
-                                    }
+                if (kiemTra(txtTenDangNhap_DangKy.getText())) {
+                    if (txtMatKhau_DangKy.getText().length() >= 5 && txtMatKhau_DangKy.getText() != null) {
+                        if (txtHoVaTen.getText().length() > 0 && txtHoVaTen.getText() != null) {
+                            if (txtNgaySinh.getText().length() > 0 && txtNgaySinh.getText() != null) {
+                                if (txtNhapLaiMatKhau.getText().equals(txtMatKhau_DangKy.getText())) {
+                                    String userName = txtTenDangNhap_DangKy.getText();
+                                    nhanvien.setUsernane(userName);
+                                    String pass = txtMatKhau_DangKy.getText();
+                                    nhanvien.setPassword(pass);
+                                    String hoTen = txtHoVaTen.getText();
+                                    nhanvien.setHoTenNV(hoTen);
+                                    String dob = txtNgaySinh.getText();
+                                    Date date = stringToDate.String2Date(dob);
+                                    nhanvien.setNgaySinh(date);
+                                    jpaController.create(nhanvien);
+                                    paneDangNhap.toFront();
+                                    lblStatus.setText("Đăng ký thành công!");
+                                    System.out.println("Đăng ký thành công!");
                                 } else {
-                                    System.out.println("Ngay sinh nhập sai mời nhập lại!");
-                                    lblStatus1.setText("Ngay sinh nhập sai mời nhập lại!");
+                                    System.out.println("Mật khẩu và mật khẩu nhập lại không khớp!");
+                                    lblStatus1.setText("Mật khẩu và mật khẩu nhập lại không khớp!");
                                 }
                             } else {
-                                System.out.println("Họ và tên phải từ 4 kí tự trở nên!");
-                                lblStatus1.setText("Họ và tên phải từ 4 kí tự trở nên!");
+                                System.out.println("Ngay sinh nhập sai mời nhập lại!");
+                                lblStatus1.setText("Ngay sinh nhập sai mời nhập lại!");
                             }
                         } else {
-                            System.out.println("Password phải từ 5 kí tự trở nên!");
-                            lblStatus1.setText("Password phải từ 5 kí tự trở nên!");
+                            System.out.println("Họ và tên phải từ 4 kí tự trở nên!");
+                            lblStatus1.setText("Họ và tên phải từ 4 kí tự trở nên!");
                         }
                     } else {
-                        System.out.println("Username đã tồn tại!");
-                        lblStatus1.setText("Username đã tồn tại!");
+                        System.out.println("Password phải từ 5 kí tự trở nên!");
+                        lblStatus1.setText("Password phải từ 5 kí tự trở nên!");
                     }
-                });
+                } else {
+                    System.out.println("Username đã tồn tại!");
+                    lblStatus1.setText("Username đã tồn tại!");
+                }
             } else {
                 System.out.println("Tên đăng nhập phải từ 4 kí tự trở nên!");
                 lblStatus1.setText("Tên đăng nhập phải từ 4 kí tự trở nên!");
@@ -254,11 +245,13 @@ public class FXMLMainHomeController implements Initializable {
 
     private boolean kiemTra(String text) {
         for (Nhanvien nhanvien : resultListNV) {
-            if (nhanvien.getUsernane().equals(text)) return false;
+            if (nhanvien.getUsernane().equals(text)) {
+                return false;
+            }
         }
         return true;
     }
-    
+
     @FXML
     private void btnLamMoi_Click(MouseEvent event) {
         txtTenDangNhap_DangKy.clear();
