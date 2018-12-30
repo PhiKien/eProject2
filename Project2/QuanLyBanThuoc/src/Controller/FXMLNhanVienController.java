@@ -10,7 +10,6 @@ import Model.Nhanvien;
 import Util.StringToDate;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.Date;
@@ -27,9 +26,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -106,9 +107,16 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private TableColumn<Nhanvien, String> tcPass;
     @FXML
-    private TextField txtGioiTinh;
-    @FXML
     private DatePicker datePickerNgaySinh;
+    
+    @FXML
+    private Label lblStatusNV;
+    @FXML
+    private RadioButton rbNam;
+    @FXML
+    private RadioButton rbNu;
+    @FXML
+    private ToggleGroup gioiTinh;
     /**
      * Initializes the controller class.
      *
@@ -119,8 +127,7 @@ public class FXMLNhanVienController implements Initializable {
     EntityManager em = emf.createEntityManager();
     TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
     List<Nhanvien> resultListNV = createNamedQuery.getResultList();
-    @FXML
-    private Label lblStatusNV;
+    NhanvienJpaController jpaController = new NhanvienJpaController(emf);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -144,6 +151,14 @@ public class FXMLNhanVienController implements Initializable {
             return FXCollections.observableArrayList();
         }
         return data;
+    }
+    
+    private void ReloadData(){
+        data.clear();
+        TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
+        resultListNV = createNamedQuery.getResultList();
+        data = FXCollections.observableArrayList(resultListNV);
+        tabDsDuyet.setItems(data);
     }
 
     @FXML
@@ -181,6 +196,7 @@ public class FXMLNhanVienController implements Initializable {
     private void mnItemNhapExcel_Click(ActionEvent event) {
     }
 
+    
     @FXML
     private void mnItemNhanVien_Click(ActionEvent event) {
         try {
@@ -265,8 +281,6 @@ public class FXMLNhanVienController implements Initializable {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
 
-        NhanvienJpaController jpaController = new NhanvienJpaController(emf);
-
         EntityManager em = emf.createEntityManager();
         //bắt đầu tạo transaction
         em.getTransaction().begin();
@@ -274,8 +288,7 @@ public class FXMLNhanVienController implements Initializable {
             TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
             resultListNV = createNamedQuery.getResultList();
 
-            if (txtDiaChi.getText() != null && txtGioiTinh.getText() != null && txtHoTen.getText() != null && txtPass.getText() != null && txtUser.getText() != null && datePickerNgaySinh.getValue() != null) {
-                if (txtGioiTinh.getText().equalsIgnoreCase("Nam") || txtGioiTinh.getText().equalsIgnoreCase("Nu")) {
+            if (txtDiaChi.getText() != null && txtHoTen.getText() != null && txtPass.getText() != null && txtUser.getText() != null && datePickerNgaySinh.getValue() != null) {
                     if (txtHoTen.getText().length() > 2 && txtUser.getText().length() > 2 && txtPass.getText().length() > 2) {
                         if (kiemTra(txtHoTen.getText())) {
                             nhanvien.setHoTenNV(txtHoTen.getText());
@@ -284,20 +297,24 @@ public class FXMLNhanVienController implements Initializable {
                             nhanvien.setNgaySinh(date);
                             nhanvien.setUsernane(txtUser.getText());
                             nhanvien.setPassword(txtPass.getText());
-                            nhanvien.setGioiTinh(txtGioiTinh.getText());
+                            //nhanvien.setGioiTinh(txtGioiTinh.getText());
+                            if(rbNam.isSelected()){
+                                nhanvien.setGioiTinh("Nam");
+                            }else{
+                                nhanvien.setGioiTinh("Nữ");
+                            }
                             jpaController.create(nhanvien);
-                            lblStatusNV.setText("Edit thành công!");
-                            System.out.println("Edit thanh cong!");
+                            lblStatusNV.setText("Thêm mới thành công!");
+                            ReloadData();
+                            btnLamMoi_Click(event);
                         } else {
                             lblStatusNV.setText("Username đã tồn tại!!");
                         }
                     } else {
                         lblStatusNV.setText("Họ tên và user, pass phải lơn hơn 2 kí tự!");
                     }
-                } else {
-                    lblStatusNV.setText("Giới tính phải là Nam hoặc Nữ!");
                 }
-            } else {
+            else {
                 lblStatusNV.setText("Không được để trống các ô!");
             }
         } catch (Exception e) {
@@ -309,12 +326,7 @@ public class FXMLNhanVienController implements Initializable {
     }
 
     private boolean kiemTra(String text) {
-        for (Nhanvien nhanvien : resultListNV) {
-            if (nhanvien.getUsernane().equals(text)) {
-                return false;
-            }
-        }
-        return true;
+        return resultListNV.stream().noneMatch((nhanvien) -> (nhanvien.getUsernane().equals(text)));
     }
 
     @FXML
@@ -324,8 +336,6 @@ public class FXMLNhanVienController implements Initializable {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
 
-        NhanvienJpaController jpaController = new NhanvienJpaController(emf);
-
         EntityManager em = emf.createEntityManager();
         //bắt đầu tạo transaction
         em.getTransaction().begin();
@@ -333,8 +343,7 @@ public class FXMLNhanVienController implements Initializable {
             TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
             resultListNV = createNamedQuery.getResultList();
 
-            if (txtDiaChi.getText() != null && txtGioiTinh.getText() != null && txtHoTen.getText() != null && txtPass.getText() != null && txtUser.getText() != null && datePickerNgaySinh.getValue() != null) {
-                if (txtGioiTinh.getText().equalsIgnoreCase("Nam") || txtGioiTinh.getText().equalsIgnoreCase("Nu")) {
+            if (txtDiaChi.getText() != null && txtHoTen.getText() != null && txtPass.getText() != null && txtUser.getText() != null && datePickerNgaySinh.getValue() != null) {
                     if (txtHoTen.getText().length() > 2 && txtUser.getText().length() > 2 && txtPass.getText().length() > 2) {
                         if (kiemTra(txtHoTen.getText())) {
                             nhanvien.setHoTenNV(txtHoTen.getText());
@@ -343,19 +352,22 @@ public class FXMLNhanVienController implements Initializable {
                             nhanvien.setNgaySinh(date);
                             nhanvien.setUsernane(txtUser.getText());
                             nhanvien.setPassword(txtPass.getText());
-                            nhanvien.setGioiTinh(txtGioiTinh.getText());
+                            //nhanvien.setGioiTinh(txtGioiTinh.getText());
+                            if(rbNam.isSelected()){
+                                nhanvien.setGioiTinh("Nam");
+                            } else {
+                                nhanvien.setGioiTinh("Nữ");
+                            }
                             jpaController.edit(nhanvien);
-                            lblStatusNV.setText("Thêm mới thành công!");
-                            System.out.println("Dang ky thanh cong!");
+                            lblStatusNV.setText("Sửa thành công!");
+                            ReloadData();
+                            btnLamMoi_Click(event);
                         } else {
                             lblStatusNV.setText("Username đã tồn tại!!");
                         }
                     } else {
                         lblStatusNV.setText("Họ tên và user, pass phải lơn hơn 2 kí tự!");
                     }
-                } else {
-                    lblStatusNV.setText("Giới tính phải là Nam hoặc Nữ!");
-                }
             } else {
                 lblStatusNV.setText("Không được để trống các ô!");
             }
@@ -369,6 +381,20 @@ public class FXMLNhanVienController implements Initializable {
 
     @FXML
     private void btnXoa_Click(ActionEvent event) {
+        Nhanvien nhanVien = tabDsDuyet.getSelectionModel().getSelectedItem();
+        if (nhanVien == null) {
+            lblStatusNV.setText("Mời chọn nhân viên muốn xóa");
+            return;
+        } else {
+            try{
+                jpaController.destroy(nhanVien.getMaNV());
+                lblStatusNV.setText("Xóa nhân viên " + nhanVien.getHoTenNV() + " thành công");
+                ReloadData();
+            }catch (Exception e) {
+                e.getMessage();
+                em.getTransaction().rollback();
+            }
+        }
     }
 
     @FXML
@@ -378,8 +404,9 @@ public class FXMLNhanVienController implements Initializable {
         txtPass.clear();
         txtTimKiem.clear();
         txtUser.clear();
-        txtGioiTinh.clear();
-        datePickerNgaySinh.setValue(LocalDate.of(1970, 01, 01));
+        rbNam.setSelected(true);
+        datePickerNgaySinh.setValue(null);
+        lblStatusNV.setText("");
     }
 
     @FXML
@@ -388,7 +415,7 @@ public class FXMLNhanVienController implements Initializable {
             if (nv.getHoTenNV().equals(txtTimKiem.getText())) {
                 txtHoTen.setText(nv.getHoTenNV());
                 txtDiaChi.setText(nv.getDiaChi());
-                txtGioiTinh.setText(nv.getGioiTinh());
+                //txtGioiTinh.setText(nv.getGioiTinh());
                 txtUser.setText(nv.getUsernane());
                 txtPass.setText(nv.getPassword());
                 datePickerNgaySinh.setValue(nv.getNgaySinh().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
@@ -412,7 +439,11 @@ public class FXMLNhanVienController implements Initializable {
 
             txtHoTen.setText(hoTen);
             txtDiaChi.setText(diaChi);
-            txtGioiTinh.setText(gioiTinh);
+            if(nhanVien.getGioiTinh().equals("Nam")){
+                rbNam.setSelected(true);
+            } else{
+                rbNu.setSelected(true);
+            }
             txtUser.setText(user);
             txtPass.setText(pass);
         }

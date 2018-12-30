@@ -19,8 +19,13 @@
     -fx-prompt-text-fill: black;
     -fx-border-width: 2px;
     -fx-border-radius: 50px;
-    -fx-background-color: transparent;
+    -fx-background-color: rgba(255,255,255,0);
     -fx-pref-height: 35px;
+}
+
+.btnLogin:hover{
+    -fx-text-fill:  linear-gradient(to top, #ff512f, #dd2476);
+    -fx-border-color:  linear-gradient(to top, #ff512f, #dd2476);
 }
 
 .btnMenu {

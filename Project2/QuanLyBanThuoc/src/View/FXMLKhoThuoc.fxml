@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -46,6 +47,9 @@
                     </items>
                 </Menu>
             </menus>
+         <padding>
+            <Insets top="2.0" />
+         </padding>
         </MenuBar>
         <Pane layoutX="13.0" layoutY="41.0" prefHeight="46.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
             <children>
