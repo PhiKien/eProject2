@@ -11,7 +11,6 @@ import Util.StringToDate;
 import java.io.IOException;
 import java.net.URL;
 import java.time.ZoneId;
-import static java.time.temporal.TemporalQueries.localDate;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -290,7 +289,7 @@ public class FXMLNhanVienController implements Initializable {
 
             if (txtDiaChi.getText() != null && txtHoTen.getText() != null && txtPass.getText() != null && txtUser.getText() != null && datePickerNgaySinh.getValue() != null) {
                     if (txtHoTen.getText().length() > 2 && txtUser.getText().length() > 2 && txtPass.getText().length() > 2) {
-                        if (kiemTra(txtHoTen.getText())) {
+                        if (kiemTra(txtUser.getText())) {
                             nhanvien.setHoTenNV(txtHoTen.getText());
                             nhanvien.setDiaChi(txtDiaChi.getText());
                             Date date = Date.from(datePickerNgaySinh.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
@@ -304,9 +303,8 @@ public class FXMLNhanVienController implements Initializable {
                                 nhanvien.setGioiTinh("Nữ");
                             }
                             jpaController.create(nhanvien);
-                            lblStatusNV.setText("Thêm mới thành công!");
-                            ReloadData();
                             btnLamMoi_Click(event);
+                            lblStatusNV.setText("Thêm mới thành công!");
                         } else {
                             lblStatusNV.setText("Username đã tồn tại!!");
                         }
@@ -359,9 +357,8 @@ public class FXMLNhanVienController implements Initializable {
                                 nhanvien.setGioiTinh("Nữ");
                             }
                             jpaController.edit(nhanvien);
-                            lblStatusNV.setText("Sửa thành công!");
-                            ReloadData();
                             btnLamMoi_Click(event);
+                            lblStatusNV.setText("Sửa thành công!");
                         } else {
                             lblStatusNV.setText("Username đã tồn tại!!");
                         }
@@ -388,8 +385,8 @@ public class FXMLNhanVienController implements Initializable {
         } else {
             try{
                 jpaController.destroy(nhanVien.getMaNV());
+                btnLamMoi_Click(event);
                 lblStatusNV.setText("Xóa nhân viên " + nhanVien.getHoTenNV() + " thành công");
-                ReloadData();
             }catch (Exception e) {
                 e.getMessage();
                 em.getTransaction().rollback();
@@ -407,22 +404,25 @@ public class FXMLNhanVienController implements Initializable {
         rbNam.setSelected(true);
         datePickerNgaySinh.setValue(null);
         lblStatusNV.setText("");
+        ReloadData();
     }
 
     @FXML
     private void btnTimKiem_Click(ActionEvent event) {
-        resultListNV.forEach((nv) -> {
-            if (nv.getHoTenNV().equals(txtTimKiem.getText())) {
-                txtHoTen.setText(nv.getHoTenNV());
-                txtDiaChi.setText(nv.getDiaChi());
-                //txtGioiTinh.setText(nv.getGioiTinh());
-                txtUser.setText(nv.getUsernane());
-                txtPass.setText(nv.getPassword());
-                datePickerNgaySinh.setValue(nv.getNgaySinh().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        for (Nhanvien nv : resultListNV) {               
+            if (nv.getHoTenNV().equals(txtTimKiem.getText())) {               
+                data.clear();
+                TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findByHoTenNV", Nhanvien.class);
+                createNamedQuery.setParameter("hoTenNV",nv.getHoTenNV());
+                resultListNV = createNamedQuery.getResultList();
+                data = FXCollections.observableArrayList(resultListNV);
+                tabDsDuyet.setItems(data);
+                lblStatusNV.setText("");
+                return;
             } else {
-                System.out.println("Khong tim thay!");
+                lblStatusNV.setText("Không tìm thấy !");
             }
-        });
+        };
     }
 
     @FXML
