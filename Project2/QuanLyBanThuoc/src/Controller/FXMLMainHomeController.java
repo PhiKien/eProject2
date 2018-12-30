@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -79,6 +80,8 @@ public class FXMLMainHomeController implements Initializable {
     private RadioButton rbNam;
     @FXML
     private RadioButton rbNu;
+    @FXML
+    private ToggleGroup gioiTinh;
 
     /**
      * Initializes the controller class.
@@ -172,8 +175,6 @@ public class FXMLMainHomeController implements Initializable {
         paneDangKy.toFront();
     }
 
-   
-
     @FXML
     private void btnXacNhanDangKy_Click(ActionEvent event) {
         Nhanvien nhanvien = new Nhanvien();
@@ -207,36 +208,33 @@ public class FXMLMainHomeController implements Initializable {
                                     String dob = txtNgaySinh.getText();
                                     Date date = stringToDate.String2Date(dob);
                                     nhanvien.setNgaySinh(date);
+                                    if(rbNam.isSelected()){
+                                        nhanvien.setGioiTinh("Nam");
+                                    } else {
+                                        nhanvien.setGioiTinh("Nữ");
+                                    }
                                     jpaController.create(nhanvien);
                                     paneDangNhap.toFront();
                                     lblStatus.setText("Đăng ký thành công!");
-                                    System.out.println("Đăng ký thành công!");
                                 } else {
-                                    System.out.println("Mật khẩu và mật khẩu nhập lại không khớp!");
                                     lblStatus1.setText("Mật khẩu và mật khẩu nhập lại không khớp!");
                                 }
                             } else {
-                                System.out.println("Ngay sinh nhập sai mời nhập lại!");
                                 lblStatus1.setText("Ngay sinh nhập sai mời nhập lại!");
                             }
                         } else {
-                            System.out.println("Họ và tên phải từ 4 kí tự trở nên!");
                             lblStatus1.setText("Họ và tên phải từ 4 kí tự trở nên!");
                         }
                     } else {
-                        System.out.println("Password phải từ 5 kí tự trở nên!");
                         lblStatus1.setText("Password phải từ 5 kí tự trở nên!");
                     }
                 } else {
-                    System.out.println("Username đã tồn tại!");
                     lblStatus1.setText("Username đã tồn tại!");
                 }
             } else {
-                System.out.println("Tên đăng nhập phải từ 4 kí tự trở nên!");
                 lblStatus1.setText("Tên đăng nhập phải từ 4 kí tự trở nên!");
             }
         } catch (Exception e) {
-            e.printStackTrace();
             em.getTransaction().rollback();
         } finally {
             em.close();
@@ -259,6 +257,7 @@ public class FXMLMainHomeController implements Initializable {
         txtNhapLaiMatKhau.clear();
         txtNgaySinh.clear();
         txtHoVaTen.clear();
+        rbNam.setSelected(true);
     }
 
     @FXML

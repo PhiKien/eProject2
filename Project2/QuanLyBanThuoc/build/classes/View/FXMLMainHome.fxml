@@ -87,7 +87,7 @@
                         <Image url="@../Image/hinh-nen-cho-slide-powerpoint-chu-de-y-te-va-suc-khoe-anh-7.jpg" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="txtTenDangNhap_DangKy" layoutX="175.0" layoutY="67.0" prefHeight="30.0" prefWidth="216.0" promptText="Tên đăng nhập" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <TextField fx:id="txtTenDangNhap_DangKy" layoutX="64.0" layoutY="67.0" prefHeight="30.0" prefWidth="216.0" promptText="Tên đăng nhập" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -95,7 +95,7 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
-                  <TextField fx:id="txtHoVaTen" layoutX="175.0" layoutY="109.0" prefHeight="30.0" prefWidth="216.0" promptText="Họ và tên" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <TextField fx:id="txtHoVaTen" layoutX="65.0" layoutY="109.0" prefHeight="30.0" prefWidth="216.0" promptText="Họ và tên" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -103,7 +103,15 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
-                  <PasswordField fx:id="txtMatKhau_DangKy" layoutX="177.0" layoutY="152.0" prefHeight="27.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <TextField fx:id="txtNgaySinh" layoutX="65.0" layoutY="152.0" prefHeight="30.0" prefWidth="216.0" promptText="Ngày sinh (dd/MM/yyyy)" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </TextField>
+                  <PasswordField fx:id="txtMatKhau_DangKy" layoutX="288.0" layoutY="67.0" prefHeight="27.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -111,7 +119,7 @@
                         <Insets left="35.0" />
                      </padding>
                   </PasswordField>
-                  <PasswordField fx:id="txtNhapLaiMatKhau" layoutX="175.0" layoutY="193.0" prefHeight="27.0" prefWidth="216.0" promptText="Nhập lại mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <PasswordField fx:id="txtNhapLaiMatKhau" layoutX="288.0" layoutY="109.0" prefHeight="27.0" prefWidth="216.0" promptText="Nhập lại mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -119,20 +127,28 @@
                         <Insets left="35.0" />
                      </padding>
                   </PasswordField>
-                  <TextField fx:id="txtNgaySinh" layoutX="175.0" layoutY="234.0" prefHeight="30.0" prefWidth="216.0" promptText="Ngày sinh (dd/MM/yyyy)" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets left="35.0" />
-                     </padding>
-                  </TextField>
-                  <Button fx:id="btnXacNhanDangKy" layoutX="177.0" layoutY="319.0" mnemonicParsing="false" onAction="#btnXacNhanDangKy_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="ĐĂNG KÝ">
+                  <Pane layoutX="288.0" layoutY="152.0" prefHeight="35.0" prefWidth="216.0" style="-fx-border-color: white;" styleClass="input">
+                     <children>
+                        <RadioButton fx:id="rbNam" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#rbNam_Click" selected="true" text="Nam">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="gioiTinh" />
+                           </toggleGroup>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbNu" layoutX="87.0" layoutY="8.0" mnemonicParsing="false" onAction="#rbNu_Click" text="Nữ" toggleGroup="$gioiTinh">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </RadioButton>
+                     </children></Pane>
+                  <Button fx:id="btnXacNhanDangKy" layoutX="179.0" layoutY="195.0" mnemonicParsing="false" onAction="#btnXacNhanDangKy_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="ĐĂNG KÝ">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnLamMoi" layoutX="285.0" layoutY="320.0" mnemonicParsing="false" onAction="#btnLamMoiDK_Click" onMouseClicked="#btnLamMoi_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="LÀM MỚI">
+                  <Button fx:id="btnLamMoi" layoutX="287.0" layoutY="196.0" mnemonicParsing="false" onAction="#btnLamMoiDK_Click" onMouseClicked="#btnLamMoi_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="LÀM MỚI">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -142,51 +158,36 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Text>
-                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="181.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="292.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/icons8-secure-filled-50.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="181.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="71.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/male-user.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="181.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="71.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/male-user.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="181.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="294.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/icons8-secure-filled-50.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="181.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="71.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/Gift_birthday-512.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lblStatus1" alignment="CENTER" layoutX="23.0" layoutY="322.0" prefHeight="35.0" prefWidth="525.0" textAlignment="CENTER" textFill="#da0909">
+                  <Label fx:id="lblStatus1" alignment="CENTER" layoutX="25.0" layoutY="239.0" prefHeight="35.0" prefWidth="525.0" textAlignment="CENTER" textFill="#da0909">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="174.0" layoutY="276.0" prefHeight="30.0" prefWidth="216.0" promptText="Giới tính:" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <RadioButton fx:id="rbNam" layoutX="257.0" layoutY="285.0" mnemonicParsing="false" onAction="#rbNam_Click" text="Nam">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton fx:id="rbNu" layoutX="318.0" layoutY="285.0" mnemonicParsing="false" onAction="#rbNu_Click" text="Nữ">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </RadioButton>
                </children>
             </Pane>
             <Pane fx:id="paneDangNhap" prefHeight="425.0" prefWidth="567.0" style="-fx-background-color: transparent;">
