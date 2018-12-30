@@ -127,12 +127,12 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
-                  <Button fx:id="btnXacNhanDangKy" layoutX="177.0" layoutY="275.0" mnemonicParsing="false" onAction="#btnXacNhanDangKy_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="ĐĂNG KÝ">
+                  <Button fx:id="btnXacNhanDangKy" layoutX="177.0" layoutY="319.0" mnemonicParsing="false" onAction="#btnXacNhanDangKy_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="ĐĂNG KÝ">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnLamMoi" layoutX="285.0" layoutY="275.0" mnemonicParsing="false" onAction="#btnLamMoiDK_Click" onMouseClicked="#btnLamMoi_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="LÀM MỚI">
+                  <Button fx:id="btnLamMoi" layoutX="285.0" layoutY="320.0" mnemonicParsing="false" onAction="#btnLamMoiDK_Click" onMouseClicked="#btnLamMoi_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="LÀM MỚI">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -172,6 +172,21 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <TextField layoutX="174.0" layoutY="276.0" prefHeight="30.0" prefWidth="216.0" promptText="Giới tính:" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <RadioButton fx:id="rbNam" layoutX="257.0" layoutY="285.0" mnemonicParsing="false" onAction="#rbNam_Click" text="Nam">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="rbNu" layoutX="318.0" layoutY="285.0" mnemonicParsing="false" onAction="#rbNu_Click" text="Nữ">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
                </children>
             </Pane>
             <Pane fx:id="paneDangNhap" prefHeight="425.0" prefWidth="567.0" style="-fx-background-color: transparent;">

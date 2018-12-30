@@ -111,10 +111,11 @@
         <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" onMouseClicked="#tabDsDuyet_Click" prefHeight="209.0" prefWidth="765.0">
             <columns>
                 <TableColumn fx:id="tcHoTen" prefWidth="165.0" text="Họ tên" />
-                <TableColumn fx:id="tcDiaChi" minWidth="0.0" prefWidth="219.0" text="Địa chỉ" />
-                <TableColumn fx:id="tcGioiTinh" minWidth="0.0" prefWidth="117.0" text="Giới tính" />
-                <TableColumn fx:id="tcUser" minWidth="0.0" prefWidth="127.0" text="Username" />
-                <TableColumn fx:id="tcPass" minWidth="0.0" prefWidth="136.0" text="Password" />
+            <TableColumn fx:id="tcNgaySinh" prefWidth="157.0" text="Ngày sinh" />
+                <TableColumn fx:id="tcDiaChi" minWidth="0.0" prefWidth="167.0" text="Địa chỉ" />
+                <TableColumn fx:id="tcGioiTinh" minWidth="0.0" prefWidth="78.0" text="Giới tính" />
+                <TableColumn fx:id="tcUser" minWidth="0.0" prefWidth="101.0" text="Username" />
+                <TableColumn fx:id="tcPass" minWidth="0.0" prefWidth="96.0" text="Password" />
             </columns>
         </TableView>
         <Label layoutX="328.0" layoutY="297.0" text="Danh sách chờ phê duyệt">

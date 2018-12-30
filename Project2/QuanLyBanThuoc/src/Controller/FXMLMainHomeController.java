@@ -21,6 +21,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -74,6 +75,10 @@ public class FXMLMainHomeController implements Initializable {
     private Label lblStatus;
     @FXML
     private Label lblStatus1;
+    @FXML
+    private RadioButton rbNam;
+    @FXML
+    private RadioButton rbNu;
 
     /**
      * Initializes the controller class.
@@ -277,6 +282,14 @@ public class FXMLMainHomeController implements Initializable {
 
     @FXML
     private void btnLamMoiDK_Click(ActionEvent event) {
+    }
+
+    @FXML
+    private void rbNam_Click(ActionEvent event) {
+    }
+
+    @FXML
+    private void rbNu_Click(ActionEvent event) {
     }
 
 }
