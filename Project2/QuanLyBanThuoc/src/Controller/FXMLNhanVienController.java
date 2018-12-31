@@ -25,7 +25,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -38,7 +37,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -122,6 +120,10 @@ public class FXMLNhanVienController implements Initializable {
     private RadioButton rbNu;
     @FXML
     private ToggleGroup gioiTinh;
+    
+    private static final short HOAT_DONG = 1;
+    private static final short KHONG_HOAT_DONG = 0;
+
     /**
      * Initializes the controller class.
      *
@@ -328,6 +330,7 @@ public class FXMLNhanVienController implements Initializable {
                         } else {
                             nhanvien.setGioiTinh("Nữ");
                         }
+                        nhanvien.setTrangThai(HOAT_DONG);
                         jpaController.create(nhanvien);
                         btnLamMoi_Click(event);
                         lblStatusNV.setText("Thêm mới thành công!");
@@ -363,30 +366,23 @@ public class FXMLNhanVienController implements Initializable {
         //bắt đầu tạo transaction
         em.getTransaction().begin();
         try {
-            TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
-            resultListNV = createNamedQuery.getResultList();
-
             if (txtDiaChi.getText() != null && txtHoTen.getText() != null && txtPass.getText() != null && txtUser.getText() != null && datePickerNgaySinh.getValue() != null) {
                 if (txtHoTen.getText().length() > 2 && txtUser.getText().length() > 2 && txtPass.getText().length() > 2) {
-                    if (kiemTra(txtHoTen.getText())) {
-                        nhanvien.setHoTenNV(txtHoTen.getText());
-                        nhanvien.setDiaChi(txtDiaChi.getText());
-                        Date date = Date.from(datePickerNgaySinh.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
-                        nhanvien.setNgaySinh(date);
-                        nhanvien.setUsernane(txtUser.getText());
-                        nhanvien.setPassword(txtPass.getText());
-                        //nhanvien.setGioiTinh(txtGioiTinh.getText());
-                        if (rbNam.isSelected()) {
-                            nhanvien.setGioiTinh("Nam");
-                        } else {
-                            nhanvien.setGioiTinh("Nữ");
-                        }
-                        jpaController.edit(nhanvien);
-                        btnLamMoi_Click(event);
-                        lblStatusNV.setText("Sửa thành công!");
+                    nhanvien.setHoTenNV(txtHoTen.getText());
+                    nhanvien.setDiaChi(txtDiaChi.getText());
+                    Date date = Date.from(datePickerNgaySinh.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
+                    nhanvien.setNgaySinh(date);
+                    nhanvien.setUsernane(txtUser.getText());
+                    nhanvien.setPassword(txtPass.getText());
+                    if (rbNam.isSelected()) {
+                        nhanvien.setGioiTinh("Nam");
                     } else {
-                        lblStatusNV.setText("Username đã tồn tại!!");
+                        nhanvien.setGioiTinh("Nữ");
                     }
+                    nhanvien.setTrangThai(HOAT_DONG);
+                    jpaController.edit(nhanvien);
+                    btnLamMoi_Click(event);
+                    lblStatusNV.setText("Sửa thành công!");                
                 } else {
                     lblStatusNV.setText("Họ tên và user, pass phải lơn hơn 2 kí tự!");
                 }
