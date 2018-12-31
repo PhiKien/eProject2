@@ -86,21 +86,21 @@
             <TextField fx:id="txtMaThuoc" layoutX="126.0" layoutY="77.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="txtMaKH" layoutX="459.0" layoutY="77.0" />
             <Label layoutX="49.0" layoutY="42.0" text="Mã hóa đơn:" />
-            <Label layoutX="39.0" layoutY="81.0" text="Tên nhân viên:" />
+            <Label layoutX="38.0" layoutY="81.0" text="Tên người bán:" />
             <Label layoutX="393.0" layoutY="40.0" text="Ngày bán:" />
             <Label layoutX="362.0" layoutY="80.0" text="Tên khách hàng:" />
             <DatePicker fx:id="dpNgayBan" layoutX="458.0" layoutY="38.0" />
-            <Button fx:id="btnCTHoaDon" layoutX="458.0" layoutY="113.0" mnemonicParsing="false" onAction="#btnCTHoaDon_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Chi tiết hóa đơn">
+            <Button fx:id="btnCTHoaDon" layoutX="530.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnCTHoaDon_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Chi tiết hóa đơn">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnInHoaDon" layoutX="361.0" layoutY="113.0" mnemonicParsing="false" onAction="#btnInHoaDon_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="In hóa đơn">
+            <Button fx:id="btnInHoaDon" layoutX="384.0" layoutY="140.0" mnemonicParsing="false" onAction="#btnInHoaDon_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="In hóa đơn">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Label layoutX="59.0" layoutY="119.0" text="Tổng tiền: " />
+            <Label layoutX="60.0" layoutY="119.0" text="Tổng tiền: " />
             <TextField fx:id="txtTongTien" disable="true" editable="false" layoutX="126.0" layoutY="115.0" />
             <Label fx:id="lblStatusHD" alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="13.0" prefHeight="17.0" prefWidth="269.0" textAlignment="CENTER" textFill="#f80505" textOverrun="CLIP" />
          </children>
@@ -109,9 +109,9 @@
         <columns>
             <TableColumn fx:id="tcMaHD" prefWidth="104.0" text="Mã hóa đơn" />
           <TableColumn fx:id="tcHoTenKH" prefWidth="152.0" text="Họ tên khách hàng" />
-            <TableColumn fx:id="tcTrieuChung" minWidth="0.0" prefWidth="215.0" text="Triệu chứng" />
-            <TableColumn fx:id="tcChuanDoan" minWidth="0.0" prefWidth="126.0" text="Chuẩn đoán" />
+            <TableColumn fx:id="tcTenNguoiBan" minWidth="0.0" prefWidth="215.0" text="Tên người bán" />
             <TableColumn fx:id="tcNgayBan" minWidth="0.0" prefWidth="167.0" text="Ngày bán" />
+            <TableColumn fx:id="tcTongTien" minWidth="0.0" prefWidth="126.0" text="Tổng tiền" />
         </columns>
       </TableView>
       <Label layoutX="328.0" layoutY="297.0" text="Danh sách hóa đơn">

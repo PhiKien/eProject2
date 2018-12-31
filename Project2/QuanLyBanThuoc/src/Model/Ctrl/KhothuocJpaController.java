@@ -147,6 +147,30 @@ public class KhothuocJpaController implements Serializable {
         }
     }
 
+    public void editKhoThuoc(Khothuoc khoThuoc){
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Khothuoc oldKhoTHuoc = em.find(Khothuoc.class, khoThuoc.getMaThuoc());
+            oldKhoTHuoc.setTenThuoc(khoThuoc.getTenThuoc());
+            oldKhoTHuoc.setDonVi(khoThuoc.getDonVi());
+            oldKhoTHuoc.setDonGia(khoThuoc.getDonGia());
+            oldKhoTHuoc.setNsx(khoThuoc.getNsx());
+            oldKhoTHuoc.setHsd(khoThuoc.getHsd());
+            oldKhoTHuoc.setMaNhomThuoc(khoThuoc.getMaNhomThuoc());
+            em.getTransaction().commit();
+        } catch(Exception ex){
+            
+            System.out.println(ex.getMessage());
+        } finally{
+            if(em!= null){
+                em.close();
+            }
+        }
+
+    }
+    
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {

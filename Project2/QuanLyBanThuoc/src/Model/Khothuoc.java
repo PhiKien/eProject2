@@ -41,8 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Khothuoc.findByDonGia", query = "SELECT k FROM Khothuoc k WHERE k.donGia = :donGia"),
     @NamedQuery(name = "Khothuoc.findByNsx", query = "SELECT k FROM Khothuoc k WHERE k.nsx = :nsx"),
     @NamedQuery(name = "Khothuoc.findByHsd", query = "SELECT k FROM Khothuoc k WHERE k.hsd = :hsd"),
-    @NamedQuery(name = "Khothuoc.findByNguoiNhap", query = "SELECT k FROM Khothuoc k WHERE k.nguoiNhap = :nguoiNhap"),
-    @NamedQuery(name = "Khothuoc.findByNgayNhap", query = "SELECT k FROM Khothuoc k WHERE k.ngayNhap = :ngayNhap"),
     @NamedQuery(name = "Khothuoc.findByTrangThai", query = "SELECT k FROM Khothuoc k WHERE k.trangThai = :trangThai")})
 public class Khothuoc implements Serializable {
 
@@ -70,13 +68,6 @@ public class Khothuoc implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date hsd;
     @Basic(optional = false)
-    @Column(name = "NguoiNhap")
-    private String nguoiNhap;
-    @Basic(optional = false)
-    @Column(name = "NgayNhap")
-    @Temporal(TemporalType.DATE)
-    private Date ngayNhap;
-    @Basic(optional = false)
     @Column(name = "TrangThai")
     private short trangThai;
     @JoinColumn(name = "MaNhomThuoc", referencedColumnName = "MaNhomThuoc")
@@ -92,15 +83,13 @@ public class Khothuoc implements Serializable {
         this.maThuoc = maThuoc;
     }
 
-    public Khothuoc(Integer maThuoc, String tenThuoc, String donVi, int donGia, Date nsx, Date hsd, String nguoiNhap, Date ngayNhap, short trangThai) {
+    public Khothuoc(Integer maThuoc, String tenThuoc, String donVi, int donGia, Date nsx, Date hsd, short trangThai) {
         this.maThuoc = maThuoc;
         this.tenThuoc = tenThuoc;
         this.donVi = donVi;
         this.donGia = donGia;
         this.nsx = nsx;
         this.hsd = hsd;
-        this.nguoiNhap = nguoiNhap;
-        this.ngayNhap = ngayNhap;
         this.trangThai = trangThai;
     }
 
@@ -150,22 +139,6 @@ public class Khothuoc implements Serializable {
 
     public void setHsd(Date hsd) {
         this.hsd = hsd;
-    }
-
-    public String getNguoiNhap() {
-        return nguoiNhap;
-    }
-
-    public void setNguoiNhap(String nguoiNhap) {
-        this.nguoiNhap = nguoiNhap;
-    }
-
-    public Date getNgayNhap() {
-        return ngayNhap;
-    }
-
-    public void setNgayNhap(Date ngayNhap) {
-        this.ngayNhap = ngayNhap;
     }
 
     public short getTrangThai() {

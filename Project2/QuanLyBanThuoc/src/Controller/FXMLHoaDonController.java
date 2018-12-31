@@ -81,10 +81,6 @@ public class FXMLHoaDonController implements Initializable {
     private TableColumn<?, ?> tcHoTen;
     private TableColumn<?, ?> tcDiaChi;
     @FXML
-    private TableColumn<?, ?> tcTrieuChung;
-    @FXML
-    private TableColumn<?, ?> tcChuanDoan;
-    @FXML
     private TextField txtMaHoaDon;
     @FXML
     private TextField txtMaThuoc;
@@ -118,6 +114,10 @@ public class FXMLHoaDonController implements Initializable {
     private TableColumn<?, ?> tcHoTenKH;
     @FXML
     private TableColumn<?, ?> tcNgayBan;
+    @FXML
+    private TableColumn<?, ?> tcTenNguoiBan;
+    @FXML
+    private TableColumn<?, ?> tcTongTien;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

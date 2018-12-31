@@ -11,6 +11,7 @@ import Util.StringToDate;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +32,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -94,89 +96,84 @@ public class FXMLKhoThuocController implements Initializable {
     private DatePicker dpNSX;
     @FXML
     private DatePicker dpHSD;
-    
-    private TextField txtGia;
     @FXML
     private TableView<Khothuoc> tabDsThuoc;
     @FXML
-    private TableColumn<?, ?> tcTenThuoc;
+    private TableColumn<Khothuoc, String> tcTenThuoc;
     @FXML
-    private TableColumn<?, ?> tcDonVi;
+    private TableColumn<Khothuoc, String> tcDonVi;
     @FXML
     private TableColumn<Khothuoc, Date> tcNSX;
     @FXML
     private TableColumn<Khothuoc, Date> tcHSD;
     @FXML
-    private TableColumn<?, ?> tcDonGia;
+    private TableColumn<Khothuoc, Integer> tcDonGia;
+    @FXML
+    private TableColumn<Khothuoc, Integer> tcMaThuoc;
     @FXML
     private TextField txtDonGia;
-    @FXML
-    private TableColumn<?, ?> tcMaThuoc;
     @FXML
     private Label lblStatusThuoc;
 
     /**
      * Initializes the controller class.
      */
-    
-    private static final short HOAT_DONG =1;
-    private static final short KHONG_HOAT_DONG =0;
+    private static final short HOAT_DONG = 1;
+    private static final short KHONG_HOAT_DONG = 0;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
     EntityManager em = emf.createEntityManager();
     TypedQuery<Khothuoc> createNamedQuery = em.createNamedQuery("Khothuoc.findAll", Khothuoc.class);
     List<Khothuoc> resultListKT = createNamedQuery.getResultList();
     KhothuocJpaController jpaController = new KhothuocJpaController(emf);
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initColumns();
         tabDsThuoc.setItems(getKhoThuocData());
     }
-    
+
     public void initColumns() {
         tcMaThuoc.setCellValueFactory(new PropertyValueFactory<>("MaThuoc"));
-        tcTenThuoc.setCellValueFactory(new PropertyValueFactory<>("TenThuoc")); 
-        tcNSX.setCellFactory(column -> {
-            TableCell<Khothuoc, Date> cell = new TableCell<Khothuoc, Date>() {
-                private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-                @Override
-                protected void updateItem(Date item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setText(null);
-                    } else {
-                        this.setText(format.format(item));
-
-                    }
-                }
-            };
-
-            return cell;
-        });
+        tcTenThuoc.setCellValueFactory(new PropertyValueFactory<>("TenThuoc"));
+//        tcNSX.setCellFactory(column -> {
+//            TableCell<Khothuoc, Date> cell = new TableCell<Khothuoc, Date>() {
+//                private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+//
+//                @Override
+//                protected void updateItem(Date item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    if (empty) {
+//                        setText(null);
+//                    } else {
+//                        this.setText(format.format(item));
+//
+//                    }
+//                }
+//            };
+//
+//            return cell;
+//        });
         tcNSX.setCellValueFactory(new PropertyValueFactory<>("NSX"));
-        
-        tcHSD.setCellFactory(column -> {
-            TableCell<Khothuoc, Date> cell = new TableCell<Khothuoc, Date>() {
-                private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-                @Override
-                protected void updateItem(Date item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setText(null);
-                    } else {
-                        this.setText(format.format(item));
-
-                    }
-                }
-            };
-
-            return cell;
-        });
+//        tcHSD.setCellFactory(column -> {
+//            TableCell<Khothuoc, Date> cell = new TableCell<Khothuoc, Date>() {
+//                private final SimpleDateFormat format2 = new SimpleDateFormat("dd/MM/yyyy");
+//                @Override
+//                protected void updateItem(Date item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    if (empty) {
+//                        setText(null);
+//                    } else {
+//                        this.setText(format2.format(item));
+//
+//                    }
+//                }
+//            };
+//            return cell;
+//        });
         tcHSD.setCellValueFactory(new PropertyValueFactory<>("HSD"));
         tcDonVi.setCellValueFactory(new PropertyValueFactory<>("DonVi"));
-        tcDonGia.setCellValueFactory(new PropertyValueFactory<>("DonGia"));  
+        tcDonGia.setCellValueFactory(new PropertyValueFactory<>("DonGia"));
     }
 
     private ObservableList<Khothuoc> data;
@@ -198,7 +195,6 @@ public class FXMLKhoThuocController implements Initializable {
         data = FXCollections.observableArrayList(allThuoc);
         tabDsThuoc.setItems(data);
     }
-
 
     @FXML
     private void mnItemThem_Click(ActionEvent event) {
@@ -332,11 +328,11 @@ public class FXMLKhoThuocController implements Initializable {
                 Date dateNSX = Date.from(dpNSX.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
                 thuoc.setNsx(dateNSX);
                 Date dateHSD = Date.from(dpHSD.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
-                thuoc.setNsx(dateHSD);
+                thuoc.setHsd(dateHSD);
                 thuoc.setTrangThai(HOAT_DONG);
                 jpaController.create(thuoc);
                 btnLamMoi_Click(event);
-                lblStatusThuoc.setText("Thêm mới thành công!");                                  
+                lblStatusThuoc.setText("Thêm mới thành công!");
             } else {
                 lblStatusThuoc.setText("Không được để trống các ô!");
             }
@@ -348,12 +344,54 @@ public class FXMLKhoThuocController implements Initializable {
         }
     }
 
-    @FXML
+    @FXML // đang lỗi null khóa chính nhân vào 
     private void btnSua_Click(ActionEvent event) {
+        Khothuoc thuoc = new Khothuoc();
+        StringToDate stringToDate = new StringToDate();
+        //bắt đầu tạo transaction
+        em.getTransaction().begin();
+        try {
+            if (txtTenThuoc.getText() != null && txtDonVi.getText() != null && txtDonGia.getText() != null && dpNSX.getValue() != null && dpHSD.getValue() != null) {
+                thuoc.setMaThuoc(Integer.parseInt(txtMaThuoc.getText()));
+                thuoc.setTenThuoc(txtTenThuoc.getText());
+                thuoc.setDonVi(txtDonVi.getText());
+                int gia = Integer.parseInt(txtDonGia.getText());
+                thuoc.setDonGia(gia);
+                Date dateNSX = Date.from(dpNSX.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
+                thuoc.setNsx(dateNSX);
+                Date dateHSD = Date.from(dpHSD.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
+                thuoc.setNsx(dateHSD);
+                thuoc.setTrangThai(HOAT_DONG);
+                jpaController.editKhoThuoc(thuoc);
+                btnLamMoi_Click(event);
+                lblStatusThuoc.setText("Sửa thành công!");
+            } else {
+                lblStatusThuoc.setText("Không được để trống các ô!");
+            }
+        } catch (NumberFormatException e) {
+            e.getMessage();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
     }
 
     @FXML
     private void btnXoa_Click(ActionEvent event) {
+        Khothuoc khothuoc = tabDsThuoc.getSelectionModel().getSelectedItem();
+        if (khothuoc == null) {
+            lblStatusThuoc.setText("Mời chọn thuốc muốn xóa!");
+            return;
+        } else {
+            try {
+               jpaController.destroy(khothuoc.getMaThuoc());
+                btnLamMoi_Click(event);
+                lblStatusThuoc.setText("Xóa thuốc " + khothuoc.getTenThuoc()+ " thành công!");
+            } catch (Exception e) {
+                e.getMessage();
+                em.getTransaction().rollback();
+            }
+        }
     }
 
     @FXML
@@ -371,6 +409,45 @@ public class FXMLKhoThuocController implements Initializable {
 
     @FXML
     private void btnTimKiem_Click(ActionEvent event) {
+        for (Khothuoc kt : resultListKT) {
+            if (kt.getTenThuoc().equals(txtTimKiem.getText())) {
+                data.clear();
+                TypedQuery<Khothuoc> findByName = em.createNamedQuery("Khothuoc.findByTenThuoc", Khothuoc.class);
+                findByName.setParameter("TenThuoc", kt.getTenThuoc());
+                resultListKT = findByName.getResultList();
+                data = FXCollections.observableArrayList(resultListKT);
+                tabDsThuoc.setItems(data);
+                lblStatusThuoc.setText("");
+                return;
+            } else {
+                lblStatusThuoc.setText("Không tìm thấy !");
+            }
+        };
     }
 
+    @FXML
+    private void tabDsThuoc_Click(MouseEvent event) {
+        Khothuoc khothuoc = tabDsThuoc.getSelectionModel().getSelectedItem();
+        if (khothuoc == null) {
+            return;
+        } else {
+            Integer maThuoc = khothuoc.getMaThuoc();
+            String tenThuoc = khothuoc.getTenThuoc();
+            String donVi = khothuoc.getDonVi();
+            Date dateHSD = khothuoc.getHsd();
+            LocalDate HSD = dateHSD.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Date dateNSX = khothuoc.getNsx();
+            LocalDate NSX = dateNSX.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Integer donGia = khothuoc.getDonGia();
+
+            txtMaThuoc.setText(maThuoc.toString());
+            txtTenThuoc.setText(tenThuoc);
+            dpHSD.setValue(HSD);
+            dpNSX.setValue(NSX);
+            txtDonGia.setText(donGia.toString());
+            txtDonVi.setText(donVi);
+        }
+    }
 }
+
+
