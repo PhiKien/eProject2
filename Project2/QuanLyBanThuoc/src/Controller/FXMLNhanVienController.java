@@ -137,6 +137,10 @@ public class FXMLNhanVienController implements Initializable {
     NhanvienJpaController jpaController = new NhanvienJpaController(emf);
     @FXML
     private TableColumn<Nhanvien, Date> tcNgaySinh;
+    @FXML
+    private TextField txtMaNhanVien;
+    @FXML
+    private TableColumn<Nhanvien, Integer> tcMaNV;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -145,6 +149,7 @@ public class FXMLNhanVienController implements Initializable {
     }
 
     public void initColumns() {
+        tcMaNV.setCellValueFactory(new PropertyValueFactory<>("MaNV"));
         tcHoTen.setCellValueFactory(new PropertyValueFactory<>("HoTenNV"));
         tcNgaySinh.setCellFactory(column -> {
             TableCell<Nhanvien, Date> cell = new TableCell<Nhanvien, Date>() {
@@ -368,6 +373,8 @@ public class FXMLNhanVienController implements Initializable {
         try {
             if (txtDiaChi.getText() != null && txtHoTen.getText() != null && txtPass.getText() != null && txtUser.getText() != null && datePickerNgaySinh.getValue() != null) {
                 if (txtHoTen.getText().length() > 2 && txtUser.getText().length() > 2 && txtPass.getText().length() > 2) {
+                    int ma = Integer.parseInt(txtMaNhanVien.getText());
+                    nhanvien.setMaNV(ma);
                     nhanvien.setHoTenNV(txtHoTen.getText());
                     nhanvien.setDiaChi(txtDiaChi.getText());
                     Date date = Date.from(datePickerNgaySinh.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
@@ -425,6 +432,7 @@ public class FXMLNhanVienController implements Initializable {
         rbNam.setSelected(true);
         datePickerNgaySinh.setValue(null);
         lblStatusNV.setText("");
+        txtMaNhanVien.clear();
         ReloadData();
     }
 
@@ -454,6 +462,7 @@ public class FXMLNhanVienController implements Initializable {
         if (nhanVien == null) {
             return;
         } else {
+            Integer maNV = nhanVien.getMaNV();
             String hoTen = nhanVien.getHoTenNV();
             String diaChi = nhanVien.getDiaChi();
             String gioiTinh = nhanVien.getGioiTinh();
@@ -461,6 +470,7 @@ public class FXMLNhanVienController implements Initializable {
             String pass = nhanVien.getPassword();
             Date input = nhanVien.getNgaySinh();
             LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            txtMaNhanVien.setText(maNV.toString());
             txtHoTen.setText(hoTen);
             datePickerNgaySinh.setValue(date);
             txtDiaChi.setText(diaChi);
