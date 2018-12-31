@@ -111,6 +111,14 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
+                  <TextField fx:id="txtDiaChi" layoutX="64.0" layoutY="196.0" prefHeight="30.0" prefWidth="216.0" promptText="Địa chỉ" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="35.0" />
+                     </padding>
+                  </TextField>
                   <PasswordField fx:id="txtMatKhau_DangKy" layoutX="288.0" layoutY="67.0" prefHeight="27.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
@@ -143,12 +151,12 @@
                            </font>
                         </RadioButton>
                      </children></Pane>
-                  <Button fx:id="btnXacNhanDangKy" layoutX="179.0" layoutY="195.0" mnemonicParsing="false" onAction="#btnXacNhanDangKy_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="ĐĂNG KÝ">
+                  <Button fx:id="btnXacNhanDangKy" layoutX="290.0" layoutY="195.0" mnemonicParsing="false" onAction="#btnXacNhanDangKy_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="ĐĂNG KÝ">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnLamMoi" layoutX="287.0" layoutY="196.0" mnemonicParsing="false" onAction="#btnLamMoiDK_Click" onMouseClicked="#btnLamMoi_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="LÀM MỚI">
+                  <Button fx:id="btnLamMoi" layoutX="398.0" layoutY="196.0" mnemonicParsing="false" onAction="#btnLamMoiDK_Click" onMouseClicked="#btnLamMoi_Click" prefWidth="105.0" styleClass="btnLogin" stylesheets="@CSS/fxmlmainhome.css" text="LÀM MỚI">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -188,6 +196,11 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="27.0" fitWidth="25.0" layoutX="71.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/icons8-location-filled-100.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane fx:id="paneDangNhap" prefHeight="425.0" prefWidth="567.0" style="-fx-background-color: transparent;">

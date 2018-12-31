@@ -82,7 +82,11 @@ public class FXMLMainHomeController implements Initializable {
     private RadioButton rbNu;
     @FXML
     private ToggleGroup gioiTinh;
+    @FXML
+    private TextField txtDiaChi;
 
+    private static final short HOAT_DONG = 1;
+    private static final short KHONG_HOAT_DONG = 0;
     /**
      * Initializes the controller class.
      *
@@ -208,11 +212,13 @@ public class FXMLMainHomeController implements Initializable {
                                     String dob = txtNgaySinh.getText();
                                     Date date = stringToDate.String2Date(dob);
                                     nhanvien.setNgaySinh(date);
+                                    nhanvien.setDiaChi(txtDiaChi.getText());
                                     if(rbNam.isSelected()){
                                         nhanvien.setGioiTinh("Nam");
                                     } else {
                                         nhanvien.setGioiTinh("Nữ");
                                     }
+                                    nhanvien.setTrangThai(HOAT_DONG);
                                     jpaController.create(nhanvien);
                                     paneDangNhap.toFront();
                                     lblStatus.setText("Đăng ký thành công!");
