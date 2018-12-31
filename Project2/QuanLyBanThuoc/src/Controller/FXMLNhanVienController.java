@@ -190,9 +190,11 @@ public class FXMLNhanVienController implements Initializable {
 
     private void ReloadData() {
         data.clear();
-        TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
-        resultListNV = createNamedQuery.getResultList();
-        data = FXCollections.observableArrayList(resultListNV);
+        EntityManagerFactory newEmf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+        EntityManager newEm = newEmf.createEntityManager();
+        TypedQuery<Nhanvien> getAll = newEm.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
+        List<Nhanvien> allNhanVien = getAll.getResultList();
+        data = FXCollections.observableArrayList(allNhanVien);
         tabDsDuyet.setItems(data);
     }
 
@@ -389,8 +391,7 @@ public class FXMLNhanVienController implements Initializable {
                         nhanvien.setGioiTinh("Nữ");
                     }
                     nhanvien.setTrangThai(HOAT_DONG);
-                    System.out.println(nhanvien);
-                    jpaController.edit(nhanvien);
+                    jpaController.editNhanVien(nhanvien);
                     btnLamMoi_Click(event);
                     lblStatusNV.setText("Sửa thành công!");                
                 } else {

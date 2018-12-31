@@ -82,7 +82,7 @@
         <Pane layoutX="14.0" layoutY="102.0" prefHeight="193.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC; -fx-border-style: double;">
             <children>
                 <TextField editable="false" layoutX="27.0" layoutY="-12.0" prefHeight="25.0" prefWidth="99.0" text="Thông tin thuốc" />
-                <TextField fx:id="txtMaThuoc" layoutX="126.0" layoutY="42.0" />
+                <TextField fx:id="txtMaThuoc" disable="true" editable="false" layoutX="126.0" layoutY="42.0" prefHeight="25.0" prefWidth="76.0" />
                 <TextField fx:id="txtTenThuoc" layoutX="126.0" layoutY="87.0" />
                 <TextField fx:id="txtDonVi" layoutX="126.0" layoutY="135.0" prefHeight="19.0" prefWidth="149.0" />
                 <Label layoutX="63.0" layoutY="45.0" text="Mã thuốc:" />
@@ -93,17 +93,18 @@
                 <DatePicker fx:id="dpNSX" layoutX="499.0" layoutY="42.0" />
             <DatePicker fx:id="dpHSD" layoutX="499.0" layoutY="87.0" />
             <Label layoutX="446.0" layoutY="141.0" text="Đơn giá:" />
-            <TextField fx:id="txtGia" layoutX="500.0" layoutY="138.0" />
+            <TextField fx:id="txtDonGia" layoutX="500.0" layoutY="138.0" />
             <Label layoutX="653.0" layoutY="141.0" text="(Đồng)">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
+            <Label fx:id="lblStatusThuoc" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="14.0" prefHeight="17.0" prefWidth="269.0" textAlignment="CENTER" textFill="#f80505" textOverrun="CLIP" />
             </children>
         </Pane>
         <TableView fx:id="tabDsThuoc" layoutX="14.0" layoutY="317.0" prefHeight="212.0" prefWidth="765.0">
             <columns>
-                <TableColumn prefWidth="63.0" text="Mã thuốc" />
+                <TableColumn fx:id="tcMaThuoc" prefWidth="63.0" text="Mã thuốc" />
                 <TableColumn fx:id="tcTenThuoc" prefWidth="162.0" text="Tên thuốc" />
                 <TableColumn fx:id="tcDonVi" minWidth="0.0" prefWidth="100.0" text="Đơn vị" />
                 <TableColumn fx:id="tcNSX" minWidth="0.0" prefWidth="139.0" text="NSX" />

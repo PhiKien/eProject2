@@ -122,6 +122,28 @@ public class KhachhangJpaController implements Serializable {
             }
         }
     }
+    
+    public void editKhachHang(Khachhang khachHang){
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Khachhang oldKhachHang = em.find(Khachhang.class, khachHang.getMaKH());
+            oldKhachHang.setHoTenKH(khachHang.getHoTenKH());
+            oldKhachHang.setDiaChi(khachHang.getDiaChi());
+            oldKhachHang.setGioiTinh(khachHang.getGioiTinh());
+            oldKhachHang.setChuanDoan(khachHang.getChuanDoan());
+            oldKhachHang.setTrieuChung(khachHang.getTrieuChung());
+            oldKhachHang.setNgaySinh(khachHang.getNgaySinh());
+            em.getTransaction().commit();
+        } catch(Exception ex){
+            throw ex;
+        } finally{
+            if(em!= null){
+                em.close();
+            }
+        }
+    }
 
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;

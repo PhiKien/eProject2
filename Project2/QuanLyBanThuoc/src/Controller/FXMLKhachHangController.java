@@ -7,7 +7,6 @@ package Controller;
 
 import Model.Ctrl.KhachhangJpaController;
 import Model.Khachhang;
-import Model.Nhanvien;
 import Util.StringToDate;
 import java.io.IOException;
 import java.net.URL;
@@ -185,8 +184,11 @@ public class FXMLKhachHangController implements Initializable {
 
     private void ReloadData() {
         data.clear();
-        resultListKH = createNamedQuery.getResultList();
-        data = FXCollections.observableArrayList(resultListKH);
+        EntityManagerFactory newEmf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+        EntityManager newEm = newEmf.createEntityManager();
+        TypedQuery<Khachhang> getAll = newEm.createNamedQuery("Khachhang.findAll", Khachhang.class);
+        List<Khachhang> allKhachHang = getAll.getResultList();
+        data = FXCollections.observableArrayList(allKhachHang);
         tabDsDuyet.setItems(data);
     }
 
@@ -377,8 +379,8 @@ public class FXMLKhachHangController implements Initializable {
                         khachhang.setGioiTinh("Nữ");
                     }
                     khachhang.setTrangThai(HOAT_DONG);
-                    jpaController.edit(khachhang);
-                    btnLamMoi_Click(event);
+                    jpaController.editKhachHang(khachhang);
+                    btnLamMoi_Click(event);                   
                     lblStatusKH.setText("Sửa thành công!");                   
                 } else {
                     lblStatusKH.setText("Họ tên phải lớn hơn 2 kí tự!");

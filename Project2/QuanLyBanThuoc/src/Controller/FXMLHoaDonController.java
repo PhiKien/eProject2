@@ -5,24 +5,29 @@
  */
 package Controller;
 
+import Model.Ctrl.HoadonJpaController;
+import Model.Hoadon;
 import java.io.IOException;
 import java.net.URL;
-import static java.util.Date.from;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  * FXML Controller class
@@ -72,10 +77,8 @@ public class FXMLHoaDonController implements Initializable {
     @FXML
     private TextField txtTimKiem;
     @FXML
-    private TableView<?> tabDsDuyet;
-    @FXML
+    private TableView<Hoadon> tabDsDuyet;
     private TableColumn<?, ?> tcHoTen;
-    @FXML
     private TableColumn<?, ?> tcDiaChi;
     @FXML
     private TableColumn<?, ?> tcTrieuChung;
@@ -93,15 +96,33 @@ public class FXMLHoaDonController implements Initializable {
     private Button btnCTHoaDon;
     @FXML
     private Button btnInHoaDon;
+    @FXML
+    private TextField txtTongTien;
 
     /**
      * Initializes the controller class.
      */
+    private static final short HOAT_DONG =1;
+    private static final short KHONG_HOAT_DONG =0;
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+    EntityManager em = emf.createEntityManager();
+    TypedQuery<Hoadon> createNamedQuery = em.createNamedQuery("Hoadon.findAll", Hoadon.class);
+    List<Hoadon> resultListHD = createNamedQuery.getResultList();
+    HoadonJpaController jpaController = new HoadonJpaController(emf);
+    
+    @FXML
+    private Label lblStatusHD;
+    @FXML
+    private TableColumn<?, ?> tcMaHD;
+    @FXML
+    private TableColumn<?, ?> tcHoTenKH;
+    @FXML
+    private TableColumn<?, ?> tcNgayBan;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
+    }
+    
     @FXML
     private void mnItemThem_Click(ActionEvent event) {
     }
@@ -251,7 +272,7 @@ public class FXMLHoaDonController implements Initializable {
             fxmlLoader.setLocation(getClass().getResource("/View/FXMLChiTietHoaDon.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage window = new Stage();
-            window.setTitle("Nhân viên");
+            window.setTitle("Chi tiết hóa đơn");
             window.setScene(scene);
             window.show();
         } catch (IOException e) {

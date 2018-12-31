@@ -122,6 +122,29 @@ public class NhanvienJpaController implements Serializable {
             }
         }
     }
+    
+    public void editNhanVien(Nhanvien nhanVien){
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Nhanvien oldNhanvien = em.find(Nhanvien.class, nhanVien.getMaNV());
+            oldNhanvien.setHoTenNV(nhanVien.getHoTenNV());
+            oldNhanvien.setDiaChi(nhanVien.getDiaChi());
+            oldNhanvien.setGioiTinh(nhanVien.getGioiTinh());
+            oldNhanvien.setUsernane(nhanVien.getUsernane());
+            oldNhanvien.setPassword(nhanVien.getPassword());
+            oldNhanvien.setNgaySinh(nhanVien.getNgaySinh());
+            em.getTransaction().commit();
+        } catch(Exception ex){
+            throw ex;
+        } finally{
+            if(em!= null){
+                em.close();
+            }
+        }
+
+    }
 
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
