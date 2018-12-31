@@ -130,11 +130,7 @@ public class FXMLNhanVienController implements Initializable {
      * @param url
      * @param rb
      */
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
-    EntityManager em = emf.createEntityManager();
-    TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
-    List<Nhanvien> resultListNV = createNamedQuery.getResultList();
-    NhanvienJpaController jpaController = new NhanvienJpaController(emf);
+    
     @FXML
     private TableColumn<Nhanvien, Date> tcNgaySinh;
     @FXML
@@ -142,6 +138,12 @@ public class FXMLNhanVienController implements Initializable {
     @FXML
     private TableColumn<Nhanvien, Integer> tcMaNV;
 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+    EntityManager em = emf.createEntityManager();
+    TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
+    List<Nhanvien> resultListNV = createNamedQuery.getResultList();
+    NhanvienJpaController jpaController = new NhanvienJpaController(emf);
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initColumns();
@@ -387,6 +389,7 @@ public class FXMLNhanVienController implements Initializable {
                         nhanvien.setGioiTinh("Nữ");
                     }
                     nhanvien.setTrangThai(HOAT_DONG);
+                    System.out.println(nhanvien);
                     jpaController.edit(nhanvien);
                     btnLamMoi_Click(event);
                     lblStatusNV.setText("Sửa thành công!");                

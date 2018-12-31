@@ -51,69 +51,38 @@
             <Insets top="2.0" />
          </padding>
       </MenuBar>
-      <Pane layoutX="13.0" layoutY="41.0" prefHeight="46.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
-         <children>
-            <Button fx:id="btnThem" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="btn" text="Thêm">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnSua" layoutX="90.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnSua_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" text="Sửa ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnXoa" layoutX="156.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnXoa_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" text="Xóa">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnLamMoi" layoutX="222.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnLamMoi_Click" styleClass="btn" text="Làm mới">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnTimKiem" layoutX="447.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="btn" text="Tìm kiếm">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <TextField fx:id="txtTimKiem" layoutX="532.0" layoutY="8.0" prefHeight="25.0" prefWidth="190.0" promptText="Nhập tên khách hàng....">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-         </children>
-      </Pane>
       <Pane layoutX="14.0" layoutY="102.0" prefHeight="193.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC; -fx-border-style: double;">
          <children>
+            <TextField fx:id="txtHoTen" layoutX="128.0" layoutY="62.0" />
+            <TextField fx:id="txtDiaChi" layoutX="128.0" layoutY="99.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="txtTrieuChung" layoutX="129.0" layoutY="132.0" prefHeight="46.0" prefWidth="190.0" />
+            <DatePicker fx:id="dpNgaySinh" layoutX="460.0" layoutY="63.0" />
+            <RadioButton fx:id="rbNam" layoutX="460.0" layoutY="102.0" mnemonicParsing="false" selected="true" text="Nam">
+               <toggleGroup>
+                  <ToggleGroup fx:id="gioiTinh" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="rbNu" layoutX="539.0" layoutY="102.0" mnemonicParsing="false" text="Nữ" toggleGroup="$gioiTinh" />
+            <TextField fx:id="txtChuanDoan" layoutX="460.0" layoutY="132.0" prefHeight="46.0" prefWidth="190.0" />
             <TextField editable="false" layoutX="27.0" layoutY="-12.0" prefHeight="25.0" prefWidth="135.0" text="Thông tin khách hàng" />
-            <TextField fx:id="txtHoTen" layoutX="126.0" layoutY="38.0" />
-            <TextField fx:id="txtDiaChi" layoutX="126.0" layoutY="77.0" prefHeight="25.0" prefWidth="149.0" />
-            <TextField fx:id="txtSDT" layoutX="459.0" layoutY="63.0" />
-            <RadioButton fx:id="rbNam" layoutX="460.0" layoutY="104.0" mnemonicParsing="false" text="Nam" />
-            <RadioButton fx:id="rbNu" layoutX="539.0" layoutY="104.0" mnemonicParsing="false" text="Nữ" />
-            <Label layoutX="77.0" layoutY="39.0" text="Họ tên:" />
-            <Label layoutX="77.0" layoutY="81.0" text="Địa chỉ:" />
-            <Label layoutX="393.0" layoutY="23.0" text="Ngày sinh:" />
-            <Label layoutX="425.0" layoutY="66.0" text="SĐT:" />
-            <Label layoutX="401.0" layoutY="105.0" text="Giới tính:" />
-            <DatePicker fx:id="dpNgaySinh" layoutX="458.0" layoutY="20.0" />
-            <Label layoutX="50.0" layoutY="123.0" text="Triệu chứng:" />
-            <TextField fx:id="txtTrieuChung" layoutX="126.0" layoutY="120.0" prefHeight="46.0" prefWidth="190.0" />
-            <Label layoutX="384.0" layoutY="143.0" text="Chuẩn đoán:" />
-            <TextField fx:id="txttxtChuanDoan" layoutX="461.0" layoutY="141.0" prefHeight="46.0" prefWidth="190.0" />
+            <Label layoutX="79.0" layoutY="67.0" text="Họ tên:" />
+            <Label layoutX="79.0" layoutY="103.0" text="Địa chỉ:" />
+            <Label layoutX="393.0" layoutY="66.0" text="Ngày sinh:" />
+            <Label layoutX="401.0" layoutY="103.0" text="Giới tính:" />
+            <Label layoutX="53.0" layoutY="135.0" text="Triệu chứng:" />
+            <Label layoutX="383.0" layoutY="134.0" text="Chuẩn đoán:" />
+            <TextField fx:id="txtMaKH" disable="true" editable="false" layoutX="128.0" layoutY="28.0" prefHeight="25.0" prefWidth="76.0" />
+            <Label layoutX="79.0" layoutY="32.0" text="Mã KH:" />
+            <Label fx:id="lblStatusKH" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="24.0" prefHeight="17.0" prefWidth="269.0" textAlignment="CENTER" textFill="#f80505" textOverrun="CLIP" />
          </children>
       </Pane>
-      <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" prefHeight="212.0" prefWidth="765.0">
+      <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" onMouseClicked="#tabDsDuyet_Click" prefHeight="212.0" prefWidth="765.0">
         <columns>
-            <TableColumn prefWidth="55.0" text="Mã " />
-          <TableColumn fx:id="tcHoTen" prefWidth="102.0" text="Họ tên" />
-          <TableColumn fx:id="tcSDT" minWidth="0.0" prefWidth="119.0" text="SĐT" />
-            <TableColumn fx:id="tcDiaChi" minWidth="0.0" prefWidth="102.0" text="Địa chỉ" />
-            <TableColumn fx:id="tcGioiTinh" minWidth="0.0" prefWidth="96.0" text="Giới tính" />
-            <TableColumn minWidth="0.0" prefWidth="64.0" text="Ngày sinh" />
-            <TableColumn fx:id="tcTrieuChung" minWidth="0.0" prefWidth="85.0" text="Triệu chứng" />
+            <TableColumn fx:id="tcMaKH" prefWidth="46.0" text="Mã " />
+          <TableColumn fx:id="tcHoTen" prefWidth="145.0" text="Họ tên" />
+            <TableColumn fx:id="tcDiaChi" minWidth="0.0" prefWidth="149.0" text="Địa chỉ" />
+            <TableColumn fx:id="tcGioiTinh" minWidth="0.0" prefWidth="63.0" text="Giới tính" />
+            <TableColumn fx:id="tcNgaySinh" minWidth="0.0" prefWidth="88.0" text="Ngày sinh" />
+            <TableColumn fx:id="tcTrieuChung" minWidth="0.0" prefWidth="138.0" text="Triệu chứng" />
             <TableColumn fx:id="tcChuanDoan" minWidth="0.0" prefWidth="135.0" text="Chuẩn đoán" />
         </columns>
       </TableView>
@@ -122,5 +91,39 @@
             <Font size="13.0" />
          </font>
       </Label>
+      <Pane layoutX="14.0" layoutY="39.0" prefHeight="46.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
+         <children>
+            <Button fx:id="btnThem" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="btn" stylesheets="@CSS/fxmlkhachhang.css" text="Thêm">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSua" layoutX="90.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnSua_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" stylesheets="@CSS/fxmlkhachhang.css" text="Sửa ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnXoa" layoutX="156.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnXoa_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" stylesheets="@CSS/fxmlkhachhang.css" text="Xóa">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnLamMoi" layoutX="222.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnLamMoi_Click" styleClass="btn" stylesheets="@CSS/fxmlkhachhang.css" text="Làm mới">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnTimKiem" layoutX="447.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="btn" stylesheets="@CSS/fxmlkhachhang.css" text="Tìm kiếm">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <TextField fx:id="txtTimKiem" layoutX="532.0" layoutY="8.0" prefHeight="25.0" prefWidth="190.0" promptText="Nhập tên nhân viên....">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

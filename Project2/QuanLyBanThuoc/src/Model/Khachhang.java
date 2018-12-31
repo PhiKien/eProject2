@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "khachhang")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Khachhang.findAll", query = "SELECT k FROM Khachhang k"),
+    @NamedQuery(name = "Khachhang.findAll", query = "SELECT k FROM Khachhang k WHERE k.trangThai = 1"),
     @NamedQuery(name = "Khachhang.findByMaKH", query = "SELECT k FROM Khachhang k WHERE k.maKH = :maKH"),
     @NamedQuery(name = "Khachhang.findByHoTenKH", query = "SELECT k FROM Khachhang k WHERE k.hoTenKH = :hoTenKH"),
     @NamedQuery(name = "Khachhang.findByNgaySinh", query = "SELECT k FROM Khachhang k WHERE k.ngaySinh = :ngaySinh"),
@@ -58,7 +58,7 @@ public class Khachhang implements Serializable {
     private Date ngaySinh;
     @Basic(optional = false)
     @Column(name = "GioiTinh")
-    private boolean gioiTinh;
+    private String gioiTinh;
     @Basic(optional = false)
     @Column(name = "DiaChi")
     private String diaChi;
@@ -79,7 +79,7 @@ public class Khachhang implements Serializable {
         this.maKH = maKH;
     }
 
-    public Khachhang(Integer maKH, String hoTenKH, Date ngaySinh, boolean gioiTinh, String diaChi, short trangThai) {
+    public Khachhang(Integer maKH, String hoTenKH, Date ngaySinh, String gioiTinh, String diaChi, short trangThai) {
         this.maKH = maKH;
         this.hoTenKH = hoTenKH;
         this.ngaySinh = ngaySinh;
@@ -112,11 +112,11 @@ public class Khachhang implements Serializable {
         this.ngaySinh = ngaySinh;
     }
 
-    public boolean getGioiTinh() {
+    public String getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(boolean gioiTinh) {
+    public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
