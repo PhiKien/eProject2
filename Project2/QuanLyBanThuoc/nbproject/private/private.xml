@@ -3,11 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/drago/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLKhoThuocController.java</file>
-            <file>file:/C:/Users/drago/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLKhachHangController.java</file>
-            <file>file:/C:/Users/drago/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Model/Khothuoc.java</file>
-            <file>file:/C:/Users/drago/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Model/Ctrl/KhothuocJpaController.java</file>
-            <file>file:/C:/Users/drago/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLNhanVienController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/View/FXMainHome.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Model/Ctrl/ChitiethoadonJpaController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/View/CSS/fxmltknchoadon.css</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/View/CSS/fxmlkhachhang.css</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/View/CSS/fxmlkhothuoc.css</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/View/CSS/fxmlmainmenu.css</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/View/CSS/fxmlmainhome.css</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Model/Khothuoc.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLMainHomeController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLNhanVienController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Model/Hoadon.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Model/Ctrl/KhachhangJpaController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLMainMenuController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLHoaDonController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/View/FXMLMainMenu.fxml</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Model/Khachhang.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Model/Ctrl/NhanvienJpaController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/View/CSS/fxmlnhanvien.css</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/View/FXMLChiTietHoaDon.fxml</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLKhoThuocController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/View/CSS/fxmltknckhachhang.css</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Model/Nhanvien.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Model/Ctrl/KhothuocJpaController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLKhachHangController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLChiTietHoaDonController.java</file>
+            <file>file:/C:/Users/Dell%205537/Desktop/eProject2/Project2/QuanLyBanThuoc/src/Controller/FXMLTKNCHoaDonController.java</file>
         </group>
     </open-files>
 </project-private>

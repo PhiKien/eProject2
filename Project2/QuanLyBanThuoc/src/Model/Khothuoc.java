@@ -188,7 +188,11 @@ public class Khothuoc implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Khothuoc[ maThuoc=" + maThuoc + " ]";
+        return "Khothuoc{" + "maThuoc=" + maThuoc + ", tenThuoc=" + tenThuoc + ", donVi=" + donVi + ", donGia=" + donGia + ", nsx=" + nsx + ", hsd=" + hsd + ", trangThai=" + trangThai + ", maNhomThuoc=" + maNhomThuoc + ", chitiethoadonCollection=" + chitiethoadonCollection + '}';
+    }
+
+    public void setMaNhomThuoc(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
