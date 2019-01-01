@@ -432,7 +432,7 @@ public class FXMLKhoThuocController implements Initializable {
             if (kt.getTenThuoc().equals(txtTimKiem.getText())) {
                 data.clear();
                 TypedQuery<Khothuoc> findByName = em.createNamedQuery("Khothuoc.findByTenThuoc", Khothuoc.class);
-                findByName.setParameter("TenThuoc", kt.getTenThuoc());
+                findByName.setParameter("tenThuoc", kt.getTenThuoc());
                 resultListKT = findByName.getResultList();
                 data = FXCollections.observableArrayList(resultListKT);
                 tabDsThuoc.setItems(data);

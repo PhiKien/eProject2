@@ -7,10 +7,14 @@ package Controller;
 
 import Model.Ctrl.HoadonJpaController;
 import Model.Hoadon;
+import Model.Khachhang;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +27,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -78,14 +83,8 @@ public class FXMLHoaDonController implements Initializable {
     private TextField txtTimKiem;
     @FXML
     private TableView<Hoadon> tabDsDuyet;
-    private TableColumn<?, ?> tcHoTen;
-    private TableColumn<?, ?> tcDiaChi;
     @FXML
     private TextField txtMaHoaDon;
-    @FXML
-    private TextField txtMaThuoc;
-    @FXML
-    private TextField txtMaKH;
     @FXML
     private DatePicker dpNgayBan;
     @FXML
@@ -98,31 +97,37 @@ public class FXMLHoaDonController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    private static final short HOAT_DONG =1;
-    private static final short KHONG_HOAT_DONG =0;
+    private static final short HOAT_DONG = 1;
+    private static final short KHONG_HOAT_DONG = 0;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
     EntityManager em = emf.createEntityManager();
     TypedQuery<Hoadon> createNamedQuery = em.createNamedQuery("Hoadon.findAll", Hoadon.class);
     List<Hoadon> resultListHD = createNamedQuery.getResultList();
     HoadonJpaController jpaController = new HoadonJpaController(emf);
     
+    
+    
     @FXML
     private Label lblStatusHD;
     @FXML
-    private TableColumn<?, ?> tcMaHD;
+    private TableColumn<Hoadon, Integer> tcMaHD;
     @FXML
-    private TableColumn<?, ?> tcHoTenKH;
+    private TableColumn<Hoadon, String> tcHoTenKH;
     @FXML
-    private TableColumn<?, ?> tcNgayBan;
+    private TableColumn<Hoadon, Date> tcNgayBan;
     @FXML
-    private TableColumn<?, ?> tcTenNguoiBan;
+    private TableColumn<Hoadon, String> tcTenNguoiBan;
     @FXML
-    private TableColumn<?, ?> tcTongTien;
-    
+    private TableColumn<Hoadon, Integer> tcTongTien;
+    @FXML
+    private TextField txtTenKH;
+    @FXML
+    private TextField txtTenNguoiBan;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
-    
+
     @FXML
     private void mnItemThem_Click(ActionEvent event) {
     }
@@ -252,16 +257,17 @@ public class FXMLHoaDonController implements Initializable {
     private void btnXoa_Click(ActionEvent event) {
     }
 
+    private ObservableList<Hoadon> data;
+    
     @FXML
     private void btnLamMoi_Click(ActionEvent event) {
         txtMaHoaDon.clear();
-        txtMaKH.clear();
-        txtMaThuoc.clear();
         txtTimKiem.clear();
     }
 
     @FXML
     private void btnTimKiem_Click(ActionEvent event) {
+
     }
 
     @FXML
@@ -283,5 +289,10 @@ public class FXMLHoaDonController implements Initializable {
     @FXML
     private void btnInHoaDon_Click(ActionEvent event) {
     }
-    
+
+    @FXML
+    private void tabDsDuyet_Click(MouseEvent event) {
+        
+    }
+
 }
