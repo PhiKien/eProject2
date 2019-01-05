@@ -187,7 +187,7 @@ public class Nhanvien implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Nhanvien[ maNV= " + maNV + " - " + "hoTenNV= " + hoTenNV + " - "  + "ngaySinh= " + ngaySinh + " - "  + "gioiTinh= " + gioiTinh + " - "  + "diaChi= "+ diaChi + " - "  + "usernane= " + usernane + " - "  + "password= " + password + " - "  + "trangThai= " + trangThai +" ]";
+        return "" + maNV;
     }
     
 }

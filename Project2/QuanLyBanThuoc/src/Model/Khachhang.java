@@ -183,7 +183,7 @@ public class Khachhang implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Khachhang[ maKH=" + maKH + " ]";
+        return "" + maKH;
     }
     
 }

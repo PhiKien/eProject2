@@ -8,8 +8,12 @@ package Controller;
 import Model.Ctrl.HoadonJpaController;
 import Model.Hoadon;
 import Model.Khachhang;
+import Model.Nhanvien;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,9 +28,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
@@ -82,8 +88,6 @@ public class FXMLHoaDonController implements Initializable {
     @FXML
     private TextField txtTimKiem;
     @FXML
-    private TableView<Hoadon> tabDsDuyet;
-    @FXML
     private TextField txtMaHoaDon;
     @FXML
     private DatePicker dpNgayBan;
@@ -97,37 +101,119 @@ public class FXMLHoaDonController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    private static final short HOAT_DONG = 1;
-    private static final short KHONG_HOAT_DONG = 0;
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
-    EntityManager em = emf.createEntityManager();
-    TypedQuery<Hoadon> createNamedQuery = em.createNamedQuery("Hoadon.findAll", Hoadon.class);
-    List<Hoadon> resultListHD = createNamedQuery.getResultList();
-    HoadonJpaController jpaController = new HoadonJpaController(emf);
-    
-    
-    
     @FXML
     private Label lblStatusHD;
     @FXML
-    private TableColumn<Hoadon, Integer> tcMaHD;
+    private TableView<Hoadon> tabDsDuyet;
     @FXML
-    private TableColumn<Hoadon, String> tcHoTenKH;
+    private TableColumn<Hoadon, Integer> tcMaHD;
     @FXML
     private TableColumn<Hoadon, Date> tcNgayBan;
     @FXML
-    private TableColumn<Hoadon, String> tcTenNguoiBan;
-    @FXML
     private TableColumn<Hoadon, Integer> tcTongTien;
+     @FXML
+    private TableColumn<Hoadon, Integer> tcMaKH;
+    @FXML
+    private TableColumn<Hoadon, Integer> tcMaNV;
+
     @FXML
     private TextField txtTenKH;
     @FXML
     private TextField txtTenNguoiBan;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    private static final short HOAT_DONG = 1;
+    private static final short KHONG_HOAT_DONG = 0;
+
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+    EntityManager em = emf.createEntityManager();
+
+    TypedQuery<Hoadon> createNamedQuery = em.createNamedQuery("Hoadon.findAll", Hoadon.class);
+    List<Hoadon> resultListHD = createNamedQuery.getResultList();
+
+    HoadonJpaController jpaController = new HoadonJpaController(emf);
+
+    TypedQuery<Khachhang> createNamedQueryKH = em.createNamedQuery("Khachhang.findAll", Khachhang.class);
+    List<Khachhang> resultListKH = createNamedQueryKH.getResultList();
+
+    TypedQuery<Nhanvien> createNamedQueryNV = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
+    List<Nhanvien> resultListNV = createNamedQueryNV.getResultList();
+   
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+//    public List<Model_NhanVien_KhachHang> nhanVien_KhachHangs() {
+//        
+//    }
+    
+    public String getTenNVByMaNV(int maNV) {
+        String tenNV = null;
+
+        for (Nhanvien nhanvien : resultListNV) {
+            if (nhanvien.getMaNV() == maNV) {
+                tenNV = nhanvien.getHoTenNV();
+                break;
+            }
+        }
+
+        return tenNV;
     }
 
+    public String getTenKHByMaKH(int maKH) {
+        String tenKH = null;
+
+        for (Khachhang khachhang : resultListKH) {
+            if (khachhang.getMaKH()== maKH) {
+                tenKH = khachhang.getHoTenKH();
+                break;
+            }
+        }
+
+        return tenKH;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        initColumns();
+        tabDsDuyet.setItems(getHoaDonData());
+    }
+
+    public void initColumns() {
+        tcMaHD.setCellValueFactory(new PropertyValueFactory<>("MaHD"));
+        tcMaKH.setCellValueFactory(new PropertyValueFactory<>("MaKH")); 
+        tcMaNV.setCellValueFactory(new PropertyValueFactory<>("MaNV"));
+        tcNgayBan.setCellFactory(column -> {
+            TableCell<Hoadon, Date> cell = new TableCell<Hoadon, Date>() {
+                private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        this.setText(format.format(item));
+
+                    }
+                }
+            };
+
+            return cell;
+        });
+        tcNgayBan.setCellValueFactory(new PropertyValueFactory<>("NgayLapHD"));
+        tcTongTien.setCellValueFactory(new PropertyValueFactory<>("TongTien"));
+    }
+
+    private ObservableList<Hoadon> data;
+
+    public ObservableList<Hoadon> getHoaDonData() {
+        data = FXCollections.observableArrayList(resultListHD);
+        if (data == null) {
+            return FXCollections.observableArrayList();
+        }
+        return data;
+    }
+    
     @FXML
     private void mnItemThem_Click(ActionEvent event) {
     }
@@ -257,8 +343,6 @@ public class FXMLHoaDonController implements Initializable {
     private void btnXoa_Click(ActionEvent event) {
     }
 
-    private ObservableList<Hoadon> data;
-    
     @FXML
     private void btnLamMoi_Click(ActionEvent event) {
         txtMaHoaDon.clear();
@@ -292,7 +376,22 @@ public class FXMLHoaDonController implements Initializable {
 
     @FXML
     private void tabDsDuyet_Click(MouseEvent event) {
-        
+         Hoadon hoaDon = tabDsDuyet.getSelectionModel().getSelectedItem();
+        if (hoaDon == null) {
+            return;
+        } else {
+            Integer maHD = hoaDon.getMaHD();
+            String hoTenKH = getTenKHByMaKH(hoaDon.getMaKH().getMaKH().intValue());
+            String hoTenNV = getTenNVByMaNV(hoaDon.getMaNV().getMaNV());
+            Date input = hoaDon.getNgayLapHD();
+            LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Integer tongTien = hoaDon.getTongTien();
+            txtMaHoaDon.setText(maHD.toString());
+            txtTenKH.setText(hoTenKH);
+            txtTenNguoiBan.setText(hoTenNV);
+            dpNgayBan.setValue(date);
+            txtTongTien.setText(tongTien.toString());
+        }
     }
 
 }

@@ -147,7 +147,7 @@ public class FXMLNhanVienController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initColumns();
-        tabDsDuyet.setItems(getStudentData());
+        tabDsDuyet.setItems(getNhanVienData());
     }
 
     public void initColumns() {
@@ -180,7 +180,7 @@ public class FXMLNhanVienController implements Initializable {
 
     private ObservableList<Nhanvien> data;
 
-    public ObservableList<Nhanvien> getStudentData() {
+    public ObservableList<Nhanvien> getNhanVienData() {
         data = FXCollections.observableArrayList(resultListNV);
         if (data == null) {
             return FXCollections.observableArrayList();

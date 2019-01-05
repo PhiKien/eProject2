@@ -108,8 +108,8 @@
       <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" onMouseClicked="#tabDsDuyet_Click" prefHeight="212.0" prefWidth="765.0">
         <columns>
             <TableColumn fx:id="tcMaHD" prefWidth="104.0" text="Mã hóa đơn" />
-          <TableColumn fx:id="tcHoTenKH" prefWidth="152.0" text="Họ tên khách hàng" />
-            <TableColumn fx:id="tcTenNguoiBan" minWidth="0.0" prefWidth="215.0" text="Tên người bán" />
+          <TableColumn fx:id="tcMaKH" prefWidth="152.0" text="Mã khách hàng" />
+            <TableColumn fx:id="tcMaNV" minWidth="0.0" prefWidth="215.0" text="Mã người bán" />
             <TableColumn fx:id="tcNgayBan" minWidth="0.0" prefWidth="167.0" text="Ngày bán" />
             <TableColumn fx:id="tcTongTien" minWidth="0.0" prefWidth="126.0" text="Tổng tiền" />
         </columns>
