@@ -284,7 +284,7 @@ public class FXMLHoaDonController implements Initializable {
         data = FXCollections.observableArrayList(allHoaDon);
         tabDsDuyet.setItems(data);
     }
-    
+
     private void ReloadCart() {
         cartData.clear();
         List<Cart> newList = listCart;
@@ -590,25 +590,34 @@ public class FXMLHoaDonController implements Initializable {
     @FXML
     private void btnThemLoaiThuoc_Click(ActionEvent event) {
         for (Cart cart : listCart) {
-            if(cbLoaiThuoc.getValue().getTenThuoc().equals(cart.getTenThuoc())){                          
+            if (cbLoaiThuoc.getValue().getTenThuoc().equals(cart.getTenThuoc())) {
                 int sl = Integer.parseInt(txtSoLuong.getText());
                 cart.setSoLuong(cart.getSoLuong() + sl);
                 int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
                 cart.setThanhTien(cart.getThanhTien() + thanhTien);
                 ReloadCart();
+                tinhTongTienHoaDon();
                 return;
-            } 
+            }
         }
-                  
+
         String tenThuoc = cbLoaiThuoc.getValue().getTenThuoc();
         int sl = Integer.parseInt(txtSoLuong.getText());
         int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
         int donGia = cbLoaiThuoc.getValue().getDonGia();
         Cart c = new Cart(tenThuoc, sl, donGia, thanhTien);
         listCart.add(c);
-
+        tinhTongTienHoaDon();
         initColumnsCart();
         tabCart.setItems(getCartData());
+    }
+
+    private void tinhTongTienHoaDon() {
+        int tongTien = 0;
+        for (Cart cart : listCart) {
+            tongTien += cart.getThanhTien();
+        }
+        txtTongTien.setText(String.valueOf(tongTien));
     }
 
     public void initColumnsCart() {
@@ -616,14 +625,39 @@ public class FXMLHoaDonController implements Initializable {
         tcSoLuong.setCellValueFactory(new PropertyValueFactory<>("soLuong"));
         tcDonGia.setCellValueFactory(new PropertyValueFactory<>("donGia"));
         tcThanhTien.setCellValueFactory(new PropertyValueFactory<>("thanhTien"));
-    }   
+    }
 
     @FXML
     private void btnBotLoaiThuoc_Click(ActionEvent event) {
+        for (Cart cart : listCart) {
+            if (cbLoaiThuoc.getValue().getTenThuoc().equals(cart.getTenThuoc())) {
+                int sl = Integer.parseInt(txtSoLuong.getText());
+                if (sl >= cart.getSoLuong()) {
+                    listCart.remove(cart);
+                    ReloadCart();
+                    tinhTongTienHoaDon();
+                    return;
+                } else {
+                    cart.setSoLuong(cart.getSoLuong() - sl);
+                }
+                int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
+                cart.setThanhTien(cart.getThanhTien() - thanhTien);
+                ReloadCart();
+                tinhTongTienHoaDon();
+            }
+        }
     }
 
     @FXML
     private void btnXoaLoaiThuoc_Click(ActionEvent event) {
+        for (Cart cart : listCart) {
+            if (cbLoaiThuoc.getValue().getTenThuoc().equals(cart.getTenThuoc())) {
+                listCart.remove(cart);
+                ReloadCart();
+                tinhTongTienHoaDon();
+                return;
+            }
+        }
     }
 
 }
