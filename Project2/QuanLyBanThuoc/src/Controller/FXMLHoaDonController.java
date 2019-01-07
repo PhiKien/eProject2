@@ -9,6 +9,7 @@ import Model.Ctrl.HoadonJpaController;
 import Model.Hoadon;
 import Model.Khachhang;
 import Model.Nhanvien;
+import Util.StringToDate;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,10 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,8 +30,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -35,6 +43,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -111,14 +121,8 @@ public class FXMLHoaDonController implements Initializable {
     private TableColumn<Hoadon, Date> tcNgayBan;
     @FXML
     private TableColumn<Hoadon, Integer> tcTongTien;
-     @FXML
-    private TableColumn<Hoadon, Integer> tcMaKH;
-    @FXML
-    private TableColumn<Hoadon, Integer> tcMaNV;
 
-    @FXML
     private TextField txtTenKH;
-    @FXML
     private TextField txtTenNguoiBan;
 
     private static final short HOAT_DONG = 1;
@@ -137,51 +141,103 @@ public class FXMLHoaDonController implements Initializable {
 
     TypedQuery<Nhanvien> createNamedQueryNV = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
     List<Nhanvien> resultListNV = createNamedQueryNV.getResultList();
-   
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-//    public List<Model_NhanVien_KhachHang> nhanVien_KhachHangs() {
-//        
-//    }
-    
-    public String getTenNVByMaNV(int maNV) {
-        String tenNV = null;
+    @FXML
+    private TableColumn<Hoadon, String> tcHoTenKH;
+    @FXML
+    private TableColumn<Hoadon, String> tcHoTenNV;
+    @FXML
+    private ComboBox<Nhanvien> cbNhanVien;
+    @FXML
+    private ComboBox<Khachhang> cbKhachHang;
 
-        for (Nhanvien nhanvien : resultListNV) {
-            if (nhanvien.getMaNV() == maNV) {
-                tenNV = nhanvien.getHoTenNV();
-                break;
-            }
-        }
-
-        return tenNV;
-    }
-
-    public String getTenKHByMaKH(int maKH) {
-        String tenKH = null;
-
-        for (Khachhang khachhang : resultListKH) {
-            if (khachhang.getMaKH()== maKH) {
-                tenKH = khachhang.getHoTenKH();
-                break;
-            }
-        }
-
-        return tenKH;
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initColumns();
         tabDsDuyet.setItems(getHoaDonData());
+        cbKhachHang.setItems(getKhachHangData());
+        cbKhachHang.setCellFactory(new Callback<ListView<Khachhang>, ListCell<Khachhang>>() {
+            @Override
+            public ListCell<Khachhang> call(ListView<Khachhang> l) {
+                return new ListCell<Khachhang>() {
+                    @Override
+                    protected void updateItem(Khachhang item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setGraphic(null);
+                        } else {
+                            setText(item.getMaKH() + "\t" + item.getHoTenKH());
+                        }
+                    }
+                };
+            }
+        });
+        
+        cbKhachHang.setConverter(new StringConverter<Khachhang>() {
+              @Override
+              public String toString(Khachhang user) {
+                if (user == null){
+                  return null;
+                } else {
+                  return user.getMaKH() + " - " + user.getHoTenKH();
+                }
+              }
+
+            @Override
+            public Khachhang fromString(String userId) {
+                return null;
+            }
+        });
+        
+        cbNhanVien.setItems(getNhanVienData());
+        cbNhanVien.setCellFactory(new Callback<ListView<Nhanvien>, ListCell<Nhanvien>>() {
+            @Override
+            public ListCell<Nhanvien> call(ListView<Nhanvien> l) {
+                return new ListCell<Nhanvien>() {
+                    @Override
+                    protected void updateItem(Nhanvien item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setGraphic(null);
+                        } else {
+                            setText(item.getMaNV() + "\t" + item.getHoTenNV());
+                        }
+                    }
+                };
+            }
+        });
+        
+        cbNhanVien.setConverter(new StringConverter<Nhanvien>() {
+              @Override
+              public String toString(Nhanvien user) {
+                if (user == null){
+                  return null;
+                } else {
+                  return user.getMaNV()+ " - " + user.getHoTenNV();
+                }
+              }
+
+            @Override
+            public Nhanvien fromString(String userId) {
+                return null;
+            }
+        });
+    }
+    
+     private void ReloadData() {
+        data.clear();
+        EntityManagerFactory newEmf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+        EntityManager newEm = newEmf.createEntityManager();
+        TypedQuery<Hoadon> getAll = newEm.createNamedQuery("Hoadon.findAll"  , Hoadon.class);
+        List<Hoadon> allHoaDon = getAll.getResultList();
+        data = FXCollections.observableArrayList(allHoaDon);
+        tabDsDuyet.setItems(data);
     }
 
     public void initColumns() {
-        tcMaHD.setCellValueFactory(new PropertyValueFactory<>("MaHD"));
-        tcMaKH.setCellValueFactory(new PropertyValueFactory<>("MaKH")); 
-        tcMaNV.setCellValueFactory(new PropertyValueFactory<>("MaNV"));
+        tcMaHD.setCellValueFactory(new PropertyValueFactory<>("maHD"));
+        tcHoTenKH.setCellValueFactory((TableColumn.CellDataFeatures<Hoadon, String> param) -> new SimpleStringProperty(param.getValue().getMaKH().getHoTenKH()));
+        tcHoTenNV.setCellValueFactory((TableColumn.CellDataFeatures<Hoadon, String> param) -> new SimpleStringProperty(param.getValue().getMaNV().getHoTenNV()));
         tcNgayBan.setCellFactory(column -> {
             TableCell<Hoadon, Date> cell = new TableCell<Hoadon, Date>() {
                 private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -213,7 +269,15 @@ public class FXMLHoaDonController implements Initializable {
         }
         return data;
     }
-    
+
+    public ObservableList<Khachhang> getKhachHangData() {
+        return FXCollections.observableArrayList(resultListKH);
+    }
+
+    public ObservableList<Nhanvien> getNhanVienData() {
+        return FXCollections.observableArrayList(resultListNV);
+    }
+
     @FXML
     private void mnItemThem_Click(ActionEvent event) {
     }
@@ -333,25 +397,85 @@ public class FXMLHoaDonController implements Initializable {
 
     @FXML
     private void btnThem_Click(ActionEvent event) {
+        Hoadon hoaDon = new Hoadon();
+        StringToDate stringToDate = new StringToDate();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+
+        EntityManager em = emf.createEntityManager();
+        //bắt đầu tạo transaction
+        em.getTransaction().begin();
+        try {
+            if (cbNhanVien.getValue() != null && cbKhachHang.getValue() != null && dpNgayBan.getValue() != null) {
+                hoaDon.setMaKH(cbKhachHang.getValue());
+                hoaDon.setMaNV(cbNhanVien.getValue());
+                Date date = Date.from(dpNgayBan.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
+                hoaDon.setNgayLapHD(date);
+                hoaDon.setTrangThai(HOAT_DONG);
+                jpaController.create(hoaDon);
+                btnLamMoi_Click(event);
+                lblStatusHD.setText("Thêm mới thành công!");
+            } else {
+                lblStatusHD.setText("Không được để trống các ô!");
+            }
+        } catch (Exception e) {
+            e.getMessage();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
     }
 
     @FXML
     private void btnSua_Click(ActionEvent event) {
+        
     }
 
     @FXML
     private void btnXoa_Click(ActionEvent event) {
+        Hoadon hoaDon = tabDsDuyet.getSelectionModel().getSelectedItem();
+        if (hoaDon == null) {
+            lblStatusHD.setText("Mời chọn hóa đơn muốn xóa!");
+            return;
+        } else {
+            try {
+               jpaController.destroy(hoaDon.getMaHD());
+                btnLamMoi_Click(event);
+                lblStatusHD.setText("Xóa nhân viên " + hoaDon.getMaHD()+ " thành công!");
+            } catch (Exception e) {
+                e.getMessage();
+                em.getTransaction().rollback();
+            }
+        }
     }
 
     @FXML
     private void btnLamMoi_Click(ActionEvent event) {
         txtMaHoaDon.clear();
         txtTimKiem.clear();
+        cbNhanVien.setValue(null);
+        cbKhachHang.setValue(null);
+        dpNgayBan.setValue(null);
+        lblStatusHD.setText(null);
+        ReloadData();
     }
 
     @FXML
     private void btnTimKiem_Click(ActionEvent event) {
-
+        for (Hoadon hd : resultListHD) {
+            if (hd.getMaKH().getHoTenKH().equals(txtTimKiem.getText())) {
+                data.clear();
+                TypedQuery<Hoadon> findByName = em.createNamedQuery("Hoadon.findByMaHD", Hoadon.class);
+                findByName.setParameter("maHD", hd.getMaHD());
+                resultListHD = findByName.getResultList();
+                data = FXCollections.observableArrayList(resultListHD);
+                tabDsDuyet.setItems(data);
+                lblStatusHD.setText("");
+                return;
+            } else {
+                lblStatusHD.setText("Không tìm thấy !");
+            }
+        };
     }
 
     @FXML
@@ -372,23 +496,21 @@ public class FXMLHoaDonController implements Initializable {
 
     @FXML
     private void btnInHoaDon_Click(ActionEvent event) {
-    }
+    }   
 
     @FXML
     private void tabDsDuyet_Click(MouseEvent event) {
-         Hoadon hoaDon = tabDsDuyet.getSelectionModel().getSelectedItem();
+        Hoadon hoaDon = tabDsDuyet.getSelectionModel().getSelectedItem();
         if (hoaDon == null) {
             return;
         } else {
             Integer maHD = hoaDon.getMaHD();
-            String hoTenKH = getTenKHByMaKH(hoaDon.getMaKH().getMaKH().intValue());
-            String hoTenNV = getTenNVByMaNV(hoaDon.getMaNV().getMaNV());
             Date input = hoaDon.getNgayLapHD();
             LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             Integer tongTien = hoaDon.getTongTien();
             txtMaHoaDon.setText(maHD.toString());
-            txtTenKH.setText(hoTenKH);
-            txtTenNguoiBan.setText(hoTenNV);
+            cbKhachHang.setValue(hoaDon.getMaKH());
+            cbNhanVien.setValue(hoaDon.getMaNV());
             dpNgayBan.setValue(date);
             txtTongTien.setText(tongTien.toString());
         }

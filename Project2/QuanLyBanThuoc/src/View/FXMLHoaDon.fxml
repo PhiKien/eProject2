@@ -79,17 +79,15 @@
                </font></TextField>
          </children>
       </Pane>
-      <Pane layoutX="14.0" layoutY="102.0" prefHeight="193.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC; -fx-border-style: double;">
+      <Pane layoutX="14.0" layoutY="102.0" prefHeight="193.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
          <children>
             <TextField editable="false" layoutX="27.0" layoutY="-12.0" prefHeight="25.0" prefWidth="120.0" text="Thông tin hóa đơn" />
             <TextField fx:id="txtMaHoaDon" disable="true" editable="false" layoutX="126.0" layoutY="38.0" prefHeight="25.0" prefWidth="67.0" />
-            <TextField fx:id="txtTenNguoiBan" layoutX="126.0" layoutY="77.0" prefHeight="25.0" prefWidth="149.0" />
-            <TextField fx:id="txtTenKH" layoutX="459.0" layoutY="77.0" />
             <Label layoutX="49.0" layoutY="42.0" text="Mã hóa đơn:" />
-            <Label layoutX="38.0" layoutY="81.0" text="Tên người bán:" />
-            <Label layoutX="393.0" layoutY="40.0" text="Ngày bán:" />
-            <Label layoutX="362.0" layoutY="80.0" text="Tên khách hàng:" />
-            <DatePicker fx:id="dpNgayBan" layoutX="458.0" layoutY="38.0" />
+            <Label layoutX="369.0" layoutY="79.0" text="Tên người bán:" />
+            <Label layoutX="60.0" layoutY="77.0" text="Ngày bán:" />
+            <Label layoutX="361.0" layoutY="42.0" text="Tên khách hàng:" />
+            <DatePicker fx:id="dpNgayBan" layoutX="125.0" layoutY="75.0" prefHeight="25.0" prefWidth="149.0" />
             <Button fx:id="btnCTHoaDon" layoutX="530.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnCTHoaDon_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Chi tiết hóa đơn">
                <font>
                   <Font size="14.0" />
@@ -103,14 +101,16 @@
             <Label layoutX="60.0" layoutY="119.0" text="Tổng tiền: " />
             <TextField fx:id="txtTongTien" disable="true" editable="false" layoutX="126.0" layoutY="115.0" />
             <Label fx:id="lblStatusHD" alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="13.0" prefHeight="17.0" prefWidth="269.0" textAlignment="CENTER" textFill="#f80505" textOverrun="CLIP" />
+            <ComboBox fx:id="cbNhanVien" layoutX="456.0" layoutY="75.0" prefHeight="27.0" prefWidth="174.0" promptText="- Chọn nhân viên -" style="-fx-background-color: White; -fx-background-radius: 4px; -fx-border-color: rgba(0,0,0,0.3); -fx-border-radius: 4px;" />
+            <ComboBox fx:id="cbKhachHang" layoutX="455.0" layoutY="37.0" prefHeight="27.0" prefWidth="174.0" promptText="- Chọn khách hàng -" style="-fx-background-color: White; -fx-background-radius: 4px; -fx-border-color: rgba(0,0,0,0.3); -fx-border-radius: 4px;" />
          </children>
       </Pane>
       <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" onMouseClicked="#tabDsDuyet_Click" prefHeight="212.0" prefWidth="765.0">
         <columns>
-            <TableColumn fx:id="tcMaHD" prefWidth="104.0" text="Mã hóa đơn" />
-          <TableColumn fx:id="tcMaKH" prefWidth="152.0" text="Mã khách hàng" />
-            <TableColumn fx:id="tcMaNV" minWidth="0.0" prefWidth="215.0" text="Mã người bán" />
-            <TableColumn fx:id="tcNgayBan" minWidth="0.0" prefWidth="167.0" text="Ngày bán" />
+            <TableColumn fx:id="tcMaHD" editable="false" prefWidth="104.0" text="Mã hóa đơn" />
+          <TableColumn fx:id="tcHoTenKH" prefWidth="193.0" text="Tên khách hàng" />
+            <TableColumn fx:id="tcHoTenNV" minWidth="0.0" prefWidth="174.0" text="Người bán" />
+            <TableColumn fx:id="tcNgayBan" minWidth="0.0" prefWidth="167.0" text="Ngày lập hóa đơn" />
             <TableColumn fx:id="tcTongTien" minWidth="0.0" prefWidth="126.0" text="Tổng tiền" />
         </columns>
       </TableView>
