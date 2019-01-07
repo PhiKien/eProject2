@@ -96,7 +96,7 @@
             <Text layoutX="525.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="( VNĐ )" />
          </children>
       </Pane>
-      <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" onMouseClicked="#tabDsDuyet_Click" prefHeight="212.0" prefWidth="612.0">
+      <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="319.0" onMouseClicked="#tabDsDuyet_Click" prefHeight="212.0" prefWidth="612.0">
         <columns>
             <TableColumn fx:id="tcMaHD" editable="false" prefWidth="86.0" text="Mã hóa đơn" />
           <TableColumn fx:id="tcHoTenKH" prefWidth="156.0" text="Tên khách hàng" />
@@ -115,24 +115,31 @@
             <Label layoutX="50.0" layoutY="79.0" text="Tên thuốc:" />
             <Label layoutX="55.0" layoutY="115.0" text="Số lượng:" />
             <TextField fx:id="txtSoLuong" alignment="CENTER_RIGHT" layoutX="121.0" layoutY="111.0" prefHeight="25.0" prefWidth="67.0" />
-            <ListView fx:id="lvChiTietToaThuoc" layoutX="10.0" layoutY="210.0" prefHeight="200.0" prefWidth="343.0" />
-            <Button fx:id="btnThemThuoc" layoutX="83.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Thêm">
+            <Button fx:id="btnThemThuoc" layoutX="83.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnThemLoaiThuoc_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Thêm">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnBotThuoc" layoutX="154.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnThem_Click" prefHeight="30.0" prefWidth="56.0" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Bớt">
+            <Button fx:id="btnBotThuoc" layoutX="154.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnBotLoaiThuoc_Click" prefHeight="30.0" prefWidth="56.0" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Bớt">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnXoaThuoc" layoutX="225.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnThem_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Xóa">
+            <Button fx:id="btnXoaThuoc" layoutX="225.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnXoaLoaiThuoc_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Xóa">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
             <Label layoutX="37.0" layoutY="44.0" text="Mã hóa đơn:" />
             <TextField fx:id="txtMaHoaDon1" disable="true" editable="false" layoutX="121.0" layoutY="40.0" prefHeight="25.0" prefWidth="67.0" />
+            <TableView fx:id="tabCart" layoutY="211.0" prefHeight="212.0" prefWidth="362.0">
+              <columns>
+                <TableColumn fx:id="tcTenLoaiThuoc" prefWidth="117.0" text="Tên thuốc" />
+                <TableColumn fx:id="tcSoLuong" prefWidth="59.0" text="Số lượng" />
+                  <TableColumn fx:id="tcDonGia" prefWidth="78.0" text="Đơn giá" />
+                  <TableColumn fx:id="tcThanhTien" prefWidth="107.0" text="Thành tiền" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
    </children>

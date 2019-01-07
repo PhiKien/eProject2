@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.Cart;
 import Model.Ctrl.HoadonJpaController;
 import Model.Hoadon;
 import Model.Khachhang;
@@ -16,9 +17,11 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -125,6 +128,8 @@ public class FXMLHoaDonController implements Initializable {
     private static final short HOAT_DONG = 1;
     private static final short KHONG_HOAT_DONG = 0;
 
+    List<Cart> listCart;
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
     EntityManager em = emf.createEntityManager();
 
@@ -135,13 +140,13 @@ public class FXMLHoaDonController implements Initializable {
 
     TypedQuery<Khachhang> createNamedQueryKH = em.createNamedQuery("Khachhang.findAll", Khachhang.class);
     List<Khachhang> resultListKH = createNamedQueryKH.getResultList();
-    
+
     TypedQuery<Khothuoc> khoThuoc = em.createNamedQuery("Khothuoc.findAll", Khothuoc.class);
     List<Khothuoc> resultListThuoc = khoThuoc.getResultList();
 
     TypedQuery<Nhanvien> createNamedQueryNV = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
     List<Nhanvien> resultListNV = createNamedQueryNV.getResultList();
-    
+
     @FXML
     private TableColumn<Hoadon, String> tcHoTenKH;
     @FXML
@@ -155,19 +160,30 @@ public class FXMLHoaDonController implements Initializable {
     @FXML
     private TextField txtSoLuong;
     @FXML
-    private ListView<?> lvChiTietToaThuoc;
-    @FXML
     private Button btnThemThuoc;
     @FXML
     private Button btnBotThuoc;
     @FXML
     private Button btnXoaThuoc;
+    @FXML
+    private TextField txtMaHoaDon1;
+    @FXML
+    private TableView<Cart> tabCart;
+    @FXML
+    private TableColumn<Cart, String> tcTenLoaiThuoc;
+    @FXML
+    private TableColumn<Cart, Integer> tcSoLuong;
+    @FXML
+    private TableColumn<Cart, Integer> tcDonGia;
+    @FXML
+    private TableColumn<Cart, Integer> tcThanhTien;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initColumns();
+        listCart = new ArrayList<>();
         tabDsDuyet.setItems(getHoaDonData());
-        
+
         //Load combo box Khach Hang
         cbKhachHang.setItems(getKhachHangData());
         cbKhachHang.setCellFactory((ListView<Khachhang> l) -> new ListCell<Khachhang>() {
@@ -181,23 +197,23 @@ public class FXMLHoaDonController implements Initializable {
                 }
             }
         });
-        
+
         cbKhachHang.setConverter(new StringConverter<Khachhang>() {
-              @Override
-              public String toString(Khachhang user) {
-                if (user == null){
-                  return null;
+            @Override
+            public String toString(Khachhang user) {
+                if (user == null) {
+                    return null;
                 } else {
-                  return user.getMaKH() + " - " + user.getHoTenKH();
+                    return user.getMaKH() + " - " + user.getHoTenKH();
                 }
-              }
+            }
 
             @Override
             public Khachhang fromString(String userId) {
                 return null;
             }
         });
-        
+
         //Load combo Box Nhan Vien
         cbNhanVien.setItems(getNhanVienData());
         cbNhanVien.setCellFactory((ListView<Nhanvien> l) -> new ListCell<Nhanvien>() {
@@ -211,23 +227,23 @@ public class FXMLHoaDonController implements Initializable {
                 }
             }
         });
-        
+
         cbNhanVien.setConverter(new StringConverter<Nhanvien>() {
-              @Override
-              public String toString(Nhanvien user) {
-                if (user == null){
-                  return null;
+            @Override
+            public String toString(Nhanvien user) {
+                if (user == null) {
+                    return null;
                 } else {
-                  return user.getMaNV()+ " - " + user.getHoTenNV();
+                    return user.getMaNV() + " - " + user.getHoTenNV();
                 }
-              }
+            }
 
             @Override
             public Nhanvien fromString(String userId) {
                 return null;
             }
         });
-        
+
         //Load combo Box Thuốc
         cbLoaiThuoc.setItems(getKhoThuocData());
         cbLoaiThuoc.setCellFactory((ListView<Khothuoc> l) -> new ListCell<Khothuoc>() {
@@ -241,16 +257,16 @@ public class FXMLHoaDonController implements Initializable {
                 }
             }
         });
-        
+
         cbLoaiThuoc.setConverter(new StringConverter<Khothuoc>() {
-              @Override
-              public String toString(Khothuoc user) {
-                if (user == null){
-                  return null;
+            @Override
+            public String toString(Khothuoc user) {
+                if (user == null) {
+                    return null;
                 } else {
-                  return user.getTenThuoc();
+                    return user.getTenThuoc();
                 }
-              }
+            }
 
             @Override
             public Khothuoc fromString(String userId) {
@@ -258,15 +274,22 @@ public class FXMLHoaDonController implements Initializable {
             }
         });
     }
-    
-     private void ReloadData() {
+
+    private void ReloadData() {
         data.clear();
         EntityManagerFactory newEmf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
         EntityManager newEm = newEmf.createEntityManager();
-        TypedQuery<Hoadon> getAll = newEm.createNamedQuery("Hoadon.findAll"  , Hoadon.class);
+        TypedQuery<Hoadon> getAll = newEm.createNamedQuery("Hoadon.findAll", Hoadon.class);
         List<Hoadon> allHoaDon = getAll.getResultList();
         data = FXCollections.observableArrayList(allHoaDon);
         tabDsDuyet.setItems(data);
+    }
+    
+    private void ReloadCart() {
+        cartData.clear();
+        List<Cart> newList = listCart;
+        cartData = FXCollections.observableArrayList(newList);
+        tabCart.setItems(cartData);
     }
 
     public void initColumns() {
@@ -297,6 +320,16 @@ public class FXMLHoaDonController implements Initializable {
 
     private ObservableList<Hoadon> data;
 
+    private ObservableList<Cart> cartData;
+
+    public ObservableList<Cart> getCartData() {
+        cartData = FXCollections.observableArrayList(listCart);
+        if (data == null) {
+            return FXCollections.observableArrayList();
+        }
+        return cartData;
+    }
+
     public ObservableList<Hoadon> getHoaDonData() {
         data = FXCollections.observableArrayList(resultListHD);
         if (data == null) {
@@ -308,7 +341,7 @@ public class FXMLHoaDonController implements Initializable {
     public ObservableList<Khachhang> getKhachHangData() {
         return FXCollections.observableArrayList(resultListKH);
     }
-    
+
     public ObservableList<Khothuoc> getKhoThuocData() {
         return FXCollections.observableArrayList(resultListThuoc);
     }
@@ -319,14 +352,17 @@ public class FXMLHoaDonController implements Initializable {
 
     @FXML
     private void mnItemThem_Click(ActionEvent event) {
+        btnThem_Click(event);
     }
 
     @FXML
     private void mnItemSua_Click(ActionEvent event) {
+        btnSua_Click(event);
     }
 
     @FXML
     private void mnItemXoa_Click(ActionEvent event) {
+        btnXoa_Click(event);
     }
 
     @FXML
@@ -466,7 +502,7 @@ public class FXMLHoaDonController implements Initializable {
 
     @FXML
     private void btnSua_Click(ActionEvent event) {
-        
+
     }
 
     @FXML
@@ -477,9 +513,9 @@ public class FXMLHoaDonController implements Initializable {
             return;
         } else {
             try {
-               jpaController.destroy(hoaDon.getMaHD());
+                jpaController.destroy(hoaDon.getMaHD());
                 btnLamMoi_Click(event);
-                lblStatusHD.setText("Xóa nhân viên " + hoaDon.getMaHD()+ " thành công!");
+                lblStatusHD.setText("Xóa nhân viên " + hoaDon.getMaHD() + " thành công!");
             } catch (Exception e) {
                 e.getMessage();
                 em.getTransaction().rollback();
@@ -533,7 +569,6 @@ public class FXMLHoaDonController implements Initializable {
         }
     }
 
-
     @FXML
     private void tabDsDuyet_Click(MouseEvent event) {
         Hoadon hoaDon = tabDsDuyet.getSelectionModel().getSelectedItem();
@@ -550,6 +585,45 @@ public class FXMLHoaDonController implements Initializable {
             dpNgayBan.setValue(date);
             txtTongTien.setText(tongTien.toString());
         }
+    }
+
+    @FXML
+    private void btnThemLoaiThuoc_Click(ActionEvent event) {
+        for (Cart cart : listCart) {
+            if(cbLoaiThuoc.getValue().getTenThuoc().equals(cart.getTenThuoc())){                          
+                int sl = Integer.parseInt(txtSoLuong.getText());
+                cart.setSoLuong(cart.getSoLuong() + sl);
+                int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
+                cart.setThanhTien(cart.getThanhTien() + thanhTien);
+                ReloadCart();
+                return;
+            } 
+        }
+                  
+        String tenThuoc = cbLoaiThuoc.getValue().getTenThuoc();
+        int sl = Integer.parseInt(txtSoLuong.getText());
+        int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
+        int donGia = cbLoaiThuoc.getValue().getDonGia();
+        Cart c = new Cart(tenThuoc, sl, donGia, thanhTien);
+        listCart.add(c);
+
+        initColumnsCart();
+        tabCart.setItems(getCartData());
+    }
+
+    public void initColumnsCart() {
+        tcTenLoaiThuoc.setCellValueFactory((TableColumn.CellDataFeatures<Cart, String> param) -> new SimpleStringProperty(param.getValue().getTenThuoc()));
+        tcSoLuong.setCellValueFactory(new PropertyValueFactory<>("soLuong"));
+        tcDonGia.setCellValueFactory(new PropertyValueFactory<>("donGia"));
+        tcThanhTien.setCellValueFactory(new PropertyValueFactory<>("thanhTien"));
+    }   
+
+    @FXML
+    private void btnBotLoaiThuoc_Click(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnXoaLoaiThuoc_Click(ActionEvent event) {
     }
 
 }
