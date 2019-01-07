@@ -8,6 +8,7 @@ package Controller;
 import Model.Ctrl.HoadonJpaController;
 import Model.Hoadon;
 import Model.Khachhang;
+import Model.Khothuoc;
 import Model.Nhanvien;
 import Util.StringToDate;
 import java.io.IOException;
@@ -102,10 +103,6 @@ public class FXMLHoaDonController implements Initializable {
     @FXML
     private DatePicker dpNgayBan;
     @FXML
-    private Button btnCTHoaDon;
-    @FXML
-    private Button btnInHoaDon;
-    @FXML
     private TextField txtTongTien;
 
     /**
@@ -138,6 +135,9 @@ public class FXMLHoaDonController implements Initializable {
 
     TypedQuery<Khachhang> createNamedQueryKH = em.createNamedQuery("Khachhang.findAll", Khachhang.class);
     List<Khachhang> resultListKH = createNamedQueryKH.getResultList();
+    
+    TypedQuery<Khothuoc> khoThuoc = em.createNamedQuery("Khothuoc.findAll", Khothuoc.class);
+    List<Khothuoc> resultListThuoc = khoThuoc.getResultList();
 
     TypedQuery<Nhanvien> createNamedQueryNV = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
     List<Nhanvien> resultListNV = createNamedQueryNV.getResultList();
@@ -150,26 +150,35 @@ public class FXMLHoaDonController implements Initializable {
     private ComboBox<Nhanvien> cbNhanVien;
     @FXML
     private ComboBox<Khachhang> cbKhachHang;
+    @FXML
+    private ComboBox<Khothuoc> cbLoaiThuoc;
+    @FXML
+    private TextField txtSoLuong;
+    @FXML
+    private ListView<?> lvChiTietToaThuoc;
+    @FXML
+    private Button btnThemThuoc;
+    @FXML
+    private Button btnBotThuoc;
+    @FXML
+    private Button btnXoaThuoc;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initColumns();
         tabDsDuyet.setItems(getHoaDonData());
+        
+        //Load combo box Khach Hang
         cbKhachHang.setItems(getKhachHangData());
-        cbKhachHang.setCellFactory(new Callback<ListView<Khachhang>, ListCell<Khachhang>>() {
+        cbKhachHang.setCellFactory((ListView<Khachhang> l) -> new ListCell<Khachhang>() {
             @Override
-            public ListCell<Khachhang> call(ListView<Khachhang> l) {
-                return new ListCell<Khachhang>() {
-                    @Override
-                    protected void updateItem(Khachhang item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item == null || empty) {
-                            setGraphic(null);
-                        } else {
-                            setText(item.getMaKH() + "\t" + item.getHoTenKH());
-                        }
-                    }
-                };
+            protected void updateItem(Khachhang item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setGraphic(null);
+                } else {
+                    setText(item.getMaKH() + "\t" + item.getHoTenKH());
+                }
             }
         });
         
@@ -189,21 +198,17 @@ public class FXMLHoaDonController implements Initializable {
             }
         });
         
+        //Load combo Box Nhan Vien
         cbNhanVien.setItems(getNhanVienData());
-        cbNhanVien.setCellFactory(new Callback<ListView<Nhanvien>, ListCell<Nhanvien>>() {
+        cbNhanVien.setCellFactory((ListView<Nhanvien> l) -> new ListCell<Nhanvien>() {
             @Override
-            public ListCell<Nhanvien> call(ListView<Nhanvien> l) {
-                return new ListCell<Nhanvien>() {
-                    @Override
-                    protected void updateItem(Nhanvien item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item == null || empty) {
-                            setGraphic(null);
-                        } else {
-                            setText(item.getMaNV() + "\t" + item.getHoTenNV());
-                        }
-                    }
-                };
+            protected void updateItem(Nhanvien item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setGraphic(null);
+                } else {
+                    setText(item.getMaNV() + "\t" + item.getHoTenNV());
+                }
             }
         });
         
@@ -219,6 +224,36 @@ public class FXMLHoaDonController implements Initializable {
 
             @Override
             public Nhanvien fromString(String userId) {
+                return null;
+            }
+        });
+        
+        //Load combo Box Thuốc
+        cbLoaiThuoc.setItems(getKhoThuocData());
+        cbLoaiThuoc.setCellFactory((ListView<Khothuoc> l) -> new ListCell<Khothuoc>() {
+            @Override
+            protected void updateItem(Khothuoc item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setGraphic(null);
+                } else {
+                    setText(item.getTenThuoc());
+                }
+            }
+        });
+        
+        cbLoaiThuoc.setConverter(new StringConverter<Khothuoc>() {
+              @Override
+              public String toString(Khothuoc user) {
+                if (user == null){
+                  return null;
+                } else {
+                  return user.getTenThuoc();
+                }
+              }
+
+            @Override
+            public Khothuoc fromString(String userId) {
                 return null;
             }
         });
@@ -272,6 +307,10 @@ public class FXMLHoaDonController implements Initializable {
 
     public ObservableList<Khachhang> getKhachHangData() {
         return FXCollections.observableArrayList(resultListKH);
+    }
+    
+    public ObservableList<Khothuoc> getKhoThuocData() {
+        return FXCollections.observableArrayList(resultListThuoc);
     }
 
     public ObservableList<Nhanvien> getNhanVienData() {
@@ -365,7 +404,6 @@ public class FXMLHoaDonController implements Initializable {
     @FXML
     private void mnItemHoaDon_Click(ActionEvent event) {
         try {
-            //((Node) event.getSource()).getScene().getWindow().hide();    
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/View/FXMLHoaDon.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
@@ -455,6 +493,8 @@ public class FXMLHoaDonController implements Initializable {
         txtTimKiem.clear();
         cbNhanVien.setValue(null);
         cbKhachHang.setValue(null);
+        cbLoaiThuoc.setValue(null);
+        txtSoLuong.clear();
         dpNgayBan.setValue(null);
         lblStatusHD.setText(null);
         ReloadData();
@@ -478,7 +518,6 @@ public class FXMLHoaDonController implements Initializable {
         };
     }
 
-    @FXML
     private void btnCTHoaDon_Click(ActionEvent event) {
         try {
             //((Node) event.getSource()).getScene().getWindow().hide();    an di from home
@@ -494,9 +533,6 @@ public class FXMLHoaDonController implements Initializable {
         }
     }
 
-    @FXML
-    private void btnInHoaDon_Click(ActionEvent event) {
-    }   
 
     @FXML
     private void tabDsDuyet_Click(MouseEvent event) {

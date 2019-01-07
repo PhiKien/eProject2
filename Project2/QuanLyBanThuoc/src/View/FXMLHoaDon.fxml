@@ -9,12 +9,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="765.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLHoaDonController">
+<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="1024.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLHoaDonController">
     <stylesheets>
         <URL value="@/View/CSS/fxmlhoadon.css" />
     </stylesheets>
     <children>
-      <MenuBar prefHeight="30.0" prefWidth="790.0" style="-fx-background-color: linear-gradient(to top, #3a7bd5, #3a6073);">
+      <MenuBar prefHeight="30.0" prefWidth="1024.0" style="-fx-background-color: linear-gradient(to top, #3a7bd5, #3a6073);">
         <menus>
           <Menu mnemonicParsing="false" styleClass="menuB" text="Chức năng">
             <items>
@@ -51,7 +51,7 @@
             <Insets top="2.0" />
          </padding>
       </MenuBar>
-      <Pane layoutX="13.0" layoutY="41.0" prefHeight="46.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
+      <Pane layoutX="13.0" layoutY="41.0" prefHeight="46.0" prefWidth="995.0" style="-fx-border-color: #DCDCDC;">
          <children>
             <Button fx:id="btnThem" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Thêm">
                <font>
@@ -69,53 +69,71 @@
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button fx:id="btnTimKiem" layoutX="447.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Tìm kiếm">
+            <Button fx:id="btnTimKiem" layoutX="670.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnTimKiem_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Tìm kiếm">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <TextField fx:id="txtTimKiem" layoutX="532.0" layoutY="8.0" prefHeight="25.0" prefWidth="190.0" promptText="Nhập tên khách hàng....">
+            <TextField fx:id="txtTimKiem" layoutX="755.0" layoutY="8.0" prefHeight="25.0" prefWidth="190.0" promptText="Nhập tên khách hàng....">
                <font>
                   <Font size="14.0" />
                </font></TextField>
          </children>
       </Pane>
-      <Pane layoutX="14.0" layoutY="102.0" prefHeight="193.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
+      <Pane layoutX="14.0" layoutY="108.0" prefHeight="187.0" prefWidth="612.0" style="-fx-border-color: #DCDCDC;">
          <children>
             <TextField editable="false" layoutX="27.0" layoutY="-12.0" prefHeight="25.0" prefWidth="120.0" text="Thông tin hóa đơn" />
-            <TextField fx:id="txtMaHoaDon" disable="true" editable="false" layoutX="126.0" layoutY="38.0" prefHeight="25.0" prefWidth="67.0" />
-            <Label layoutX="49.0" layoutY="42.0" text="Mã hóa đơn:" />
-            <Label layoutX="369.0" layoutY="79.0" text="Tên người bán:" />
-            <Label layoutX="60.0" layoutY="77.0" text="Ngày bán:" />
-            <Label layoutX="361.0" layoutY="42.0" text="Tên khách hàng:" />
-            <DatePicker fx:id="dpNgayBan" layoutX="125.0" layoutY="75.0" prefHeight="25.0" prefWidth="149.0" />
-            <Button fx:id="btnCTHoaDon" layoutX="530.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnCTHoaDon_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Chi tiết hóa đơn">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnInHoaDon" layoutX="384.0" layoutY="140.0" mnemonicParsing="false" onAction="#btnInHoaDon_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="In hóa đơn">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Label layoutX="60.0" layoutY="119.0" text="Tổng tiền: " />
-            <TextField fx:id="txtTongTien" disable="true" editable="false" layoutX="126.0" layoutY="115.0" />
+            <TextField fx:id="txtMaHoaDon" disable="true" editable="false" layoutX="107.0" layoutY="38.0" prefHeight="25.0" prefWidth="67.0" />
+            <Label layoutX="31.0" layoutY="42.0" text="Mã hóa đơn:" />
+            <Label layoutX="19.0" layoutY="116.0" text="Tên người bán:" />
+            <Label layoutX="325.0" layoutY="77.0" text="Ngày bán:" />
+            <Label layoutX="13.0" layoutY="79.0" text="Tên khách hàng:" />
+            <DatePicker fx:id="dpNgayBan" layoutX="390.0" layoutY="75.0" prefHeight="25.0" prefWidth="174.0" />
+            <Label layoutX="325.0" layoutY="116.0" text="Tổng tiền: " />
+            <TextField fx:id="txtTongTien" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="391.0" layoutY="112.0" prefHeight="25.0" prefWidth="128.0" />
             <Label fx:id="lblStatusHD" alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="13.0" prefHeight="17.0" prefWidth="269.0" textAlignment="CENTER" textFill="#f80505" textOverrun="CLIP" />
-            <ComboBox fx:id="cbNhanVien" layoutX="456.0" layoutY="75.0" prefHeight="27.0" prefWidth="174.0" promptText="- Chọn nhân viên -" style="-fx-background-color: White; -fx-background-radius: 4px; -fx-border-color: rgba(0,0,0,0.3); -fx-border-radius: 4px;" />
-            <ComboBox fx:id="cbKhachHang" layoutX="455.0" layoutY="37.0" prefHeight="27.0" prefWidth="174.0" promptText="- Chọn khách hàng -" style="-fx-background-color: White; -fx-background-radius: 4px; -fx-border-color: rgba(0,0,0,0.3); -fx-border-radius: 4px;" />
+            <ComboBox fx:id="cbNhanVien" layoutX="108.0" layoutY="111.0" prefHeight="27.0" prefWidth="174.0" promptText="- Chọn nhân viên -" style="-fx-background-color: White; -fx-background-radius: 4px; -fx-border-color: rgba(0,0,0,0.3); -fx-border-radius: 4px;" />
+            <ComboBox fx:id="cbKhachHang" layoutX="107.0" layoutY="74.0" prefHeight="27.0" prefWidth="174.0" promptText="- Chọn khách hàng -" style="-fx-background-color: White; -fx-background-radius: 4px; -fx-border-color: rgba(0,0,0,0.3); -fx-border-radius: 4px;" />
+            <Text layoutX="525.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="( VNĐ )" />
          </children>
       </Pane>
-      <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" onMouseClicked="#tabDsDuyet_Click" prefHeight="212.0" prefWidth="765.0">
+      <TableView fx:id="tabDsDuyet" layoutX="14.0" layoutY="317.0" onMouseClicked="#tabDsDuyet_Click" prefHeight="212.0" prefWidth="612.0">
         <columns>
-            <TableColumn fx:id="tcMaHD" editable="false" prefWidth="104.0" text="Mã hóa đơn" />
-          <TableColumn fx:id="tcHoTenKH" prefWidth="193.0" text="Tên khách hàng" />
-            <TableColumn fx:id="tcHoTenNV" minWidth="0.0" prefWidth="174.0" text="Người bán" />
-            <TableColumn fx:id="tcNgayBan" minWidth="0.0" prefWidth="167.0" text="Ngày lập hóa đơn" />
-            <TableColumn fx:id="tcTongTien" minWidth="0.0" prefWidth="126.0" text="Tổng tiền" />
+            <TableColumn fx:id="tcMaHD" editable="false" prefWidth="86.0" text="Mã hóa đơn" />
+          <TableColumn fx:id="tcHoTenKH" prefWidth="156.0" text="Tên khách hàng" />
+            <TableColumn fx:id="tcHoTenNV" minWidth="0.0" prefWidth="146.0" text="Người bán" />
+            <TableColumn fx:id="tcNgayBan" minWidth="0.0" prefWidth="111.0" text="Ngày lập hóa đơn" />
+            <TableColumn fx:id="tcTongTien" minWidth="0.0" prefWidth="113.0" text="Tổng tiền" />
         </columns>
       </TableView>
-      <Label layoutX="328.0" layoutY="297.0" text="Danh sách hóa đơn">
+      <Label layoutX="269.0" layoutY="298.0" text="Danh sách hóa đơn">
         
       </Label>
+      <Pane layoutX="646.0" layoutY="108.0" prefHeight="422.0" prefWidth="362.0" style="-fx-border-color: #DCDCDC;">
+         <children>
+            <TextField editable="false" layoutX="27.0" layoutY="-12.0" prefHeight="25.0" prefWidth="103.0" text="Chi tiết hóa đơn" />
+            <ComboBox fx:id="cbLoaiThuoc" layoutX="121.0" layoutY="74.0" prefHeight="27.0" prefWidth="182.0" promptText="- Chọn loại thuốc -" style="-fx-background-color: White; -fx-background-radius: 4px; -fx-border-color: rgba(0,0,0,0.3); -fx-border-radius: 4px;" />
+            <Label layoutX="50.0" layoutY="79.0" text="Tên thuốc:" />
+            <Label layoutX="55.0" layoutY="115.0" text="Số lượng:" />
+            <TextField fx:id="txtSoLuong" alignment="CENTER_RIGHT" layoutX="121.0" layoutY="111.0" prefHeight="25.0" prefWidth="67.0" />
+            <ListView fx:id="lvChiTietToaThuoc" layoutX="10.0" layoutY="210.0" prefHeight="200.0" prefWidth="343.0" />
+            <Button fx:id="btnThemThuoc" layoutX="83.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnThem_Click" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Thêm">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnBotThuoc" layoutX="154.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnThem_Click" prefHeight="30.0" prefWidth="56.0" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Bớt">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnXoaThuoc" layoutX="225.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnThem_Click" prefHeight="30.0" prefWidth="55.0" styleClass="btn" stylesheets="@CSS/fxmlhoadon.css" text="Xóa">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="37.0" layoutY="44.0" text="Mã hóa đơn:" />
+            <TextField fx:id="txtMaHoaDon1" disable="true" editable="false" layoutX="121.0" layoutY="40.0" prefHeight="25.0" prefWidth="67.0" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
