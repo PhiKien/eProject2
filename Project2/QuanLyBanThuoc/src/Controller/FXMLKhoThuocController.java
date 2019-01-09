@@ -323,6 +323,9 @@ public class FXMLKhoThuocController implements Initializable {
     private void btnThem_Click(ActionEvent event) {
         Khothuoc thuoc = new Khothuoc();
         StringToDate stringToDate = new StringToDate();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+
+        EntityManager em = emf.createEntityManager();
         //bắt đầu tạo transaction
         em.getTransaction().begin();
         try {

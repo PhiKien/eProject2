@@ -89,7 +89,7 @@
             <Label layoutX="13.0" layoutY="79.0" text="Tên khách hàng:" />
             <DatePicker fx:id="dpNgayBan" layoutX="390.0" layoutY="75.0" prefHeight="25.0" prefWidth="174.0" />
             <Label layoutX="325.0" layoutY="116.0" text="Tổng tiền: " />
-            <TextField fx:id="txtTongTien" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="391.0" layoutY="112.0" prefHeight="25.0" prefWidth="128.0" />
+            <TextField fx:id="txtTongTien" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="391.0" layoutY="112.0" prefHeight="25.0" prefWidth="128.0" text="0" />
             <Label fx:id="lblStatusHD" alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="13.0" prefHeight="17.0" prefWidth="269.0" textAlignment="CENTER" textFill="#f80505" textOverrun="CLIP" />
             <ComboBox fx:id="cbNhanVien" layoutX="108.0" layoutY="111.0" prefHeight="27.0" prefWidth="174.0" promptText="- Chọn nhân viên -" style="-fx-background-color: White; -fx-background-radius: 4px; -fx-border-color: rgba(0,0,0,0.3); -fx-border-radius: 4px;" />
             <ComboBox fx:id="cbKhachHang" layoutX="107.0" layoutY="74.0" prefHeight="27.0" prefWidth="174.0" promptText="- Chọn khách hàng -" style="-fx-background-color: White; -fx-background-radius: 4px; -fx-border-color: rgba(0,0,0,0.3); -fx-border-radius: 4px;" />
@@ -132,7 +132,7 @@
             </Button>
             <Label layoutX="37.0" layoutY="44.0" text="Mã hóa đơn:" />
             <TextField fx:id="txtMaHoaDon1" disable="true" editable="false" layoutX="121.0" layoutY="40.0" prefHeight="25.0" prefWidth="67.0" />
-            <TableView fx:id="tabCart" layoutY="211.0" prefHeight="212.0" prefWidth="362.0">
+            <TableView fx:id="tabCart" layoutY="211.0" onMouseClicked="#tabCart_Click" prefHeight="212.0" prefWidth="362.0">
               <columns>
                 <TableColumn fx:id="tcTenLoaiThuoc" prefWidth="117.0" text="Tên thuốc" />
                 <TableColumn fx:id="tcSoLuong" prefWidth="59.0" text="Số lượng" />

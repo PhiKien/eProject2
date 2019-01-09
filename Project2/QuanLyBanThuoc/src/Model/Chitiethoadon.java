@@ -37,7 +37,7 @@ public class Chitiethoadon implements Serializable {
     protected ChitiethoadonPK chitiethoadonPK;
     @Basic(optional = false)
     @Column(name = "SoLuong")
-    private short soLuong;
+    private int soLuong;
     @Basic(optional = false)
     @Column(name = "TrangThai")
     private short trangThai;
@@ -55,7 +55,7 @@ public class Chitiethoadon implements Serializable {
         this.chitiethoadonPK = chitiethoadonPK;
     }
 
-    public Chitiethoadon(ChitiethoadonPK chitiethoadonPK, short soLuong, short trangThai) {
+    public Chitiethoadon(ChitiethoadonPK chitiethoadonPK, int soLuong, short trangThai) {
         this.chitiethoadonPK = chitiethoadonPK;
         this.soLuong = soLuong;
         this.trangThai = trangThai;
@@ -73,11 +73,11 @@ public class Chitiethoadon implements Serializable {
         this.chitiethoadonPK = chitiethoadonPK;
     }
 
-    public short getSoLuong() {
+    public int getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(short soLuong) {
+    public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
 
@@ -127,7 +127,7 @@ public class Chitiethoadon implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Chitiethoadon[ chitiethoadonPK=" + chitiethoadonPK + " ]";
+        return "Chitiethoadon{" + "chitiethoadonPK=" + chitiethoadonPK + ", soLuong=" + soLuong + ", trangThai=" + trangThai + ", hoadon=" + hoadon + ", khothuoc=" + khothuoc + '}';
     }
     
 }

@@ -15,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Model.Hoadon;
+import Model.Khachhang;
 import Model.Khothuoc;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -206,6 +207,10 @@ public class ChitiethoadonJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+
+    public void destroy(Integer maHD, Khachhang maKH) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

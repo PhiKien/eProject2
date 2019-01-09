@@ -10,6 +10,7 @@ package Model;
  * @author Dell 5537
  */
 public class Cart {
+    private int maThuoc;
     private String tenThuoc;
     private int soLuong;
     private int donGia;
@@ -18,11 +19,20 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(String tenThuoc, int soLuong, int donGia, int thanhTien) {
+    public Cart(int maThuoc, String tenThuoc, int soLuong, int donGia, int thanhTien) {
+        this.maThuoc = maThuoc;
         this.tenThuoc = tenThuoc;
         this.soLuong = soLuong;
         this.donGia = donGia;
         this.thanhTien = thanhTien;
+    }
+
+    public int getMaThuoc() {
+        return maThuoc;
+    }
+
+    public void setMaThuoc(int maThuoc) {
+        this.maThuoc = maThuoc;
     }
 
     public String getTenThuoc() {
@@ -59,7 +69,7 @@ public class Cart {
 
     @Override
     public String toString() {
-        return "Cart{" + "tenThuoc=" + tenThuoc + ", soLuong=" + soLuong + ", donGia=" + donGia + ", thanhTien=" + thanhTien + '}';
+        return "Cart{" + "maThuoc=" + maThuoc + ", tenThuoc=" + tenThuoc + ", soLuong=" + soLuong + ", donGia=" + donGia + ", thanhTien=" + thanhTien + '}';
     }
-    
+
 }
