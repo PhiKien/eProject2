@@ -162,6 +162,24 @@ public class ChitiethoadonJpaController implements Serializable {
             }
         }
     }
+    
+    public void editChiTietHoaDon(Chitiethoadon ctHoaDon){
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Chitiethoadon oldCTHoaDon = em.find(Chitiethoadon.class, ctHoaDon.getChitiethoadonPK());
+            oldCTHoaDon.setKhothuoc(ctHoaDon.getKhothuoc());
+            oldCTHoaDon.setSoLuong(ctHoaDon.getSoLuong());
+            em.getTransaction().commit();
+        } catch(Exception ex){
+            throw ex;
+        } finally{
+            if(em!= null){
+                em.close();
+            }
+        }
+    }
 
     public List<Chitiethoadon> findChitiethoadonEntities() {
         return findChitiethoadonEntities(true, -1, -1);
@@ -207,10 +225,6 @@ public class ChitiethoadonJpaController implements Serializable {
         } finally {
             em.close();
         }
-    }
-
-    public void destroy(Integer maHD, Khachhang maKH) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

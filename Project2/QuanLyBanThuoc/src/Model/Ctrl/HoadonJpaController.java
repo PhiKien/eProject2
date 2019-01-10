@@ -170,6 +170,26 @@ public class HoadonJpaController implements Serializable {
             }
         }
     }
+    
+    public void editHoaDon(Hoadon hoaDon){
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Hoadon oldHoaDon = em.find(Hoadon.class, hoaDon.getMaHD());
+            oldHoaDon.setMaKH(hoaDon.getMaKH());
+            oldHoaDon.setMaNV(hoaDon.getMaNV());
+            oldHoaDon.setNgayLapHD(hoaDon.getNgayLapHD());
+            oldHoaDon.setTongTien(hoaDon.getTongTien());
+            em.getTransaction().commit();
+        } catch(Exception ex){
+            throw ex;
+        } finally{
+            if(em!= null){
+                em.close();
+            }
+        }
+    }
 
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;

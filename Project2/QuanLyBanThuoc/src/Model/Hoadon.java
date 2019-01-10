@@ -159,7 +159,7 @@ public class Hoadon implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Hoadon[ maHD=" + maHD + " ]";
+        return "Hoadon{" + "maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", tongTien=" + tongTien + ", trangThai=" + trangThai + ", maKH=" + maKH + ", maNV=" + maNV + ", chitiethoadonCollection=" + chitiethoadonCollection + '}';
     }
-    
+   
 }
