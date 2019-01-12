@@ -146,7 +146,7 @@ public class FXMLHoaDonController implements Initializable {
 
     TypedQuery<Khachhang> createNamedQueryKH = em.createNamedQuery("Khachhang.findAll", Khachhang.class);
     List<Khachhang> resultListKH = createNamedQueryKH.getResultList();
-    
+
     TypedQuery<Chitiethoadon> createNamedQueryCT = em.createNamedQuery("Chitiethoadon.findAll", Chitiethoadon.class);
     List<Chitiethoadon> resultListCT = createNamedQueryCT.getResultList();
 
@@ -186,6 +186,8 @@ public class FXMLHoaDonController implements Initializable {
     private TableColumn<Cart, Integer> tcDonGia;
     @FXML
     private TableColumn<Cart, Integer> tcThanhTien;
+    @FXML
+    private Label lblStatusHD1;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -283,7 +285,7 @@ public class FXMLHoaDonController implements Initializable {
             }
         });
     }
-    
+
     private void ReloadData() {
         data.clear();
         EntityManagerFactory newEmf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
@@ -300,8 +302,8 @@ public class FXMLHoaDonController implements Initializable {
         cartData = FXCollections.observableArrayList(newList);
         tabCart.setItems(cartData);
     }
-    
-    private void ReloadDataChiTietHoaDon(){
+
+    private void ReloadDataChiTietHoaDon() {
         cartData.clear();
         EntityManagerFactory newEmf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
         EntityManager newEm = newEmf.createEntityManager();
@@ -350,17 +352,17 @@ public class FXMLHoaDonController implements Initializable {
     private ObservableList<Hoadon> data;
 
     private ObservableList<Cart> cartData;
-    
+
     private ObservableList<Chitiethoadon> chiTietData;
-    
-    public ObservableList<Chitiethoadon> getCTData(){
+
+    public ObservableList<Chitiethoadon> getCTData() {
         chiTietData = FXCollections.observableArrayList(resultListCT);
         if (chiTietData == null) {
             return FXCollections.observableArrayList();
         }
         return chiTietData;
     }
-    
+
     public ObservableList<Cart> getCartData() {
         cartData = FXCollections.observableArrayList(listCart);
         if (data == null) {
@@ -507,7 +509,7 @@ public class FXMLHoaDonController implements Initializable {
     @FXML
     private void mnItemBaoCao_Click(ActionEvent event) {
     }
-    
+
     @FXML
     private void btnThem_Click(ActionEvent event) {
         Hoadon hoaDon = new Hoadon();
@@ -530,7 +532,7 @@ public class FXMLHoaDonController implements Initializable {
                 hoaDon.setTongTien(Integer.parseInt(txtTongTien.getText()));
                 hoaDon.setTrangThai(HOAT_DONG);
                 jpaController.create(hoaDon);
-                if(listCart != null || listCart.size() > 0){
+                if (listCart != null || listCart.size() > 0) {
                     for (Cart cart : listCart) {
                         chiTiet.setHoadon(hoaDon);
                         Khothuoc thuoc = thuocCtrl.findKhothuoc(cart.getMaThuoc());
@@ -552,10 +554,22 @@ public class FXMLHoaDonController implements Initializable {
             em.close();
         }
     }
+    
+    public List<Chitiethoadon> getAllCTHD(Hoadon hoaDon){
+        EntityManagerFactory newEmf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+        EntityManager newEm = newEmf.createEntityManager();
+        TypedQuery<Chitiethoadon> getAll = newEm.createNamedQuery("Chitiethoadon.findByMaHD", Chitiethoadon.class);
+        getAll.setParameter("maHD", hoaDon.getMaHD());
+        List<Chitiethoadon> listCTbyMaHD = getAll.getResultList();
+        return listCTbyMaHD;
+    }
 
     @FXML
     private void btnSua_Click(ActionEvent event) {
         Hoadon hoaDon = new Hoadon();
+        Chitiethoadon ct = new Chitiethoadon();
+        KhothuocJpaController ktJPACtrl = new KhothuocJpaController(emf);
+
         StringToDate stringToDate = new StringToDate();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
@@ -564,41 +578,37 @@ public class FXMLHoaDonController implements Initializable {
         //bắt đầu tạo transaction
         em.getTransaction().begin();
         try {
-            if (cbKhachHang.getValue()!= null && cbNhanVien.getValue() != null && dpNgayBan.getValue() != null) {
-                    int maHD = Integer.parseInt(txtMaHoaDon.getText());
-                    hoaDon.setMaHD(maHD);
-                    hoaDon.setMaKH(cbKhachHang.getValue());
-                    hoaDon.setMaNV(cbNhanVien.getValue());
-                    Date date = Date.from(dpNgayBan.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
-                    hoaDon.setNgayLapHD(date);
-                    hoaDon.setTrangThai(HOAT_DONG);
-                    int tongTien = Integer.parseInt(txtTongTien.getText());
-                    hoaDon.setTongTien(tongTien);
-                    jpaController.editHoaDon(hoaDon);
-                    if(listCart != null || listCart.size() > 0){
-                        for (Cart cart : listCart) {
-                            Chitiethoadon ct = new Chitiethoadon();
-                            KhothuocJpaController ktJPACtrl = new KhothuocJpaController(emf);
-                            Khothuoc kt = ktJPACtrl.findKhothuoc(cart.getMaThuoc());
-                            ChitiethoadonPK ctPK = new ChitiethoadonPK(hoaDon.getMaHD(), kt.getMaThuoc());
-                            ct.setChitiethoadonPK(ctPK);
-                            ct.setHoadon(hoaDon);
-                            ct.setKhothuoc(kt);
-                            ct.setSoLuong(cart.getSoLuong());
-                            ct.setTrangThai(HOAT_DONG);
-                            Cart newCart = new Cart();
-                            newCart.setMaThuoc(ct.getKhothuoc().getMaThuoc());
-                            newCart.setTenThuoc(ct.getKhothuoc().getTenThuoc());
-                            newCart.setSoLuong(ct.getSoLuong());
-                            newCart.setDonGia(ct.getKhothuoc().getDonGia());
-                            newCart.setThanhTien(ct.getSoLuong() * ct.getKhothuoc().getDonGia());
-                            cart = newCart;
-                            System.out.println(listCart);
-                            ctJPACtrol.editChiTietHoaDon(ct);
-                        }
+            if (cbKhachHang.getValue() != null && cbNhanVien.getValue() != null && dpNgayBan.getValue() != null) {
+                int maHD = Integer.parseInt(txtMaHoaDon.getText());
+                hoaDon.setMaHD(maHD);
+                hoaDon.setMaKH(cbKhachHang.getValue());
+                hoaDon.setMaNV(cbNhanVien.getValue());
+                Date date = Date.from(dpNgayBan.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());//convert localDate -> date
+                hoaDon.setNgayLapHD(date);
+                hoaDon.setTrangThai(HOAT_DONG);
+                int tongTien = Integer.parseInt(txtTongTien.getText());
+                hoaDon.setTongTien(tongTien);
+                jpaController.editHoaDon(hoaDon);
+                System.out.println(listPK);
+                if(listPK != null || listPK.size() > 0){
+                    for (ChitiethoadonPK pk : listPK) {
+                        ctJPACtrol.destroy(pk);
                     }
-                    btnLamMoi_Click(event);                   
-                    lblStatusHD.setText("Sửa thành công!");                                  
+                }
+                if (listCart != null || listCart.size() > 0) {
+                    for (Cart cart : listCart) {
+                        Khothuoc kt = ktJPACtrl.findKhothuoc(cart.getMaThuoc());
+                        ChitiethoadonPK ctPK = new ChitiethoadonPK(hoaDon.getMaHD(), kt.getMaThuoc());
+                        ct.setChitiethoadonPK(ctPK);
+                        ct.setHoadon(hoaDon);
+                        ct.setKhothuoc(kt);
+                        ct.setSoLuong(cart.getSoLuong());
+                        ct.setTrangThai(HOAT_DONG);
+                        ctJPACtrol.create(ct);
+                    }
+                }
+                btnLamMoi_Click(event);
+                lblStatusHD.setText("Sửa thành công!");
             } else {
                 lblStatusHD.setText("Không được để trống các ô!");
             }
@@ -609,7 +619,7 @@ public class FXMLHoaDonController implements Initializable {
             em.close();
         }
     }
-    
+
     private final ChitiethoadonJpaController ctJPACtrol = new ChitiethoadonJpaController(emf);
 
     @FXML
@@ -669,13 +679,7 @@ public class FXMLHoaDonController implements Initializable {
         };
     }
     
-    public List<Chitiethoadon> getCTHoaDonByMa(int maHD){
-        TypedQuery<Chitiethoadon> findByMaHD = em.createNamedQuery("Chitiethoadon.findByMaHD", Chitiethoadon.class);
-        findByMaHD.setParameter("maHD", maHD);
-        List<Chitiethoadon> listCTbyMaHD = findByMaHD.getResultList();
-        System.out.println(listCTbyMaHD);
-        return listCTbyMaHD;
-    }
+    private List<ChitiethoadonPK> listPK;
 
     @FXML
     private void tabDsDuyet_Click(MouseEvent event) {
@@ -692,17 +696,27 @@ public class FXMLHoaDonController implements Initializable {
             cbNhanVien.setValue(hoaDon.getMaNV());
             dpNgayBan.setValue(date);
             txtTongTien.setText(tongTien.toString());
-            List<Chitiethoadon> listCTbyMaHD = getCTHoaDonByMa(hoaDon.getMaHD());
-            listCart = new ArrayList<>();     
+            EntityManagerFactory newEmf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+            EntityManager newEm = newEmf.createEntityManager();
+            TypedQuery<Chitiethoadon> getAll = newEm.createNamedQuery("Chitiethoadon.findByMaHD", Chitiethoadon.class);
+            getAll.setParameter("maHD", hoaDon.getMaHD());
+            List<Chitiethoadon> listCTbyMaHD = getAll.getResultList();
+            listCart = new ArrayList<>();
+            listPK = new ArrayList<>();
             for (Chitiethoadon ct : listCTbyMaHD) {
                 Cart newCart = new Cart();
+                ChitiethoadonPK pk = new ChitiethoadonPK();
                 newCart.setMaThuoc(ct.getKhothuoc().getMaThuoc());
                 newCart.setTenThuoc(ct.getKhothuoc().getTenThuoc());
                 newCart.setDonGia(ct.getKhothuoc().getDonGia());
                 newCart.setSoLuong(ct.getSoLuong());
                 newCart.setThanhTien(ct.getSoLuong() * ct.getKhothuoc().getDonGia());
+                pk.setMaHD(hoaDon.getMaHD());
+                pk.setMaThuoc(ct.getKhothuoc().getMaThuoc());
+                listPK.add(pk);
                 listCart.add(newCart);
             }
+            System.out.println(listPK);
             cartData = FXCollections.observableArrayList(listCart);
             initColumnsCart();
             tabCart.setItems(cartData);
@@ -711,28 +725,34 @@ public class FXMLHoaDonController implements Initializable {
 
     @FXML
     private void btnThemLoaiThuoc_Click(ActionEvent event) {
-        for (Cart cart : listCart) {
-            if (cbLoaiThuoc.getValue().getMaThuoc().equals(cart.getMaThuoc())) {
-                int sl = Integer.parseInt(txtSoLuong.getText());
-                cart.setSoLuong(cart.getSoLuong() + sl);
-                int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
-                cart.setThanhTien(cart.getThanhTien() + thanhTien);
-                ReloadCart();
-                tinhTongTienHoaDon();
-                return;
+        try {
+            for (Cart cart : listCart) {
+                if (cbLoaiThuoc.getValue().getMaThuoc().equals(cart.getMaThuoc())) {
+                    int sl = Integer.parseInt(txtSoLuong.getText());
+                    cart.setSoLuong(cart.getSoLuong() + sl);
+                    int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
+                    cart.setThanhTien(cart.getThanhTien() + thanhTien);
+                    ReloadCart();
+                    tinhTongTienHoaDon();
+                    return;
+                }
             }
-        }
 
-        String tenThuoc = cbLoaiThuoc.getValue().getTenThuoc();
-        int maThuoc = cbLoaiThuoc.getValue().getMaThuoc();
-        int sl = Integer.parseInt(txtSoLuong.getText());
-        int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
-        int donGia = cbLoaiThuoc.getValue().getDonGia();
-        Cart c = new Cart(maThuoc, tenThuoc, sl, donGia, thanhTien);
-        listCart.add(c);
-        tinhTongTienHoaDon();
-        initColumnsCart();
-        tabCart.setItems(getCartData());
+            String tenThuoc = cbLoaiThuoc.getValue().getTenThuoc();
+            int maThuoc = cbLoaiThuoc.getValue().getMaThuoc();
+            int sl = Integer.parseInt(txtSoLuong.getText());
+            int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
+            int donGia = cbLoaiThuoc.getValue().getDonGia();
+            Cart c = new Cart(maThuoc, tenThuoc, sl, donGia, thanhTien);
+            listCart.add(c);
+            lblStatusHD1.setText(null);
+            tinhTongTienHoaDon();
+            initColumnsCart();
+            tabCart.setItems(getCartData());
+        } catch (NumberFormatException e) {
+            e.getMessage();
+            lblStatusHD1.setText("Nhập sai!");
+        }
     }
 
     private void tinhTongTienHoaDon() {
@@ -752,22 +772,28 @@ public class FXMLHoaDonController implements Initializable {
 
     @FXML
     private void btnBotLoaiThuoc_Click(ActionEvent event) {
-        for (Cart cart : listCart) {
-            if (cbLoaiThuoc.getValue().getTenThuoc().equals(cart.getTenThuoc())) {
-                int sl = Integer.parseInt(txtSoLuong.getText());
-                if (sl >= cart.getSoLuong()) {
-                    listCart.remove(cart);
+        try {
+            for (Cart cart : listCart) {
+                if (cbLoaiThuoc.getValue().getTenThuoc().equals(cart.getTenThuoc())) {
+                    int sl = Integer.parseInt(txtSoLuong.getText());
+                    if (sl >= cart.getSoLuong()) {
+                        listCart.remove(cart);
+                        ReloadCart();
+                        tinhTongTienHoaDon();
+                        return;
+                    } else {
+                        cart.setSoLuong(cart.getSoLuong() - sl);
+                    }
+                    int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
+                    cart.setThanhTien(cart.getThanhTien() - thanhTien);
                     ReloadCart();
                     tinhTongTienHoaDon();
-                    return;
-                } else {
-                    cart.setSoLuong(cart.getSoLuong() - sl);
+                    lblStatusHD1.setText(null);
                 }
-                int thanhTien = sl * cbLoaiThuoc.getValue().getDonGia();
-                cart.setThanhTien(cart.getThanhTien() - thanhTien);
-                ReloadCart();
-                tinhTongTienHoaDon();
             }
+        } catch (NumberFormatException e) {
+            e.getMessage();
+            lblStatusHD1.setText("Nhập sai!");
         }
     }
 
@@ -786,18 +812,11 @@ public class FXMLHoaDonController implements Initializable {
     @FXML
     private void tabCart_Click(MouseEvent event) {
         Cart cartSelected = tabCart.getSelectionModel().getSelectedItem();
-        if (cartSelected == null) {
-            return;
-        } else {
+        if (cartSelected != null) {
             Integer maThuoc = cartSelected.getMaThuoc();
-            String tenThuoc = cartSelected.getTenThuoc();
-            int soLuong = cartSelected.getSoLuong();
-            int donGia = cartSelected.getDonGia();
-            int thanhTien = cartSelected.getThanhTien();
             KhothuocJpaController ktCtrl = new KhothuocJpaController(emf);
             Khothuoc t = ktCtrl.findKhothuoc(maThuoc);
             cbLoaiThuoc.setValue(t);
-            txtSoLuong.setText(String.valueOf(soLuong));
         }
     }
 

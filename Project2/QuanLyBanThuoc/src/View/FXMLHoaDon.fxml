@@ -140,6 +140,7 @@
                   <TableColumn fx:id="tcThanhTien" prefWidth="107.0" text="Thành tiền" />
               </columns>
             </TableView>
+            <Label fx:id="lblStatusHD1" alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="14.0" prefHeight="17.0" prefWidth="269.0" textAlignment="CENTER" textFill="#f80505" textOverrun="CLIP" />
          </children>
       </Pane>
    </children>
