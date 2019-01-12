@@ -87,6 +87,8 @@ public class FXMLMainHomeController implements Initializable {
 
     private static final short HOAT_DONG = 1;
     private static final short KHONG_HOAT_DONG = 0;
+    
+    
     /**
      * Initializes the controller class.
      *
@@ -137,22 +139,23 @@ public class FXMLMainHomeController implements Initializable {
             //lấy list username
             resultListNV = createNamedQuery.getResultList();
             if (txtTenDangNhap_DangNhap.getText().length() > 4 && txtTenDangNhap_DangNhap.getText() != null) {
-                        if (kiemTraDangNhap(txtTenDangNhap_DangNhap.getText(), txtMatKhau_DangNhap.getText())) {
-                            try {
-                                ((Node) event.getSource()).getScene().getWindow().hide();
-                                FXMLLoader fxmlLoader = new FXMLLoader();
-                                fxmlLoader.setLocation(getClass().getResource("/View/FXMLMainMenu.fxml"));
-                                Scene scene = new Scene(fxmlLoader.load());
-                                Stage window = new Stage();
-                                window.setTitle("Menu");
-                                window.setScene(scene);
-                                window.show();
-                            } catch (IOException e) {
-                                System.out.println(e.getMessage());
-                            }
-                        } else {
-                            lblStatus.setText("Sai Username hoặc Password!");
-                        }                         
+                if (kiemTraDangNhap(txtTenDangNhap_DangNhap.getText(), txtMatKhau_DangNhap.getText())) {
+                    try {
+                        FXMLMainMenuController.userName = txtTenDangNhap_DangNhap.getText();
+                        ((Node) event.getSource()).getScene().getWindow().hide();
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(getClass().getResource("/View/FXMLMainMenu.fxml"));
+                        Scene scene = new Scene(fxmlLoader.load());
+                        Stage window = new Stage();
+                        window.setTitle("Menu");
+                        window.setScene(scene);
+                        window.show();
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+                    lblStatus.setText("Sai Username hoặc Password!");
+                }
             } else {
                 lblStatus.setText("Không được để trống Username và Password!");
             }
@@ -162,18 +165,18 @@ public class FXMLMainHomeController implements Initializable {
             em.close();
         }
     }
-   
+
     List<Nhanvien> resultListNV;
-    
-    private boolean kiemTraDangNhap(String user, String pass) {        
+
+    private boolean kiemTraDangNhap(String user, String pass) {
         for (int i = 0; i < resultListNV.size(); i++) {
-            if (resultListNV.get(i).getUsernane().equals(user) && resultListNV.get(i).getPassword().equals(pass)) {              
-                    return true;                
+            if (resultListNV.get(i).getUsernane().equals(user) && resultListNV.get(i).getPassword().equals(pass)) {
+                return true;
             }
         }
         return false;
     }
-    
+
     @FXML
     private void btnDangKy_Click(ActionEvent event) {
         paneDangKy.toFront();
@@ -213,7 +216,7 @@ public class FXMLMainHomeController implements Initializable {
                                     Date date = stringToDate.String2Date(dob);
                                     nhanvien.setNgaySinh(date);
                                     nhanvien.setDiaChi(txtDiaChi.getText());
-                                    if(rbNam.isSelected()){
+                                    if (rbNam.isSelected()) {
                                         nhanvien.setGioiTinh("Nam");
                                     } else {
                                         nhanvien.setGioiTinh("Nữ");
