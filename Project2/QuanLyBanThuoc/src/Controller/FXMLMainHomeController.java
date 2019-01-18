@@ -24,6 +24,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -87,8 +89,7 @@ public class FXMLMainHomeController implements Initializable {
 
     private static final short HOAT_DONG = 1;
     private static final short KHONG_HOAT_DONG = 0;
-    
-    
+
     /**
      * Initializes the controller class.
      *
@@ -298,6 +299,122 @@ public class FXMLMainHomeController implements Initializable {
 
     @FXML
     private void rbNu_Click(ActionEvent event) {
+    }
+
+    @FXML
+    private void txtDangNhap_Enter(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            //tạo entity
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+            EntityManager em = emf.createEntityManager();
+            //bắt đầu tạo transaction
+            em.getTransaction().begin();
+            try {
+                //tạo list Usename ở nhân viên
+                TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
+                //lấy list username
+                resultListNV = createNamedQuery.getResultList();
+                if (txtTenDangNhap_DangNhap.getText().length() > 4 && txtTenDangNhap_DangNhap.getText() != null) {
+                    if (kiemTraDangNhap(txtTenDangNhap_DangNhap.getText(), txtMatKhau_DangNhap.getText())) {
+                        try {
+                            FXMLMainMenuController.userName = txtTenDangNhap_DangNhap.getText();
+                            ((Node) event.getSource()).getScene().getWindow().hide();
+                            FXMLLoader fxmlLoader = new FXMLLoader();
+                            fxmlLoader.setLocation(getClass().getResource("/View/FXMLMainMenu.fxml"));
+                            Scene scene = new Scene(fxmlLoader.load());
+                            Stage window = new Stage();
+                            window.setTitle("Menu");
+                            window.setScene(scene);
+                            window.show();
+                        } catch (IOException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } else {
+                        lblStatus.setText("Sai Username hoặc Password!");
+                    }
+                } else {
+                    lblStatus.setText("Không được để trống Username và Password!");
+                }
+            } catch (Exception e) {
+                em.getTransaction().rollback();
+            } finally {
+                em.close();
+            }
+        }
+    }
+
+    @FXML
+    private void txtDangKy_Enter(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            Nhanvien nhanvien = new Nhanvien();
+            StringToDate stringToDate = new StringToDate();
+
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuanLyBanThuocPU");
+
+            NhanvienJpaController jpaController = new NhanvienJpaController(emf);
+
+            EntityManager em = emf.createEntityManager();
+            //bắt đầu tạo transaction
+            em.getTransaction().begin();
+            try {
+                //tạo list Usename ở nhân viên
+                TypedQuery<Nhanvien> createNamedQuery = em.createNamedQuery("Nhanvien.findAll", Nhanvien.class);
+                //lấy list username
+                resultListNV = createNamedQuery.getResultList();
+
+                if (txtTenDangNhap_DangKy.getText().length() >= 4 && txtTenDangNhap_DangKy.getText() != null) {
+                    if (kiemTra(txtTenDangNhap_DangKy.getText())) {
+                        if (txtMatKhau_DangKy.getText().length() >= 5 && txtMatKhau_DangKy.getText() != null) {
+                            if (txtHoVaTen.getText().length() > 0 && txtHoVaTen.getText() != null) {
+                                if (txtNgaySinh.getText().length() > 0 && txtNgaySinh.getText() != null) {
+                                    if (txtNhapLaiMatKhau.getText().equals(txtMatKhau_DangKy.getText())) {
+                                        if (txtDiaChi.getText() != null) {
+                                            String userName = txtTenDangNhap_DangKy.getText();
+                                            nhanvien.setUsernane(userName);
+                                            String pass = txtMatKhau_DangKy.getText();
+                                            nhanvien.setPassword(pass);
+                                            String hoTen = txtHoVaTen.getText();
+                                            nhanvien.setHoTenNV(hoTen);
+                                            String dob = txtNgaySinh.getText();
+                                            Date date = stringToDate.String2Date(dob);
+                                            nhanvien.setNgaySinh(date);
+                                            nhanvien.setDiaChi(txtDiaChi.getText());
+                                            if (rbNam.isSelected()) {
+                                                nhanvien.setGioiTinh("Nam");
+                                            } else {
+                                                nhanvien.setGioiTinh("Nữ");
+                                            }
+                                            nhanvien.setTrangThai(HOAT_DONG);
+                                            jpaController.create(nhanvien);
+                                            paneDangNhap.toFront();
+                                            lblStatus.setText("Đăng ký thành công!");
+                                        } else {
+                                            lblStatus1.setText("Địa chỉ không được để trống!");
+                                        }
+                                    } else {
+                                        lblStatus1.setText("Mật khẩu và mật khẩu nhập lại không khớp!");
+                                    }
+                                } else {
+                                    lblStatus1.setText("Ngày sinh nhập sai mời nhập lại!");
+                                }
+                            } else {
+                                lblStatus1.setText("Họ và tên phải từ 4 kí tự trở nên!");
+                            }
+                        } else {
+                            lblStatus1.setText("Password phải từ 5 kí tự trở nên!");
+                        }
+                    } else {
+                        lblStatus1.setText("Username đã tồn tại!");
+                    }
+                } else {
+                    lblStatus1.setText("Tên đăng nhập phải từ 4 kí tự trở nên!");
+                }
+            } catch (Exception e) {
+                em.getTransaction().rollback();
+            } finally {
+                em.close();
+            }
+        }
     }
 
 }

@@ -589,7 +589,6 @@ public class FXMLHoaDonController implements Initializable {
                 int tongTien = Integer.parseInt(txtTongTien.getText());
                 hoaDon.setTongTien(tongTien);
                 jpaController.editHoaDon(hoaDon);
-                System.out.println(listPK);
                 if(listPK != null || listPK.size() > 0){
                     for (ChitiethoadonPK pk : listPK) {
                         ctJPACtrol.destroy(pk);
@@ -716,7 +715,6 @@ public class FXMLHoaDonController implements Initializable {
                 listPK.add(pk);
                 listCart.add(newCart);
             }
-            System.out.println(listPK);
             cartData = FXCollections.observableArrayList(listCart);
             initColumnsCart();
             tabCart.setItems(cartData);

@@ -64,6 +64,21 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Text>
+                  <Text layoutX="76.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="• Phí Công Kiên" wrappingWidth="216.0">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="76.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="• Nguyễn Quang Toàn" wrappingWidth="216.0">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="76.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="• Lê Gia Hiển" wrappingWidth="216.0">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="paneHuongDanSuDung" prefHeight="425.0" prefWidth="567.0" style="-fx-background-color: transparent;">
@@ -78,6 +93,16 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Text>
+                  <Text layoutX="40.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chủ cửa hàng sẽ được cấp 1 tài khoản admin để quản lý thông tin của nhân viên, kho thuốc và hóa đơn bán hàng từng ngày của cửa hàng." wrappingWidth="501.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="40.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nhân viên của cửa hàng sẽ quản lý thông tin khách hàng, các loại thuốc trong kho và hóa đơn khi khách đến mua hàng." wrappingWidth="501.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="paneDangKy" prefHeight="425.0" prefWidth="567.0" style="-fx-background-color: transparent;">
@@ -87,7 +112,7 @@
                         <Image url="@../Image/hinh-nen-cho-slide-powerpoint-chu-de-y-te-va-suc-khoe-anh-7.jpg" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="txtTenDangNhap_DangKy" layoutX="64.0" layoutY="67.0" prefHeight="30.0" prefWidth="216.0" promptText="Tên đăng nhập" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <TextField fx:id="txtTenDangNhap_DangKy" layoutX="64.0" layoutY="67.0" onKeyPressed="#txtDangKy_Enter" prefHeight="30.0" prefWidth="216.0" promptText="Tên đăng nhập" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -95,7 +120,7 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
-                  <TextField fx:id="txtHoVaTen" layoutX="65.0" layoutY="109.0" prefHeight="30.0" prefWidth="216.0" promptText="Họ và tên" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <TextField fx:id="txtHoVaTen" layoutX="65.0" layoutY="109.0" onKeyPressed="#txtDangKy_Enter" prefHeight="30.0" prefWidth="216.0" promptText="Họ và tên" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -103,7 +128,7 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
-                  <TextField fx:id="txtNgaySinh" layoutX="65.0" layoutY="152.0" prefHeight="30.0" prefWidth="216.0" promptText="Ngày sinh (dd/MM/yyyy)" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <TextField fx:id="txtNgaySinh" layoutX="65.0" layoutY="152.0" onKeyPressed="#txtDangKy_Enter" prefHeight="30.0" prefWidth="216.0" promptText="Ngày sinh (dd/MM/yyyy)" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -111,7 +136,7 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
-                  <TextField fx:id="txtDiaChi" layoutX="64.0" layoutY="196.0" prefHeight="30.0" prefWidth="216.0" promptText="Địa chỉ" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <TextField fx:id="txtDiaChi" layoutX="64.0" layoutY="196.0" onKeyPressed="#txtDangKy_Enter" prefHeight="30.0" prefWidth="216.0" promptText="Địa chỉ" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -119,7 +144,7 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
-                  <PasswordField fx:id="txtMatKhau_DangKy" layoutX="288.0" layoutY="67.0" prefHeight="27.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <PasswordField fx:id="txtMatKhau_DangKy" layoutX="288.0" layoutY="67.0" onKeyPressed="#txtDangKy_Enter" prefHeight="27.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -127,7 +152,7 @@
                         <Insets left="35.0" />
                      </padding>
                   </PasswordField>
-                  <PasswordField fx:id="txtNhapLaiMatKhau" layoutX="288.0" layoutY="109.0" prefHeight="27.0" prefWidth="216.0" promptText="Nhập lại mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <PasswordField fx:id="txtNhapLaiMatKhau" layoutX="288.0" layoutY="109.0" onKeyPressed="#txtDangKy_Enter" prefHeight="27.0" prefWidth="216.0" promptText="Nhập lại mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -137,7 +162,7 @@
                   </PasswordField>
                   <Pane layoutX="288.0" layoutY="152.0" prefHeight="35.0" prefWidth="216.0" style="-fx-border-color: white;" styleClass="input">
                      <children>
-                        <RadioButton fx:id="rbNam" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#rbNam_Click" selected="true" text="Nam">
+                        <RadioButton fx:id="rbNam" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#rbNam_Click" onKeyPressed="#txtDangKy_Enter" selected="true" text="Nam">
                            <toggleGroup>
                               <ToggleGroup fx:id="gioiTinh" />
                            </toggleGroup>
@@ -145,7 +170,7 @@
                               <Font size="13.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="rbNu" layoutX="87.0" layoutY="8.0" mnemonicParsing="false" onAction="#rbNu_Click" text="Nữ" toggleGroup="$gioiTinh">
+                        <RadioButton fx:id="rbNu" layoutX="87.0" layoutY="8.0" mnemonicParsing="false" onAction="#rbNu_Click" onKeyPressed="#txtDangKy_Enter" text="Nữ" toggleGroup="$gioiTinh">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -215,7 +240,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="txtTenDangNhap_DangNhap" layoutX="175.0" layoutY="67.0" prefHeight="30.0" prefWidth="216.0" promptText="Tên đăng nhập" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <TextField fx:id="txtTenDangNhap_DangNhap" layoutX="175.0" layoutY="67.0" onKeyPressed="#txtDangNhap_Enter" prefHeight="30.0" prefWidth="216.0" promptText="Tên đăng nhập" style="-fx-border-color: White; -fx-pref-height: 35; -fx-border-radius: 50px; -fx-background-color: Transparent;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -223,7 +248,7 @@
                         <Insets left="35.0" />
                      </padding>
                   </TextField>
-                  <PasswordField fx:id="txtMatKhau_DangNhap" layoutX="175.0" layoutY="109.0" prefHeight="27.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
+                  <PasswordField fx:id="txtMatKhau_DangNhap" layoutX="175.0" layoutY="109.0" onKeyPressed="#txtDangNhap_Enter" prefHeight="27.0" prefWidth="216.0" promptText="Mật khẩu" style="-fx-border-color: white;" styleClass="input" stylesheets="@CSS/fxmlmainhome.css">
                      <padding>
                         <Insets left="35.0" />
                      </padding>
