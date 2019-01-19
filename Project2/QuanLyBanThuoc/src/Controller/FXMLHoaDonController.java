@@ -633,10 +633,10 @@ public class FXMLHoaDonController implements Initializable {
                     ChitiethoadonPK pk = new ChitiethoadonPK(hoaDon.getMaHD(), cart.getMaThuoc());
                     ctJPACtrol.destroy(pk);
                 }
-                jpaController.destroy(hoaDon.getMaHD());
+                jpaController.delete(hoaDon.getMaHD());
                 btnLamMoi_Click(event);
                 lblStatusHD.setText("Xóa hóa đơn " + hoaDon.getMaHD() + " thành công!");
-            } catch (IllegalOrphanException | NonexistentEntityException e) {
+            } catch (Exception e) {
                 e.getMessage();
                 em.getTransaction().rollback();
             }

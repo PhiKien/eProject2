@@ -404,7 +404,7 @@ public class FXMLKhachHangController implements Initializable {
             return;
         } else {
             try {
-               jpaController.destroy(khachHang.getMaKH());
+               jpaController.delete(khachHang.getMaKH());
                 btnLamMoi_Click(event);
                 lblStatusKH.setText("Xóa nhân viên " + khachHang.getHoTenKH() + " thành công");
             } catch (Exception e) {

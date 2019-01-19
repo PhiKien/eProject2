@@ -122,8 +122,8 @@ public class KhachhangJpaController implements Serializable {
             }
         }
     }
-    
-    public void editKhachHang(Khachhang khachHang){
+
+    public void editKhachHang(Khachhang khachHang) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -136,12 +136,27 @@ public class KhachhangJpaController implements Serializable {
             oldKhachHang.setTrieuChung(khachHang.getTrieuChung());
             oldKhachHang.setNgaySinh(khachHang.getNgaySinh());
             em.getTransaction().commit();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw ex;
-        } finally{
-            if(em!= null){
+        } finally {
+            if (em != null) {
                 em.close();
             }
+        }
+    }
+
+    public void delete(Integer id) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Khachhang khachhang;
+            khachhang = em.getReference(Khachhang.class, id);
+            short KHONG_HOAT_DONG = 0;
+            khachhang.setTrangThai(KHONG_HOAT_DONG);
+            em.getTransaction().commit();
+        } catch (Exception ex){
+            throw ex;
         }
     }
 
@@ -222,5 +237,5 @@ public class KhachhangJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

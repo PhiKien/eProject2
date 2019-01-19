@@ -34,6 +34,21 @@ public class NhanvienJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+    
+    public void delete(Integer id) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Nhanvien nhanvien;
+            nhanvien = em.getReference(Nhanvien.class, id);
+            short KHONG_HOAT_DONG = 0;
+            nhanvien.setTrangThai(KHONG_HOAT_DONG);
+            em.getTransaction().commit();
+        } catch (Exception ex){
+            throw ex;
+        }
+    }
 
     public void create(Nhanvien nhanvien) {
         if (nhanvien.getHoadonCollection() == null) {

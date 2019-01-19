@@ -35,7 +35,22 @@ public class KhothuocJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
+    
+    public void delete(Integer id) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Khothuoc khothuoc;
+            khothuoc = em.getReference(Khothuoc.class, id);
+            short KHONG_HOAT_DONG = 0;
+            khothuoc.setTrangThai(KHONG_HOAT_DONG);
+            em.getTransaction().commit();
+        } catch (Exception ex){
+            throw ex;
+        }
+    }
+    
     public void create(Khothuoc khothuoc) {
         if (khothuoc.getChitiethoadonCollection() == null) {
             khothuoc.setChitiethoadonCollection(new ArrayList<Chitiethoadon>());

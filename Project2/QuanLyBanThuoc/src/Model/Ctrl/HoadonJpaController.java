@@ -36,6 +36,21 @@ public class HoadonJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+    
+    public void delete(Integer id) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Hoadon hoadon;
+            hoadon = em.getReference(Hoadon.class, id);
+            short KHONG_HOAT_DONG = 0;
+            hoadon.setTrangThai(KHONG_HOAT_DONG);
+            em.getTransaction().commit();
+        } catch (Exception ex){
+            throw ex;
+        }
+    }
 
     public void create(Hoadon hoadon) {
         if (hoadon.getChitiethoadonCollection() == null) {

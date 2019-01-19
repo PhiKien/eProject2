@@ -416,7 +416,7 @@ public class FXMLNhanVienController implements Initializable {
             return;
         } else {
             try {
-                jpaController.destroy(nhanVien.getMaNV());
+                jpaController.delete(nhanVien.getMaNV());
                 btnLamMoi_Click(event);
                 lblStatusNV.setText("Xóa nhân viên " + nhanVien.getHoTenNV() + " thành công");
             } catch (Exception e) {

@@ -406,7 +406,7 @@ public class FXMLKhoThuocController implements Initializable {
             return;
         } else {
             try {
-               jpaController.destroy(khothuoc.getMaThuoc());
+               jpaController.delete(khothuoc.getMaThuoc());
                 btnLamMoi_Click(event);
                 lblStatusThuoc.setText("Xóa thuốc " + khothuoc.getTenThuoc()+ " thành công!");
             } catch (Exception e) {
