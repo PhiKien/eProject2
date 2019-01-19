@@ -79,7 +79,7 @@
                </font></TextField>
             </children>
         </Pane>
-        <Pane layoutX="14.0" layoutY="102.0" prefHeight="193.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC; -fx-border-style: double;">
+        <Pane layoutX="14.0" layoutY="102.0" prefHeight="193.0" prefWidth="765.0" style="-fx-border-color: #DCDCDC;">
             <children>
                 <TextField editable="false" layoutX="27.0" layoutY="-12.0" prefHeight="25.0" prefWidth="99.0" text="Thông tin thuốc" />
                 <TextField fx:id="txtMaThuoc" disable="true" editable="false" layoutX="126.0" layoutY="42.0" prefHeight="25.0" prefWidth="76.0" />

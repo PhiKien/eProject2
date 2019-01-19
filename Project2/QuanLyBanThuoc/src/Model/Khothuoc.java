@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Khothuoc.findAll", query = "SELECT k FROM Khothuoc k WHERE k.trangThai = 1"),
     @NamedQuery(name = "Khothuoc.findByMaThuoc", query = "SELECT k FROM Khothuoc k WHERE k.maThuoc = :maThuoc"),
-    @NamedQuery(name = "Khothuoc.findByTenThuoc", query = "SELECT k FROM Khothuoc k WHERE k.tenThuoc = :tenThuoc"),
+    @NamedQuery(name = "Khothuoc.findByTenThuoc", query = "SELECT k FROM Khothuoc k WHERE k.tenThuoc LIKE :tenThuoc AND k.trangThai = 1"),
     @NamedQuery(name = "Khothuoc.findByDonVi", query = "SELECT k FROM Khothuoc k WHERE k.donVi = :donVi"),
     @NamedQuery(name = "Khothuoc.findByDonGia", query = "SELECT k FROM Khothuoc k WHERE k.donGia = :donGia"),
     @NamedQuery(name = "Khothuoc.findByNsx", query = "SELECT k FROM Khothuoc k WHERE k.nsx = :nsx"),

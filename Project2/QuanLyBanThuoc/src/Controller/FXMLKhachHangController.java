@@ -434,7 +434,7 @@ public class FXMLKhachHangController implements Initializable {
             if (kh.getHoTenKH().equals(txtTimKiem.getText())) {
                 data.clear();
                 TypedQuery<Khachhang> findByName = em.createNamedQuery("Khachhang.findByHoTenKH", Khachhang.class);
-                findByName.setParameter("hoTenKH", kh.getHoTenKH());
+                findByName.setParameter("hoTenKH", '%'+ kh.getHoTenKH() +'%');
                 resultListKH = findByName.getResultList();
                 data = FXCollections.observableArrayList(resultListKH);
                 tabDsDuyet.setItems(data);

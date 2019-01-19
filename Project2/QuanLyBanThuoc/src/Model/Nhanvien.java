@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Nhanvien.findAll", query = "SELECT n FROM Nhanvien n WHERE n.trangThai = 1"),
     @NamedQuery(name = "Nhanvien.findByMaNV", query = "SELECT n FROM Nhanvien n WHERE n.maNV = :maNV"),
-    @NamedQuery(name = "Nhanvien.findByHoTenNV", query = "SELECT n FROM Nhanvien n WHERE n.hoTenNV like :hoTenNV"),
+    @NamedQuery(name = "Nhanvien.findByHoTenNV", query = "SELECT n FROM Nhanvien n WHERE n.hoTenNV like :hoTenNV AND n.trangThai = 1"),
     @NamedQuery(name = "Nhanvien.findByNgaySinh", query = "SELECT n FROM Nhanvien n WHERE n.ngaySinh = :ngaySinh"),
     @NamedQuery(name = "Nhanvien.findByGioiTinh", query = "SELECT n FROM Nhanvien n WHERE n.gioiTinh = :gioiTinh"),
     @NamedQuery(name = "Nhanvien.findByDiaChi", query = "SELECT n FROM Nhanvien n WHERE n.diaChi = :diaChi"),

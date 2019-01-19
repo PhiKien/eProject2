@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Hoadon.findAll", query = "SELECT h FROM Hoadon h WHERE h.trangThai = 1"),
-    @NamedQuery(name = "Hoadon.findByMaHD", query = "SELECT h FROM Hoadon h WHERE h.maHD = :maHD"),
+    @NamedQuery(name = "Hoadon.findByMaHD", query = "SELECT h FROM Hoadon h WHERE h.maHD = :maHD AND h.trangThai = 1"),
     @NamedQuery(name = "Hoadon.findByNgayLapHD", query = "SELECT h FROM Hoadon h WHERE h.ngayLapHD = :ngayLapHD"),
     @NamedQuery(name = "Hoadon.findByTongTien", query = "SELECT h FROM Hoadon h WHERE h.tongTien = :tongTien"),
     @NamedQuery(name = "Hoadon.findByTrangThai", query = "SELECT h FROM Hoadon h WHERE h.trangThai = :trangThai")})
